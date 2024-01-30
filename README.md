@@ -1,92 +1,30 @@
-# Hcmatrix v3 Admin Portal
+# React + TypeScript + Vite
 
-The primary aim of this application is to manage the clients that make use of the hcmatrix v3, and provide valuable insights on the usage of hcmatrix v3. The deployed application can be found [here](/).
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Table of Contents
+Currently, two official plugins are available:
 
-- [Title](#hcmatrix-v3-admin-portal)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-  - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Features](#features)
-  - [Getting Started](#getting-started)
+## Expanding the ESLint configuration
 
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-    - [Running App Locally](#running-app-locally)
-    - [Building and Deploying](#building-and-deploying)
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-  - [Documentation](#documentation)
+- Configure the top-level `parserOptions` property like this:
 
-## Introduction
-
-The primary value proposed by this project is to provide a platform for the stake holders to manage the clients using the hcmatrix v3. The project's features are outlined in the [Features](#features) section.
-
-## Features
-
-The app is currently equipped with the following features:
-
-- Settings: This contains the settings for the application namely users, roles & permissions, prices and discounts.
-- Finance Metrics: This a dashboard with information on scheduled renewals, transaction history, tax report, and analytics on income rate, income per module, and income per addon.
-
-## Getting Started
-
-The application is a react application built using vite. The application tech stack is outlined below:
-
-- Vite
-- Antd
-- Antd/plots
-- React router
-- React query
-- Typescript
-- React
-
-### Prerequisites
-
-You'll need the following to be able to run the application, or to work on the application.
-
-- Node.js version 14 or higher
-- Node package manager (Yarn, pnpm or npm)
-- A stable internet connection
-- A modern browser such as Chrome, Firefox, or Edge
-- Text editor such as VSCode or Sublime
-
-### Installation
-
-You'll need to do the following to install the project.
-
-- Installs the dependencies of the project using the following command
-  ```bash
-   npm install # using npm
-   yarn install # using yarn
-  ```
-- Create a database either via Postgres or SQL
-- Create a .env in the root of the app's folder
-  ```bash
-  cp .env.example .env   # will create a .env file by copying .env.example
-  ```
-- You can then fill out the details in the .env file like the APP_URL
-
-### Running App Locally
-
-You can proceed to run the application after completing the steps in the [Installation](#installation), by running the following command
-
-```bash
-npm run dev # using npm
-yarn dev # using yarn
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
 ```
 
-This will open the application in the browser on `localhost:3000`
-
-### Building and Deploying
-
-The app can either be built locally and the build folder deployed or deployed using the source code on a platform like aws with a CI/CD setup. To build the app for production, run the following command
-
-```bash
-npm run build # using npm
-yarn build # using yarn
-```
-
-## Documentation
-
-The application documentation is available on the [Hcmatrix Admin Portal documentation](/). It should be noted that the source code is also documentated via docstring comments and typescript type definitions.
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
