@@ -1,7 +1,11 @@
+import AppLayout from "components/layouts/AppLayout";
+
 function App() {
   return (
     <>
-      <div className="text-red-600">red</div>
+      <AppLayout>
+        <div className="text-red-600">red</div>
+      </AppLayout>
     </>
   );
 }
