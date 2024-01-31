@@ -1,13 +1,17 @@
+import { Button } from "antd";
 import AppLayout from "components/layouts/AppLayout";
-import { AppProviders } from "components/providers";
+import { AppProviders, ThemeContextProvider } from "components/providers";
 
 function App() {
   return (
-    <AppProviders>
-      <AppLayout>
-        <div className="text-red-600">red</div>
-      </AppLayout>
-    </AppProviders>
+    <ThemeContextProvider>
+      <AppProviders>
+        <AppLayout>
+          <div className="text-primary">red</div>
+          <Button type="primary"> test</Button>
+        </AppLayout>
+      </AppProviders>
+    </ThemeContextProvider>
   );
 }
 
