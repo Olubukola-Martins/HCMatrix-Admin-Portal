@@ -10,16 +10,14 @@ const ModeSwitcher = () => {
       {mode === "light" ? (
         <Button
           type="text"
-          size="large"
-          icon={<MoonIcon className="h-6 w-6" />}
+          icon={<MoonIcon className="h-4 w-4 md:h-6 md:w-6" />}
           onClick={() => handleModeSwitch("dark")}
         />
       ) : null}
       {mode === "dark" ? (
         <Button
           type="text"
-          size="large"
-          icon={<IoIosSunny className="h-6 w-6" />}
+          icon={<IoIosSunny className="h-4 w-4 md:h-6 md:w-6" />}
           onClick={() => handleModeSwitch("light")}
         />
       ) : null}

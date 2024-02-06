@@ -5,9 +5,9 @@ import {
   SettingIcon,
   NotificationIcon,
 } from "components/icons";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import UserProfileDropdown from "./UserProfileDropdown";
 import ModeSwitcher from "components/theme/ModeSwitcher";
+import ToggleSidebar from "./ToggleSidebar";
 
 const { Header } = Layout;
 export const TopBar: React.FC<{
@@ -15,34 +15,35 @@ export const TopBar: React.FC<{
   setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ showSideBar, setShowSideBar }) => {
   return (
-    <Header className="shadow-sm dark:shadow-md dark:shadow-slate-800 flex w-full justify-between items-center sticky z-10 top-0">
-      <div className="flex gap-x-8 items-center">
+    <Header className="px-4 lg:px-6 shadow-sm dark:shadow-md dark:shadow-slate-800 flex w-full justify-between items-center sticky z-10 top-0">
+      <div className="flex gap-x-2 lg:gap-x-8 items-center">
+        <ToggleSidebar
+          showSideBar={showSideBar}
+          setShowSideBar={setShowSideBar}
+        />
+        <AppLogo className="h-6 lg:h-8" />
+      </div>
+      <div className="flex lg:gap-x-4 items-center">
         <Button
           type="text"
           size="large"
-          icon={
-            showSideBar === true ? (
-              <AiOutlineMenu size={25} />
-            ) : (
-              <AiOutlineClose size={25} />
-            )
-          }
-          onClick={() => setShowSideBar((val) => !val)}
+          className="lg:px-2 lg:py-2 px-1 py-1"
+          icon={<SearchIcon className="h-4 w-4 md:h-6 md:w-6" />}
         />
-        <AppLogo className="h-8" />
-      </div>
-      <div className="flex gap-x-4 items-center">
-        <Button type="text" size="large" icon={<SearchIcon />} />
         <ModeSwitcher />
         <Button
           type="text"
           size="large"
-          icon={<SettingIcon className="h-6 w-6" />}
+          className="lg:px-2 lg:py-2 px-1 py-1"
+          icon={<SettingIcon className="h-4 w-4 md:h-6 md:w-6" />}
         />
         <Button
           type="text"
           size="large"
-          icon={<NotificationIcon isNotified />}
+          className="lg:px-2 lg:py-2 px-1 py-1"
+          icon={
+            <NotificationIcon isNotified className="h-4 w-4 md:h-6 md:w-6" />
+          }
         />
         <UserProfileDropdown />
       </div>

@@ -13,7 +13,7 @@ const UserProfileDropdown = () => {
         ],
       }}
     >
-      <Avatar className="cursor-pointer" />
+      <Avatar className="cursor-pointer h-4 w-4 lg:w-6 lg:h-6" />
     </Dropdown>
   );
 };
