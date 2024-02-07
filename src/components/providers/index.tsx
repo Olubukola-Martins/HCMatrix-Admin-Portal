@@ -2,6 +2,7 @@ import { ConfigProvider, theme } from "antd";
 
 import useHandleColorTheme from "hooks/theme/useHandleColorTheme";
 import ThemeContextProvider from "./ThemeContextProvider";
+import CurrencyContextProvider from "./CurrencyContextProvider";
 export { ThemeContextProvider };
 
 export const AppProviders: React.FC<{ children: React.ReactNode }> = ({
@@ -37,6 +38,7 @@ export const AppProviders: React.FC<{ children: React.ReactNode }> = ({
                     siderBg: "#F6F7FB",
                     headerBg: "#fff",
                   },
+
                   // Button: {
                   //   colorPrimary: "red",
                   //   colorBgBase: "red",
@@ -49,7 +51,7 @@ export const AppProviders: React.FC<{ children: React.ReactNode }> = ({
               }
         }
       >
-        {children}
+        <CurrencyContextProvider>{children}</CurrencyContextProvider>
       </ConfigProvider>
     </div>
   );

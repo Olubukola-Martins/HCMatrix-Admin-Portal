@@ -9,8 +9,10 @@ import ItAuditMetricsIcon from "./ItAuditMetricsIcon";
 import ReportsIcon from "./ReportsIcon";
 import AppLogo from "./AppLogo";
 import SalesMetricsIcon from "./SalesMetricsIcon";
+import ArrowLeftIcon from "./ArrowLeftIcon";
 
 export {
+  ArrowLeftIcon,
   ReportsIcon,
   SalesMetricsIcon,
   ItAuditMetricsIcon,

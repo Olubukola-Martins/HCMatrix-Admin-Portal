@@ -1,6 +1,8 @@
 import React, { createContext, useEffect, useState } from "react";
 import { EThemePrimaryColor, TThemeMode } from "types";
 
+const LOCAL_STORAGE_KEY_FOR_THEME = "theme";
+const LOCAL_STORAGE_KEY_FOR_MODE = "mode";
 interface IProps {
   children: React.ReactNode;
 }
@@ -23,32 +25,38 @@ const ThemeContextProvider = ({ children }: IProps) => {
   );
   useEffect(() => {
     if (
-      localStorage.getItem("primary") === null &&
-      localStorage.getItem("mode") === null
+      localStorage.getItem(LOCAL_STORAGE_KEY_FOR_THEME) === null &&
+      localStorage.getItem(LOCAL_STORAGE_KEY_FOR_MODE) === null
     ) {
       // color
 
-      localStorage.setItem("primary", EThemePrimaryColor.DEFAULT);
+      localStorage.setItem(
+        LOCAL_STORAGE_KEY_FOR_THEME,
+        EThemePrimaryColor.DEFAULT
+      );
       setPrimary(EThemePrimaryColor.DEFAULT);
       // mode
-      localStorage.setItem("mode", "light");
+      localStorage.setItem(LOCAL_STORAGE_KEY_FOR_MODE, "light");
       setMode("light");
       return;
     }
 
     // color
-    setPrimary(localStorage.getItem("primary") as EThemePrimaryColor);
+    localStorage.getItem(LOCAL_STORAGE_KEY_FOR_THEME) &&
+      setPrimary(
+        localStorage.getItem(LOCAL_STORAGE_KEY_FOR_THEME) as EThemePrimaryColor
+      );
     // mode
-    setMode(localStorage.getItem("mode") as TThemeMode);
+    localStorage.getItem(LOCAL_STORAGE_KEY_FOR_MODE) &&
+      setMode(localStorage.getItem(LOCAL_STORAGE_KEY_FOR_MODE) as TThemeMode);
   }, []);
   const handleThemeSwitch = (color: EThemePrimaryColor) => {
     setPrimary(color);
-    localStorage.setItem("primary", color);
+    localStorage.setItem(LOCAL_STORAGE_KEY_FOR_THEME, color);
   };
   const handleModeSwitch = (mode: TThemeMode) => {
     setMode(mode);
-    localStorage.setItem("mode", mode);
-    // TODO: Refactor the local storage keys to constants as opposed to magic values
+    localStorage.setItem(LOCAL_STORAGE_KEY_FOR_MODE, mode);
   };
   return (
     <ThemeContext.Provider

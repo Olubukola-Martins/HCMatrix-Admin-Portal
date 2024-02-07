@@ -33,7 +33,9 @@ const SideBarItem: React.FC<{
 }> = ({ label, icon, link }) => {
   // TODO: Add animation transition to hover and even on sidebar close
   const matches = useMatches();
-  const routeIsAMatch = matches.map((match) => match.pathname).includes(link);
+  const routeIsAMatch = matches
+    .map((match) => match.pathname)
+    .some((match) => new RegExp(link).test(match));
   return (
     <NavLink to={link}>
       <button
