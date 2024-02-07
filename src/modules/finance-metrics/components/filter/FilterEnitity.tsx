@@ -1,4 +1,5 @@
 import { Button, Checkbox, DatePicker, Drawer, Form, Select } from "antd";
+import { ModalTitle } from "components/modal";
 import { billingCycleOptions, moduleOptions } from "constants";
 import React, { useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
@@ -46,7 +47,7 @@ const FilterEnitity: React.FC<TProps> = ({
       <Drawer
         open={open}
         onClose={handleClose}
-        title={<span className="font-bold text-xl">Filter By</span>}
+        title={<ModalTitle text="Filter By" />}
       >
         <div className="text-accent">
           <Form
