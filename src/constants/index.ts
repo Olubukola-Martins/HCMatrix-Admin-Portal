@@ -1,5 +1,7 @@
+import { appRoutePaths } from "routes/paths";
 import { TBillingCycle, TModule } from "types";
-
+export const DEFAULT_MAX_FILE_UPLOAD_SIZE_IN_MB = 2;
+export const DEFAULT_MAX_FILE_UPLOAD_COUNT = 1;
 export const dummyChartData = Array(15)
   .fill(0)
   .map(() => ({
@@ -30,4 +32,23 @@ export const moduleOptions: TModule[] = [
   "performance",
   "recruitment",
   "learning-and-development",
+];
+
+export const settingPageLinks = [
+  {
+    label: "Roles & Permissions",
+    link: appRoutePaths.settingsRolesAndPermissions,
+  },
+  {
+    label: "Users",
+    link: appRoutePaths.settingsUsers,
+  },
+  {
+    label: "Prices",
+    link: appRoutePaths.settingsPrices,
+  },
+  {
+    label: "Discounts",
+    link: appRoutePaths.settingsDiscounts,
+  },
 ];

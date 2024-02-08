@@ -10,8 +10,14 @@ import ReportsIcon from "./ReportsIcon";
 import AppLogo from "./AppLogo";
 import SalesMetricsIcon from "./SalesMetricsIcon";
 import ArrowLeftIcon from "./ArrowLeftIcon";
+import WarningIcon from "./WarningIcon";
+import SuccessIcon from "./SuccessIcon";
+import ColoredImportCircleIcon from "./ColoredImportCircleIcon";
 
 export {
+  ColoredImportCircleIcon,
+  SuccessIcon,
+  WarningIcon,
   ArrowLeftIcon,
   ReportsIcon,
   SalesMetricsIcon,

@@ -8,6 +8,8 @@ import {
 import UserProfileDropdown from "./UserProfileDropdown";
 import ModeSwitcher from "components/theme/ModeSwitcher";
 import ToggleSidebar from "./ToggleSidebar";
+import { NavLink } from "react-router-dom";
+import { appRoutePaths } from "routes";
 
 const { Header } = Layout;
 export const TopBar: React.FC<{
@@ -31,12 +33,9 @@ export const TopBar: React.FC<{
           icon={<SearchIcon className="h-4 w-4 md:h-6 md:w-6" />}
         />
         <ModeSwitcher />
-        <Button
-          type="text"
-          size="large"
-          className="lg:px-2 lg:py-2 px-1 py-1"
-          icon={<SettingIcon className="h-4 w-4 md:h-6 md:w-6" />}
-        />
+        <NavLink to={appRoutePaths.settings}>
+          <SettingIcon className="h-4 w-4 md:h-6 md:w-6" />
+        </NavLink>
         <Button
           type="text"
           size="large"
