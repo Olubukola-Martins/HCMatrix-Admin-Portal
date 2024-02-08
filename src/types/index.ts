@@ -2,7 +2,7 @@ import React from "react";
 
 export { type IImageProps, type IIconProps } from "./image";
 export { EThemePrimaryColor, type TThemeMode } from "./theme";
-
+export { type TFileType } from "./file";
 export interface IDivProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export type TCurrency = "ngn" | "usd";
