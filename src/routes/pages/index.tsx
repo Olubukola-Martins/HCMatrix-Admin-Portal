@@ -7,6 +7,7 @@ import {
 import SettingsContainer from "modules/settings/components/SettingsContainer";
 import DiscountsContainer from "modules/settings/components/discounts/DiscountsContainer";
 import SpecificDiscountsContainer from "modules/settings/components/discounts/specific-discounts/SpecificDiscountsContainer";
+import PricesContainer from "modules/settings/components/prices/PricesContainer";
 import RolesAndPermissionContainer from "modules/settings/components/roles-and-permissions/RolesAndPermissionContainer";
 import PermissionsContainer from "modules/settings/components/roles-and-permissions/permissions/PermissionsContainer";
 import UsersContainer from "modules/settings/components/users/UsersContainer";
@@ -15,10 +16,15 @@ import { TRoutePageData } from "routes/types";
 
 export const appRoutePages: TRoutePageData[] = [
   {
-    element: <div />,
+    element: <div>Page Not Found!</div>,
     path: appRoutePaths.notFound,
     title: "Not Found",
     category: ["doesnt-require-authentication"],
+  },
+  {
+    element: <PricesContainer />,
+    path: appRoutePaths.settingsPrices,
+    title: "Prices",
   },
   {
     element: <SpecificDiscountsContainer />,

@@ -1,5 +1,11 @@
 import { appRoutePaths } from "routes/paths";
-import { TBillingCycle, TDiscountType, TModule } from "types";
+import {
+  TBillingCycle,
+  TCurrency,
+  TDiscountType,
+  TModule,
+  TStorageUnit,
+} from "types";
 export const DEFAULT_MAX_FILE_UPLOAD_SIZE_IN_MB = 2;
 export const DEFAULT_MAX_FILE_UPLOAD_COUNT = 1;
 export const dummyChartData = Array(15)
@@ -23,6 +29,8 @@ export const dummyChartData = Array(15)
     category: "Category A", // You can uncomment this line if you want all items to have the same category
   }));
 
+export const storageUnitOptions: TStorageUnit[] = ["KB", "MB", "GB"];
+export const currencyOptions: TCurrency[] = ["ngn", "usd"];
 export const billingCycleOptions: TBillingCycle[] = ["monthly", "yearly"];
 export const moduleOptions: TModule[] = [
   "employee-management",

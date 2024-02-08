@@ -5,6 +5,7 @@ export { EThemePrimaryColor, type TThemeMode } from "./theme";
 export { type TFileType } from "./file";
 export interface IDivProps extends React.HTMLAttributes<HTMLDivElement> {}
 
+export type TStorageUnit = "KB" | "MB" | "GB";
 export type TDiscountType = "flat" | "percentage";
 export type TCurrency = "ngn" | "usd";
 export type TBillingCycle = "monthly" | "yearly";
