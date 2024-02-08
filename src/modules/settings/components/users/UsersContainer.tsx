@@ -1,7 +1,9 @@
 import { PageLayout } from "components/layouts";
-import { Button, Tabs } from "antd";
-import { TbFileExport } from "react-icons/tb";
+import { Tabs } from "antd";
 import AddUsers from "./AddUsers";
+import ActiveUsersTable from "./active-users/ActiveUsersTable";
+import InvitedUsersTable from "./invited-users/InvitedUsersTable";
+import ExportEnitity from "components/entity/ExportEnitity";
 
 const UsersContainer = () => {
   return (
@@ -13,11 +15,7 @@ const UsersContainer = () => {
         supportingComp: (
           <div>
             <div className="flex items-center gap-x-4">
-              <Button
-                icon={<TbFileExport className="text-2xl" />}
-                size="large"
-                type="text"
-              />
+              <ExportEnitity />
               <AddUsers />
             </div>
           </div>
@@ -30,10 +28,12 @@ const UsersContainer = () => {
             {
               key: "Active Users",
               label: "Active Users",
+              children: <ActiveUsersTable />,
             },
             {
               key: "Invited Users",
               label: "Invited Users",
+              children: <InvitedUsersTable />,
             },
           ]}
         />

@@ -1,5 +1,5 @@
 import { appRoutePaths } from "routes/paths";
-import { TBillingCycle, TModule } from "types";
+import { TBillingCycle, TDiscountType, TModule } from "types";
 export const DEFAULT_MAX_FILE_UPLOAD_SIZE_IN_MB = 2;
 export const DEFAULT_MAX_FILE_UPLOAD_COUNT = 1;
 export const dummyChartData = Array(15)
@@ -33,7 +33,13 @@ export const moduleOptions: TModule[] = [
   "recruitment",
   "learning-and-development",
 ];
-
+export const discountTypeOptions: TDiscountType[] = ["flat", "percentage"];
+export const discountPageLinks = [
+  {
+    label: "Specific Discounts",
+    link: appRoutePaths.settingsDiscountsSpecific,
+  },
+];
 export const settingPageLinks = [
   {
     label: "Roles & Permissions",

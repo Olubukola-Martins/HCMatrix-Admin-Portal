@@ -18,6 +18,7 @@ export const appRoutePaths = {
   settingsUsers: "/settings/users",
   settingsPrices: "/settings/prices",
   settingsDiscounts: "/settings/discounts",
+  settingsDiscountsSpecific: "/settings/discounts/specific",
   reports: "/reports",
   notifications: "/notifications",
   notFound: "*",
