@@ -1,12 +1,11 @@
-import { Card, Typography, DatePicker, Select, theme } from "antd";
-import { LineChart } from "components/charts";
+import { Card, Typography, DatePicker, Select } from "antd";
+import LineChartWithLabelsCovered from "components/charts/modified/LineChartWithLabelsCovered";
 import CurrencySwitcher from "components/currency/CurrencySwitcher";
 import { dummyChartData } from "constants";
 import React from "react";
 import { IDivProps } from "types";
 
 const IncomeRateCard: React.FC<IDivProps> = ({ className }) => {
-  const { token } = theme.useToken();
   return (
     <Card
       className={className}
@@ -33,18 +32,11 @@ const IncomeRateCard: React.FC<IDivProps> = ({ className }) => {
       }
       bordered={false}
     >
-      <div className="h-64 relative">
-        {/* The div below hides the label from chart */}
-        <div className="absolute top-2 left-0 right-0 bottom-0 bg-white dark:bg-[#141414] h-4" />
-
-        <LineChart
-          maintainAspectRatio={false}
-          data={dummyChartData.map((item) => item.value)}
-          labels={dummyChartData.map((item) => item.year)}
-          dataEntityLabel={undefined}
-          bgColors={token.colorPrimary}
-        />
-      </div>
+      <LineChartWithLabelsCovered
+        dataValues={dummyChartData.map((item) => item.value)}
+        labels={dummyChartData.map((item) => item.year)}
+        className="h-64 relative"
+      />
     </Card>
   );
 };
