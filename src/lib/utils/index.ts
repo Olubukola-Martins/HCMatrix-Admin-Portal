@@ -1,3 +1,5 @@
+import { TCurrency } from "types";
+
 type TError = {
   error: string;
 };
@@ -25,4 +27,16 @@ export const generateHexColor = (input: string | number): string => {
 
   // Pad the color code with zeros if needed
   return "#" + "00000".substring(0, 6 - color.length) + color;
+};
+
+const CURRENCY_MAP: Record<TCurrency, string> = {
+  ngn: "N",
+  usd: "$",
+};
+export const currencyFormatter = (props: {
+  currency: TCurrency;
+  value: string | number;
+}) => {
+  const { currency, value } = props;
+  return `${CURRENCY_MAP[currency]}${value}`;
 };
