@@ -8,13 +8,16 @@ const DoughnutChartWithExternalLabels: React.FC<
     dataEntityLabel?: string;
     externalLabels?: { value: string; color?: string }[];
     dataValues?: number[];
+    centerTextFormatter?: (text: string | number) => string;
   }
 > = ({
   externalLabels,
   className = "lg:h-64 flex lg:flex-row flex-col items-center",
   dataEntityLabel = "Amount",
   dataValues = [],
+  centerTextFormatter,
 }) => {
+  const total = dataValues.reduce((a, b) => a + b, 0);
   return (
     <div className={className}>
       <div className="flex lg:flex-col flex-row gap-2 flex-wrap w-full">
@@ -32,7 +35,9 @@ const DoughnutChartWithExternalLabels: React.FC<
       </div>
       <div className="relative h-full">
         <div className="absolute z-1 top-0 left-0 right-0 bottom-0 flex justify-center items-center ">
-          <span className="text-accent text-center">$13905</span>
+          <span className="text-accent text-center">
+            {centerTextFormatter ? centerTextFormatter(total) : total}
+          </span>
         </div>
         <DoughnutChart
           className="relative z-10"

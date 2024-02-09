@@ -2,11 +2,13 @@ import { Card, Typography, Select, DatePicker } from "antd";
 import DoughnutChartWithExternalLabels from "components/charts/modified/DoughnutChartWithExternalLabels";
 import CurrencySwitcher from "components/currency/CurrencySwitcher";
 import { dummyModuleChartData } from "constants";
-import { generateHexColor } from "lib/utils";
+import useHandleCurrency from "hooks/currency/useHandleCurrency";
+import { currencyFormatter, generateHexColor } from "lib/utils";
 import React from "react";
 import { IDivProps } from "types";
 
 const IncomePerModuleCard: React.FC<IDivProps> = ({ className }) => {
+  const { selectedCurrency } = useHandleCurrency();
   return (
     <Card
       className={className}
@@ -33,6 +35,9 @@ const IncomePerModuleCard: React.FC<IDivProps> = ({ className }) => {
           color: generateHexColor(item.type),
         }))}
         className="lg:h-64 flex lg:flex-row flex-col items-center"
+        centerTextFormatter={(value) =>
+          currencyFormatter({ currency: selectedCurrency, value })
+        }
       />
     </Card>
   );
