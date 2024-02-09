@@ -40,7 +40,7 @@ const DoughnutChartWithExternalLabels: React.FC<
           </span>
         </div>
         <DoughnutChart
-          className="relative z-10"
+          className="relative z-2"
           data={dataValues}
           labels={[]}
           dataEntityLabel={dataEntityLabel}
