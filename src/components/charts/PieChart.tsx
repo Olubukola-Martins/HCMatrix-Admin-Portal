@@ -22,11 +22,11 @@ const options = {
 export const PieChart: React.FC<TChartProps> = ({
   labels,
   data = [],
-  axis = "x",
+  // axis = "x",
   bgColors = "#1B59F8CC",
   dataEntityLabel = "items",
-  useDataSet = false,
-  dataSets = [],
+  // useDataSet = false,
+  // dataSets = [],
   maintainAspectRatio = true,
 }) => {
   const dataSrc = {

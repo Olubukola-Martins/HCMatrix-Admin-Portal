@@ -1,7 +1,8 @@
 import { Card, Typography, Select, DatePicker } from "antd";
-import { DoughnutChart } from "components/charts";
+import DoughnutChartWithExternalLabels from "components/charts/modified/DoughnutChartWithExternalLabels";
 import CurrencySwitcher from "components/currency/CurrencySwitcher";
 import { dummyModuleChartData } from "constants";
+import { generateHexColor } from "lib/utils";
 import React from "react";
 import { IDivProps } from "types";
 
@@ -23,14 +24,15 @@ const IncomePerAddOnCard: React.FC<IDivProps> = ({ className }) => {
       }
       bordered={false}
     >
-      <div className="h-64">
-        <DoughnutChart
-          data={dummyModuleChartData.map((item) => item.value)}
-          labels={[]}
-          dataEntityLabel="Employees"
-          bgColors={["#01966B", "#F97316"]}
-        />
-      </div>
+      <DoughnutChartWithExternalLabels
+        dataValues={dummyModuleChartData.map((item) => item.value)}
+        dataEntityLabel="Amount"
+        externalLabels={dummyModuleChartData.map((item) => ({
+          value: item.type,
+          color: generateHexColor(item.type),
+        }))}
+        className="lg:h-64 flex lg:flex-row flex-col items-center"
+      />
     </Card>
   );
 };
