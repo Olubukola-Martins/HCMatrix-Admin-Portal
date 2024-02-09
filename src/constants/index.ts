@@ -6,6 +6,9 @@ import {
   TModule,
   TStorageUnit,
 } from "types";
+import { ENV } from "./enviroment";
+export { ENV };
+export const LOCAL_STORAGE_AUTH_TOKEN_KEY = "auth-token";
 export const DEFAULT_MAX_FILE_UPLOAD_SIZE_IN_MB = 2;
 export const DEFAULT_MAX_FILE_UPLOAD_COUNT = 1;
 export const dummyChartData = Array(15)
@@ -28,7 +31,32 @@ export const dummyChartData = Array(15)
     value: Math.random() * 10 + 2, // Generate a random value between 2 and 12
     category: "Category A", // You can uncomment this line if you want all items to have the same category
   }));
-
+export const dummyModuleChartData = [
+  {
+    type: "Performance",
+    value: 27,
+  },
+  {
+    type: "Payroll",
+    value: 250,
+  },
+  {
+    type: "Hr Admin",
+    value: 18,
+  },
+  {
+    type: "Learning & Development",
+    value: 15,
+  },
+  {
+    type: "Recruitment",
+    value: 10,
+  },
+  {
+    type: "Time & Attendance",
+    value: 5,
+  },
+];
 export const storageUnitOptions: TStorageUnit[] = ["KB", "MB", "GB"];
 export const currencyOptions: TCurrency[] = ["ngn", "usd"];
 export const billingCycleOptions: TBillingCycle[] = ["monthly", "yearly"];

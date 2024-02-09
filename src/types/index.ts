@@ -4,7 +4,7 @@ export { type IImageProps, type IIconProps } from "./image";
 export { EThemePrimaryColor, type TThemeMode } from "./theme";
 export { type TFileType } from "./file";
 export interface IDivProps extends React.HTMLAttributes<HTMLDivElement> {}
-
+export { type TChartProps } from "./charts";
 export type TStorageUnit = "KB" | "MB" | "GB";
 export type TDiscountType = "flat" | "percentage";
 export type TCurrency = "ngn" | "usd";

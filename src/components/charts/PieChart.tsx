@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import { TChartProps } from "types";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -19,21 +19,21 @@ const options = {
   },
 };
 
-export const DoughnutChart: React.FC<TChartProps> = ({
+export const PieChart: React.FC<TChartProps> = ({
   labels,
   data = [],
+  axis = "x",
   bgColors = "#1B59F8CC",
   dataEntityLabel = "items",
-
+  useDataSet = false,
+  dataSets = [],
   maintainAspectRatio = true,
-  ...props
 }) => {
   const dataSrc = {
     labels,
     datasets: [
       {
         label: dataEntityLabel,
-        borderColor: bgColors,
 
         data,
         backgroundColor: bgColors,
@@ -41,11 +41,25 @@ export const DoughnutChart: React.FC<TChartProps> = ({
     ],
   };
   return (
-    <Doughnut
-      {...props}
+    <Pie
       options={{
         ...options,
         maintainAspectRatio,
+
+        // indexAxis: axis,
+
+        // scales: {
+        //   x: {
+        //     grid: {
+        //       display: false,
+        //     },
+        //   },
+        //   y: {
+        //     grid: {
+        //       display: false,
+        //     },
+        //   },
+        // },
       }}
       data={dataSrc}
     />

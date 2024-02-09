@@ -1,6 +1,7 @@
 import { Card, Typography, Select, DatePicker } from "antd";
 import { DoughnutChart } from "components/charts";
 import CurrencySwitcher from "components/currency/CurrencySwitcher";
+import { dummyModuleChartData } from "constants";
 import React from "react";
 import { IDivProps } from "types";
 
@@ -23,7 +24,12 @@ const IncomePerAddOnCard: React.FC<IDivProps> = ({ className }) => {
       bordered={false}
     >
       <div className="h-64">
-        <DoughnutChart />
+        <DoughnutChart
+          data={dummyModuleChartData.map((item) => item.value)}
+          labels={[]}
+          dataEntityLabel="Employees"
+          bgColors={["#01966B", "#F97316"]}
+        />
       </div>
     </Card>
   );

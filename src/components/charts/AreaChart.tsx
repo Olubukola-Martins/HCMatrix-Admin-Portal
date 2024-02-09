@@ -5,11 +5,19 @@ import {
   BarElement,
   Title,
   Tooltip,
+  Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { TChartProps } from "types";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Filler
+);
 
 const options = {
   responsive: true,
@@ -25,12 +33,12 @@ const options = {
   },
 };
 
-export const LineChart: React.FC<TChartProps> = ({
+export const AreaChart: React.FC<TChartProps> = ({
   labels,
   data = [],
   axis = "x",
   bgColors = "#1B59F8CC",
-  dataEntityLabel = "data",
+  dataEntityLabel = "items",
   useDataSet = false,
   dataSets = [],
   maintainAspectRatio = true,
@@ -41,10 +49,12 @@ export const LineChart: React.FC<TChartProps> = ({
       ? dataSets
       : [
           {
+            fill: true,
             label: dataEntityLabel,
             borderColor: bgColors,
             data,
-            backgroundColor: bgColors,
+            backgroundColor:
+              typeof bgColors === "string" ? `${bgColors}90` : bgColors,
           },
         ],
   };

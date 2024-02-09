@@ -1,15 +1,23 @@
 import {
   Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
   Tooltip,
+  Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Radar } from "react-chartjs-2";
 import { TChartProps } from "types";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
+ChartJS.register(
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend
+);
 
 const options = {
   responsive: true,
@@ -25,12 +33,12 @@ const options = {
   },
 };
 
-export const LineChart: React.FC<TChartProps> = ({
+export const RadarChart: React.FC<TChartProps> = ({
   labels,
   data = [],
   axis = "x",
   bgColors = "#1B59F8CC",
-  dataEntityLabel = "data",
+  dataEntityLabel = "items",
   useDataSet = false,
   dataSets = [],
   maintainAspectRatio = true,
@@ -44,12 +52,13 @@ export const LineChart: React.FC<TChartProps> = ({
             label: dataEntityLabel,
             borderColor: bgColors,
             data,
-            backgroundColor: bgColors,
+            backgroundColor:
+              typeof bgColors === "string" ? `${bgColors}90` : bgColors,
           },
         ],
   };
   return (
-    <Line
+    <Radar
       options={{
         ...options,
         maintainAspectRatio,

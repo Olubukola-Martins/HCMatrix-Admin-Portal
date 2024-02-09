@@ -25,12 +25,12 @@ const options = {
   },
 };
 
-export const LineChart: React.FC<TChartProps> = ({
+export const ScatterChart: React.FC<TChartProps> = ({
   labels,
   data = [],
   axis = "x",
   bgColors = "#1B59F8CC",
-  dataEntityLabel = "data",
+  dataEntityLabel = "items",
   useDataSet = false,
   dataSets = [],
   maintainAspectRatio = true,
@@ -42,7 +42,7 @@ export const LineChart: React.FC<TChartProps> = ({
       : [
           {
             label: dataEntityLabel,
-            borderColor: bgColors,
+            borderColor: "transparent",
             data,
             backgroundColor: bgColors,
           },
@@ -58,12 +58,12 @@ export const LineChart: React.FC<TChartProps> = ({
         scales: {
           x: {
             grid: {
-              display: false,
+              display: true,
             },
           },
           y: {
             grid: {
-              display: false,
+              display: true,
             },
           },
         },
