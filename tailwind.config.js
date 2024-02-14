@@ -13,6 +13,7 @@ export default {
       },
       colors: {
         primary: "var(--primary)",
+        faded: "var(--faded)",
         card: "var(--card)",
         accent: "var(--accent)",
         neutral: "var(--neutral)",

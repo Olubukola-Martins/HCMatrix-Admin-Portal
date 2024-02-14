@@ -1,4 +1,6 @@
-export type TRoutePageCategory = "doesnt-require-authentication";
+export type TRoutePageCategory =
+  | "doesnt-require-authentication"
+  | "inaccessible-if-user-is-authenticated";
 
 export type TRoutePageData = {
   path: string;

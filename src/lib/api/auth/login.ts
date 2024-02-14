@@ -1,30 +1,27 @@
-import { ENV } from "constants";
 import httpClient from "lib/http";
 import { useMutation } from "react-query";
 import { TUser, TUserAuthData } from "./types";
+import { TApiResponse } from "../types";
 
-type TData = {
+export type TLoginInput = {
   email: string;
   password: string;
 };
-const createData = async (props: { data: TData }): Promise<TLoginResponse> => {
-  const url = `${ENV.API_BASE_URL}/auth`;
+const createData = async (props: {
+  data: TLoginInput;
+}): Promise<TApiResponse<Data | null>> => {
+  const url = `/auth`;
 
-  const data: TData = {
+  const data: TLoginInput = {
     ...props.data,
   };
 
   const response = await httpClient.post(url, data);
-  const res = response.data as TLoginResponse;
+  const res = response.data as TApiResponse<Data>;
   return res;
 };
 export const useLogin = () => {
-  return useMutation((props: TData) => createData({ data: props }));
-};
-
-type TLoginResponse = {
-  message: string;
-  data: Data;
+  return useMutation((props: TLoginInput) => createData({ data: props }));
 };
 
 interface Data {

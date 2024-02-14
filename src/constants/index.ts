@@ -7,8 +7,9 @@ import {
   TStorageUnit,
 } from "types";
 import { ENV } from "./enviroment";
+import dayjs from "dayjs";
 export { ENV };
-export const LOCAL_STORAGE_AUTH_TOKEN_KEY = "auth-token";
+export const LOCAL_STORAGE_AUTH_TOKEN_KEY = "auth_token";
 export const DEFAULT_MAX_FILE_UPLOAD_SIZE_IN_MB = 2;
 export const DEFAULT_MAX_FILE_UPLOAD_COUNT = 1;
 export const dummyChartData = Array(15)
@@ -94,3 +95,12 @@ export const settingPageLinks = [
     link: appRoutePaths.settingsDiscounts,
   },
 ];
+export const DEFAULT_DATE_FORMAT = "YYYY-MM-DD";
+
+export const DEFAULT_START_DATE = dayjs()
+  .subtract(18, "month")
+  .format(DEFAULT_DATE_FORMAT);
+export const DEFAULT_END_DATE = dayjs().format(DEFAULT_DATE_FORMAT);
+
+export const DEFAULT_PAGE_LIMIT = 15;
+export const DEFAULT_PAGE_OFFSET = 0;

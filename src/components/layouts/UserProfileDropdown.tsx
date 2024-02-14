@@ -1,7 +1,9 @@
 import { Avatar, Dropdown } from "antd";
 import ThemeSwitcher from "components/theme/ThemeSwitcher";
+import useHandleAuthentication from "hooks/auth/useHandleAuthentication";
 
 const UserProfileDropdown = () => {
+  const { handleLogout } = useHandleAuthentication();
   return (
     <Dropdown
       trigger={["click"]}
@@ -9,7 +11,7 @@ const UserProfileDropdown = () => {
         items: [
           { key: 1, label: <ThemeSwitcher /> },
           { type: "divider" },
-          { key: 2, label: "Logout" },
+          { key: 2, label: "Logout", onClick: () => handleLogout() },
         ],
       }}
     >

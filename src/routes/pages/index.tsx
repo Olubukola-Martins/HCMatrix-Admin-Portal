@@ -1,3 +1,4 @@
+import LoginContainer from "modules/authentication/components/login/LoginContainer";
 import {
   FinanceMetricsContainer,
   ScheduledRenewalContainer,
@@ -14,7 +15,20 @@ import UsersContainer from "modules/settings/components/users/UsersContainer";
 import { appRoutePaths } from "routes/paths";
 import { TRoutePageData } from "routes/types";
 
+export const appAuthPages: TRoutePageData[] = [
+  {
+    element: <LoginContainer />,
+    path: appRoutePaths.login,
+    title: "Login",
+    category: ["inaccessible-if-user-is-authenticated"],
+  },
+];
 export const appRoutePages: TRoutePageData[] = [
+  {
+    element: <div>Home</div>,
+    path: appRoutePaths.home,
+    title: "Home",
+  },
   {
     element: <div>Page Not Found!</div>,
     path: appRoutePaths.notFound,

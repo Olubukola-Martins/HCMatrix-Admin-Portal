@@ -1,44 +1,57 @@
-import { Card, Typography, Select, DatePicker } from "antd";
+import { Card, Skeleton } from "antd";
 import DoughnutChartWithExternalLabels from "components/charts/modified/DoughnutChartWithExternalLabels";
-import CurrencySwitcher from "components/currency/CurrencySwitcher";
-import { dummyModuleChartData } from "constants";
-import useHandleCurrency from "hooks/currency/useHandleCurrency";
+import { DEFAULT_DATE_FORMAT } from "constants";
 import { currencyFormatter, generateHexColor } from "lib/utils";
 import React from "react";
 import { IDivProps } from "types";
+import IncomePerCardHeader, {
+  useIncomePerHeaderControls,
+} from "./headers/IncomePerCardHeader";
+import { useGetIncomePerModule } from "lib/api/finance-metrics/analytic/income-per-module";
 
 const IncomePerModuleCard: React.FC<IDivProps> = ({ className }) => {
-  const { selectedCurrency } = useHandleCurrency();
+  const { selectedCurrency, countryIds, duration, setCountryIds, setDuration } =
+    useIncomePerHeaderControls();
+  const { data, isLoading } = useGetIncomePerModule({
+    priceType: selectedCurrency,
+    duration: {
+      startDate: duration?.[0].format(DEFAULT_DATE_FORMAT),
+      endDate: duration?.[1].format(DEFAULT_DATE_FORMAT),
+    },
+    countryIds,
+  });
   return (
     <Card
       className={className}
       title={
-        <div className="flex lg:flex-row flex-col gap-4 justify-between my-4 lg:my-0">
-          <Typography.Title level={5}>
-            <span className="font-light capitalize">Income per Module</span>
-          </Typography.Title>
-          <div className="space-x-4 flex flex-row">
-            <DatePicker.RangePicker placeholder={["From", "To"]} />
-            <Select placeholder={"Location"} />
-
-            <CurrencySwitcher />
-          </div>
-        </div>
+        <IncomePerCardHeader
+          title="Income per Module"
+          duration={duration}
+          setDuration={setDuration}
+          countryIds={countryIds}
+          setCountryIds={setCountryIds}
+        />
       }
       bordered={false}
     >
-      <DoughnutChartWithExternalLabels
-        dataValues={dummyModuleChartData.map((item) => item.value)}
-        dataEntityLabel="Amount"
-        externalLabels={dummyModuleChartData.map((item) => ({
-          value: item.type,
-          color: generateHexColor(item.type),
-        }))}
-        className="lg:h-64 flex lg:flex-row flex-col items-center"
-        centerTextFormatter={(value) =>
-          currencyFormatter({ currency: selectedCurrency, value })
-        }
-      />
+      <Skeleton loading={isLoading} paragraph={{ rows: 4 }}>
+        <DoughnutChartWithExternalLabels
+          dataValues={Object.values(data?.data.percentages ?? {}).map(
+            (item) => (+item / 100) * (data?.data.totalSum ?? 0)
+          )}
+          dataEntityLabel="Amount"
+          externalLabels={Object.keys(data?.data.percentages ?? {}).map(
+            (item) => ({
+              value: item,
+              color: generateHexColor(item),
+            })
+          )}
+          className="lg:h-64 flex lg:flex-row flex-col items-center"
+          centerTextFormatter={(value) =>
+            currencyFormatter({ currency: selectedCurrency, value })
+          }
+        />
+      </Skeleton>
     </Card>
   );
 };

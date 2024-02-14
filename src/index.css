@@ -8,6 +8,7 @@
   --background: #ffffff;
   --text-color: #252526;
   --primary: #ff6647;
+  --faded: rgb(255, 102, 71, 0.5);
   --neutral: #ff221e;
   --card: #f6f7fb;
   --accent: #3a3a3a;
@@ -28,18 +29,22 @@
 
 [color-theme="#d69a00"] {
   --primary: #d69a00;
+  --faded: rgb(255, 102, 71, 0.5);
 }
 
 [color-theme="#01966b"] {
   --primary: #01966b;
+  --faded: rgb(1, 150, 107, 0.5);
 }
 
 [color-theme="#349ce4"] {
   --primary: #349ce4;
+  --faded: rgb(52, 156, 228, 0.5);
 }
 
 [color-theme="#6e55ff"] {
   --primary: #6e55ff;
+  --faded: rgb(110, 85, 255, 0.5);
 }
 
 body {
@@ -61,3 +66,17 @@ a:hover {
 .ant-btn-primary {
   background-color: var(--primary);
 }
+
+/* svg styles for auth background */
+.st0 {
+  fill: none;
+}
+
+.st1 {
+  fill: url(#SVGID_1_);
+}
+
+.st2 {
+  fill: var(--faded);
+}
+/* svg styles for auth background */

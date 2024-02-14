@@ -2,8 +2,10 @@ import { ConfigProvider, theme } from "antd";
 
 import useHandleColorTheme from "hooks/theme/useHandleColorTheme";
 import ThemeContextProvider from "./ThemeContextProvider";
+import AuthContextProvider from "./AuthContextProvider";
 import CurrencyContextProvider from "./CurrencyContextProvider";
-export { ThemeContextProvider };
+import ReactQueryProvider from "./ReactQueryProvider";
+export { ThemeContextProvider, AuthContextProvider };
 
 export const AppProviders: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -51,7 +53,9 @@ export const AppProviders: React.FC<{ children: React.ReactNode }> = ({
               }
         }
       >
-        <CurrencyContextProvider>{children}</CurrencyContextProvider>
+        <CurrencyContextProvider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </CurrencyContextProvider>
       </ConfigProvider>
     </div>
   );

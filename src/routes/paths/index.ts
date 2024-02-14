@@ -1,6 +1,8 @@
 export const appRoutePaths = {
   home: "/",
   login: "/login",
+  forgotPassword: "/forgot-password",
+  resetPassword: "/reset-password",
   userMetrics: "/user-metrics",
   financeMetrics: "/finance-metrics",
   financeMetricsTransactionHistory: "/finance-metrics/transaction-history",

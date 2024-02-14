@@ -7,6 +7,8 @@ import {
 import moment, { Moment } from "moment";
 import { TFileType } from "types";
 
+// TODO: Remove moment completely and refactor to use dayjs
+
 // helpers
 export const isPhoneNumberValid = (val: string): boolean => {
   // Regular expression pattern to match a valid North American phone number with dashes

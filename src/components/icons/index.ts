@@ -13,8 +13,10 @@ import ArrowLeftIcon from "./ArrowLeftIcon";
 import WarningIcon from "./WarningIcon";
 import SuccessIcon from "./SuccessIcon";
 import ColoredImportCircleIcon from "./ColoredImportCircleIcon";
+import AuthBackground from "./AuthBackground";
 
 export {
+  AuthBackground,
   ColoredImportCircleIcon,
   SuccessIcon,
   WarningIcon,
