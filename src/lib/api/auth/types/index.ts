@@ -1,4 +1,4 @@
-export type TUserAuthData = {
+export type TUserAuthPayload = {
   id: number;
   userId: number;
   roleId: number;

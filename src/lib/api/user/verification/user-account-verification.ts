@@ -1,9 +1,9 @@
 import httpClient from "lib/http";
 import { useMutation } from "react-query";
-import { TApiResponse } from "../types";
-import { TLoginResponseData } from "./login";
+import { TApiResponse } from "../../types";
+import { TLoginResponseData } from "lib/api/auth/login";
 
-export type TResetPasswordInput = {
+export type TVerifyAccountInput = {
   password: string;
   confirmPassword: string;
   queryParams: {
@@ -12,11 +12,11 @@ export type TResetPasswordInput = {
   };
 };
 const createData = async (props: {
-  data: TResetPasswordInput;
+  data: TVerifyAccountInput;
 }): Promise<TApiResponse<TLoginResponseData | null>> => {
-  const url = `/auth/reset-password`;
+  const url = `/user/verify`;
 
-  const data: TResetPasswordInput = {
+  const data: TVerifyAccountInput = {
     ...props.data,
   };
 
@@ -29,8 +29,8 @@ const createData = async (props: {
   const res = response.data as TApiResponse<TLoginResponseData | null>;
   return res;
 };
-export const useResetPassword = () => {
-  return useMutation((props: TResetPasswordInput) =>
+export const useVerifyAccountAndSetPassword = () => {
+  return useMutation((props: TVerifyAccountInput) =>
     createData({ data: props })
   );
 };

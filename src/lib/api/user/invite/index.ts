@@ -1,44 +1,40 @@
 import { useQuery } from "react-query";
-
 import { IPaginationProps, TApiResponseWithPagination } from "lib/api/types";
 import httpClient from "lib/http";
 import { DEFAULT_PAGE_LIMIT, DEFAULT_PAGE_OFFSET } from "constants";
 
 type IGetDataProps = Partial<{
   pagination: IPaginationProps;
-  search: string;
 }>;
 
-export const QUERY_KEY_FOR_COMPANIES = "companies";
+export const QUERY_KEY_FOR_USER_INVITES = "user-invites";
 
 const getData = async (
   props: {
     data?: IGetDataProps;
   } = {}
-): Promise<TApiResponseWithPagination<TCompany>> => {
-  const url = `/company`;
+): Promise<TApiResponseWithPagination<TUserInvite>> => {
+  const url = `/user/invite`;
   const pagination = props?.data?.pagination;
   const limit = pagination?.limit ?? DEFAULT_PAGE_LIMIT;
   const offset = pagination?.offset ?? DEFAULT_PAGE_OFFSET;
-  const search = props.data?.search;
 
   const config = {
     params: {
       limit,
       offset,
-      search,
     },
   };
 
   const response = await httpClient.get(url, config);
-  const res = response.data as TApiResponseWithPagination<TCompany>;
+  const res = response.data as TApiResponseWithPagination<TUserInvite>;
   return res;
 };
 
-export const useGetCompanies = (props: IGetDataProps = {}) => {
-  const { pagination, search } = props;
+export const useGetUserInvites = (props: IGetDataProps = {}) => {
+  const { pagination } = props;
   const queryData = useQuery(
-    [QUERY_KEY_FOR_COMPANIES, pagination, search],
+    [QUERY_KEY_FOR_USER_INVITES, pagination],
     () =>
       getData({
         data: {
@@ -51,23 +47,10 @@ export const useGetCompanies = (props: IGetDataProps = {}) => {
   return queryData;
 };
 
-export type TCompany = {
+export type TUserInvite = {
   id: number;
-  name: string;
-  label: string;
-  tag: string;
   email: string;
-  phoneNumber: string;
-  isParent: boolean;
-  isActive: boolean;
-  color: string;
-  industryId: number;
-  userId: number;
-  addressId?: number;
-  logoUrl?: string;
-  website?: string;
-  parentId?: number;
+  lastSent: string;
   createdAt: string;
   updatedAt: string;
-  deletedAt?: string;
 };

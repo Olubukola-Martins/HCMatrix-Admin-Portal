@@ -1,6 +1,6 @@
 import httpClient from "lib/http";
 import { useMutation } from "react-query";
-import { TUser, TUserAuthData } from "./types";
+import { TUser, TUserAuthPayload } from "./types";
 import { TApiResponse } from "../types";
 
 export type TLoginInput = {
@@ -9,7 +9,7 @@ export type TLoginInput = {
 };
 const createData = async (props: {
   data: TLoginInput;
-}): Promise<TApiResponse<Data | null>> => {
+}): Promise<TApiResponse<TLoginResponseData | null>> => {
   const url = `/auth`;
 
   const data: TLoginInput = {
@@ -17,15 +17,15 @@ const createData = async (props: {
   };
 
   const response = await httpClient.post(url, data);
-  const res = response.data as TApiResponse<Data>;
+  const res = response.data as TApiResponse<TLoginResponseData>;
   return res;
 };
 export const useLogin = () => {
   return useMutation((props: TLoginInput) => createData({ data: props }));
 };
 
-interface Data {
+export type TLoginResponseData = {
   user: TUser;
-  payload: TUserAuthData;
+  payload: TUserAuthPayload;
   accessToken: string;
-}
+};
