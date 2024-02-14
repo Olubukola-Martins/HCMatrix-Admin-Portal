@@ -21,7 +21,7 @@ const getData = async (
     data?: IGetDataProps;
   } = {}
 ): Promise<TApiResponse<TIncomePerRate>> => {
-  const url = `/finance/analytic/income/per/rate`;
+  const url = `/finance/analytic/income/rate`;
 
   const config = {
     params: {
@@ -39,9 +39,9 @@ const getData = async (
 };
 
 export const useGetIncomeRate = (props: IGetDataProps) => {
-  const { countryIds, duration, priceType } = props;
+  const { countryIds, duration, priceType, modules } = props;
   const queryData = useQuery(
-    [QUERY_KEY_FOR_INCOME_PER_RATE, countryIds, duration, priceType],
+    [QUERY_KEY_FOR_INCOME_PER_RATE, countryIds, duration, priceType, modules],
     () =>
       getData({
         data: {
