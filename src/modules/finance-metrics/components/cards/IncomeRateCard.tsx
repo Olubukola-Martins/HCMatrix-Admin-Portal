@@ -1,42 +1,55 @@
-import { Card, Typography, DatePicker, Select } from "antd";
+import { Card, Skeleton } from "antd";
 import LineChartWithLabelsCovered from "components/charts/modified/LineChartWithLabelsCovered";
-import CurrencySwitcher from "components/currency/CurrencySwitcher";
-import { dummyChartData } from "constants";
+import { DEFAULT_DATE_FORMAT } from "constants";
+import { useGetIncomeRate } from "lib/api/finance-metrics/analytic/income-rate";
 import React from "react";
 import { IDivProps } from "types";
+import IncomeRateHeader, {
+  useIncomeRateHeaderControls,
+} from "./headers/IncomeRateHeader";
 
 const IncomeRateCard: React.FC<IDivProps> = ({ className }) => {
+  const {
+    selectedCurrency,
+    countryIds,
+    duration,
+    setCountryIds,
+    setDuration,
+    modules,
+    setModules,
+  } = useIncomeRateHeaderControls();
+  const { data, isLoading } = useGetIncomeRate({
+    priceType: selectedCurrency,
+    duration: {
+      startDate: duration?.[0].format(DEFAULT_DATE_FORMAT),
+      endDate: duration?.[1].format(DEFAULT_DATE_FORMAT),
+    },
+    countryIds,
+    modules,
+  });
   return (
     <Card
       className={className}
       title={
-        <div className="flex lg:flex-row flex-col gap-4 justify-between my-4 lg:my-0">
-          <Typography.Title level={5}>
-            <span className="font-light">Income Rate</span>
-          </Typography.Title>
-          <div className="space-x-4 flex flex-row">
-            <DatePicker.RangePicker placeholder={["From", "To"]} />
-            <Select
-              placeholder={"Module"}
-              mode="multiple"
-              className="lg:min-w-28"
-            />
-            <Select
-              placeholder={"Location"}
-              mode="multiple"
-              className="lg:min-w-28"
-            />
-            <CurrencySwitcher />
-          </div>
-        </div>
+        <IncomeRateHeader
+          title="Income Rate"
+          duration={duration}
+          setDuration={setDuration}
+          countryIds={countryIds}
+          setCountryIds={setCountryIds}
+          modules={modules}
+          setModules={setModules}
+        />
       }
       bordered={false}
     >
-      <LineChartWithLabelsCovered
-        dataValues={dummyChartData.map((item) => item.value)}
-        labels={dummyChartData.map((item) => item.year)}
-        className="h-64 relative"
-      />
+      <Skeleton loading={isLoading} paragraph={{ rows: 4 }}>
+        <LineChartWithLabelsCovered
+          dataValues={Object.values(data?.data ?? {}).map((item) => +item)}
+          labels={Object.keys(data?.data ?? {}).map((item) => item)}
+          className="h-64 relative"
+        />
+      </Skeleton>
     </Card>
   );
 };
