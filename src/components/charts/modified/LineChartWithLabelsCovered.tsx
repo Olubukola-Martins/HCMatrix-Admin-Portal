@@ -1,4 +1,4 @@
-import { theme } from "antd";
+import { Empty, theme } from "antd";
 import React from "react";
 import { IDivProps } from "types";
 import { LineChart } from "..";
@@ -16,6 +16,9 @@ const LineChartWithLabelsCovered: React.FC<
   labels = [],
 }) => {
   const { token } = theme.useToken();
+  if (dataValues.length === 0 || dataValues.every((i) => i === 0)) {
+    return <Empty description="No data" className="mx-auto mt-12" />;
+  }
   return (
     <div className={className}>
       {/* The div below hides the label from chart */}
