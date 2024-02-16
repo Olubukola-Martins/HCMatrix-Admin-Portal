@@ -3,14 +3,11 @@ import { useQuery } from "react-query";
 import { IPaginationProps, TApiResponseWithPagination } from "lib/api/types";
 import httpClient from "lib/http";
 import { DEFAULT_PAGE_LIMIT, DEFAULT_PAGE_OFFSET } from "constants";
-import { TBillingCycle, TModule } from "types";
+import { TBillingCycle, TDuration, TModule } from "types";
 
 type IGetDataProps = {
   pagination?: IPaginationProps;
-  duration: {
-    startDate: string;
-    endDate: string;
-  };
+  duration: TDuration;
   billingCycle?: TBillingCycle;
   modules?: TModule[];
   countryIds?: number[];

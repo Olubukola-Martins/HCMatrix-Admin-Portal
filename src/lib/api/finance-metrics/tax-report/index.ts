@@ -3,15 +3,12 @@ import { useQuery } from "react-query";
 import { IPaginationProps, TApiResponseWithPagination } from "lib/api/types";
 import httpClient from "lib/http";
 import { DEFAULT_PAGE_LIMIT, DEFAULT_PAGE_OFFSET } from "constants";
-import { TBillingCycle } from "types";
+import { TBillingCycle, TDuration } from "types";
 import { TTaxReport } from "./get-tax-report";
 
 type IGetDataProps = {
   pagination?: IPaginationProps;
-  duration: {
-    startDate: string;
-    endDate: string;
-  };
+  duration: TDuration;
   billingCycle?: TBillingCycle;
   countryIds?: number[];
   industryIds?: number[];

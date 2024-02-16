@@ -1,14 +1,11 @@
 import { useQuery } from "react-query";
-import { TCurrency, TModule } from "types";
+import { TCurrency, TDuration, TModule } from "types";
 
 import { TApiResponse } from "lib/api/types";
 import httpClient from "lib/http";
 
 type IGetDataProps = {
-  duration: {
-    startDate: string;
-    endDate: string;
-  };
+  duration: TDuration;
   priceType: TCurrency;
   countryIds?: number[];
   modules?: TModule[];

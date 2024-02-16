@@ -7,13 +7,11 @@ import { TPermission } from "../get-permissions";
 export const QUERY_KEY_FOR_SINGLE_ROLE = "single-role";
 
 type TGetDataProps = { id: number };
-const getData = async (
-  props: TGetDataProps
-): Promise<TApiResponse<TRole[]>> => {
+const getData = async (props: TGetDataProps): Promise<TApiResponse<TRole>> => {
   const url = `/permission/role/${props.id}`;
 
   const response = await httpClient.get(url);
-  const res = response.data as TApiResponse<TRole[]>;
+  const res = response.data as TApiResponse<TRole>;
   return res;
 };
 

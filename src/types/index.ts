@@ -18,3 +18,9 @@ export type TSubscriptionLabel =
   | "recruitment"
   | "learning-and-development";
 export type TModule = TSubscriptionLabel;
+export type TSubscriptionType = "module" | "plan";
+export type TOrderBy = "asc" | "desc";
+export type TDuration = {
+  startDate: string;
+  endDate: string;
+};
