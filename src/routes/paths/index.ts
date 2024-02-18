@@ -9,6 +9,7 @@ export const appRoutePaths = {
   financeMetricsTaxReport: "/finance-metrics/tax-report",
   financeMetricsScheduledRenewal: "/finance-metrics/scheduled-renewal",
   trainingSessions: "/training-sessions",
+  trainingSessionsBookings: "/training-sessions/bookings",
   salesMetrics: "/sales-metrics",
   itAuditMetrics: "/it-audit-metrics",
   settings: "/settings",
@@ -24,4 +25,5 @@ export const appRoutePaths = {
   reports: "/reports",
   notifications: "/notifications",
   notFound: "*",
+  // training sessions
 };

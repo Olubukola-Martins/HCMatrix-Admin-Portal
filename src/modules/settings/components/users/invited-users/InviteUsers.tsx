@@ -1,5 +1,6 @@
 import { Button, Form, Input, Modal } from "antd";
 import { ModalTitle } from "components/modal";
+import { useInviteUsers } from "lib/api/user/invite/invite-users";
 import { listOfEmailValidationRule } from "lib/validation";
 import React from "react";
 
@@ -7,7 +8,8 @@ const InviteUsers: React.FC<{ open: boolean; handleClose: () => void }> = ({
   open,
   handleClose,
 }) => {
-  const [form] = Form.useForm<{ dueDate: string }>();
+  const [form] = Form.useForm<{ emails: string }>();
+  const { mutate, isLoading } = useInviteUsers();
   return (
     <>
       <Modal
@@ -16,10 +18,28 @@ const InviteUsers: React.FC<{ open: boolean; handleClose: () => void }> = ({
         title={<ModalTitle text="Invite Users" />}
         footer={null}
       >
-        <Form labelCol={{ span: 24 }} requiredMark={false} form={form}>
+        <Form
+          labelCol={{ span: 24 }}
+          requiredMark={false}
+          form={form}
+          onFinish={(data) => {
+            console.log(data, "....");
+            mutate(
+              {
+                emails: data.emails.split(",").map((e) => e.trim()),
+              },
+              {
+                onSuccess: () => {
+                  handleClose();
+                  form.resetFields();
+                },
+              }
+            );
+          }}
+        >
           <Form.Item
             label="Email(s)"
-            name={`name`}
+            name={`emails`}
             rules={[listOfEmailValidationRule]}
           >
             <Input.TextArea rows={7} placeholder="Emails" />
@@ -29,7 +49,9 @@ const InviteUsers: React.FC<{ open: boolean; handleClose: () => void }> = ({
             <Button type="text" onClick={handleClose}>
               Cancel
             </Button>
-            <Button type="primary">Save</Button>
+            <Button type="primary" htmlType="submit" loading={isLoading}>
+              Save__
+            </Button>
           </div>
         </Form>
       </Modal>

@@ -80,3 +80,11 @@ a:hover {
   fill: var(--faded);
 }
 /* svg styles for auth background */
+
+/* override big-calender-css */
+.rbc-event,
+.rbc-event.rbc-selected {
+  background: var(--primary) !important;
+}
+
+/* override big-calender-css */

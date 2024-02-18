@@ -7,7 +7,7 @@ import DiscountActions from "./DiscountActions";
 
 const SpecificDiscountsTable = () => {
   const { pagination, onChange } = usePagination();
-  const { data, isLoading } = useGetDiscounts();
+  const { data, isLoading } = useGetDiscounts({ pagination });
   return (
     <Table
       loading={isLoading}

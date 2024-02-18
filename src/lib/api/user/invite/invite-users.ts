@@ -1,7 +1,7 @@
 import httpClient from "lib/http";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { TApiResponse } from "../../types";
-import { TUserInvite } from ".";
+import { QUERY_KEY_FOR_USER_INVITES, TUserInvite } from ".";
 
 export type TInviteUserInput = {
   emails: string[];
@@ -20,5 +20,10 @@ const createData = async (props: {
   return res;
 };
 export const useInviteUsers = () => {
-  return useMutation((props: TInviteUserInput) => createData({ data: props }));
+  const queryClient = useQueryClient();
+  return useMutation((props: TInviteUserInput) => createData({ data: props }), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_KEY_FOR_USER_INVITES]);
+    },
+  });
 };

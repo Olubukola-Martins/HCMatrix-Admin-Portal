@@ -24,3 +24,19 @@ export type TDuration = {
   startDate: string;
   endDate: string;
 };
+export type TBookingStatus = "pending" | "accepted" | "rejected" | "completed";
+export interface TFormFileInput {
+  uid: string;
+  lastModified: number;
+  lastModifiedDate: string;
+  name: string;
+  size: number;
+  type: string;
+  percent: number;
+  originFileObj: OriginFileObj;
+  status: string;
+}
+
+interface OriginFileObj {
+  uid: string;
+}

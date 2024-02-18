@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import AddSingleUser from "./AddSingleUser";
 import ImportUsers from "./ImportUsers";
-import InviteUsers from "./InviteUsers";
+import InviteUsers from "./invited-users/InviteUsers";
 
 type TAction = "add-user" | "import-users" | "invite-users";
 const AddUsers = () => {

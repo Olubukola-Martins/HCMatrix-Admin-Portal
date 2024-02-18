@@ -3,17 +3,17 @@ import React, { useState } from "react";
 import { AiOutlineMore } from "react-icons/ai";
 import EditSingleUser from "./EditSingleUser";
 import DeleteUser from "./DeleteUser";
-import ResendInvite from "./ResendInvite";
+import { TUser } from "lib/api/user/get-user";
 
-type TAction = "edit-user" | "resend-invite" | "delete-user";
+type TAction = "edit-user" | "delete-user";
 const UserActions: React.FC<{
-  userId: number;
-  trigger: React.ReactNode;
+  user: Pick<TUser, "user" | "id" | "firstName" | "lastName" | "role">;
+  trigger?: React.ReactNode;
   actions?: TAction[];
 }> = ({
-  userId,
+  user,
   trigger = <Button icon={<AiOutlineMore />} type="text" />,
-  actions = ["edit-user", "resend-invite", "delete-user"],
+  actions = ["edit-user", "delete-user"],
 }) => {
   const [action, setAction] = useState<TAction>();
   const handleClose = () => {
@@ -28,7 +28,7 @@ const UserActions: React.FC<{
       <EditSingleUser
         open={action === "edit-user"}
         handleClose={handleClose}
-        userId={userId}
+        user={user}
       />
       <Dropdown
         menu={{
@@ -39,14 +39,10 @@ const UserActions: React.FC<{
               onClick: () => handleAction("edit-user"),
               disabled: !actions.includes("edit-user"),
             },
-            {
-              key: "Resend Invite",
-              label: <ResendInvite userId={userId} />,
-              disabled: !actions.includes("resend-invite"),
-            },
+
             {
               key: "Delete User",
-              label: <DeleteUser userId={userId} />,
+              label: <DeleteUser user={user} trigger="Delete User" />,
               disabled: !actions.includes("delete-user"),
             },
           ].filter(

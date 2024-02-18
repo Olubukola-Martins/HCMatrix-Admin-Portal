@@ -1,7 +1,8 @@
 import httpClient from "lib/http";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { TApiResponse } from "../types";
 import { TUser, TUserAuthPayload } from "../auth/types";
+import { QUERY_KEY_FOR_USERS } from ".";
 
 export type TCreateUserInput = {
   firstName: string;
@@ -24,7 +25,12 @@ const createData = async (props: {
   return res;
 };
 export const useCreateUser = () => {
-  return useMutation((props: TCreateUserInput) => createData({ data: props }));
+  const queryClient = useQueryClient();
+  return useMutation((props: TCreateUserInput) => createData({ data: props }), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_KEY_FOR_USERS]);
+    },
+  });
 };
 
 export type TCreateUserData = Omit<TUserAuthPayload, "role"> & { user: TUser };

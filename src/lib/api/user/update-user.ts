@@ -1,7 +1,8 @@
 import httpClient from "lib/http";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { TApiResponse } from "../types";
 import { TCreateUserInput } from "./create-user";
+import { QUERY_KEY_FOR_USERS } from ".";
 
 export type TUpdateUserInput = {
   id: number;
@@ -21,5 +22,10 @@ const createData = async (props: {
   return res;
 };
 export const useUpdateUser = () => {
-  return useMutation((props: TUpdateUserInput) => createData({ data: props }));
+  const queryClient = useQueryClient();
+  return useMutation((props: TUpdateUserInput) => createData({ data: props }), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_KEY_FOR_USERS]);
+    },
+  });
 };

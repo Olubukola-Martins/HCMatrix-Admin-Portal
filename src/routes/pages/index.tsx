@@ -12,6 +12,8 @@ import PricesContainer from "modules/settings/components/prices/PricesContainer"
 import RolesAndPermissionContainer from "modules/settings/components/roles-and-permissions/RolesAndPermissionContainer";
 import PermissionsContainer from "modules/settings/components/roles-and-permissions/permissions/PermissionsContainer";
 import UsersContainer from "modules/settings/components/users/UsersContainer";
+import TrainingSessionContainer from "modules/training-sessions/components/TrainingSessionContainer";
+import TrainingSessionBookingContainer from "modules/training-sessions/components/bookings/TrainingSessionBookingContainer";
 import { appRoutePaths } from "routes/paths";
 import { TRoutePageData } from "routes/types";
 
@@ -35,6 +37,20 @@ export const appRoutePages: TRoutePageData[] = [
     title: "Not Found",
     category: ["doesnt-require-authentication"],
   },
+  // training sessions
+  {
+    element: <TrainingSessionContainer />,
+    path: appRoutePaths.trainingSessions,
+    title: "Training Sessions",
+  },
+  {
+    element: <TrainingSessionBookingContainer />,
+    path: appRoutePaths.trainingSessionsBookings,
+    title: "Training Session Bookings",
+  },
+  // training sessions
+
+  // settings
   {
     element: <PricesContainer />,
     path: appRoutePaths.settingsPrices,

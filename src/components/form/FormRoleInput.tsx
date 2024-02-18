@@ -1,13 +1,13 @@
 import { Select, Form } from "antd";
 import { useDebounce } from "hooks/utils/useDebounce";
-import { useGetCompanies } from "lib/api/company";
+import { useGetRoles } from "lib/api/roles-and-permissions/role";
 import {
   generalValidationRules,
   generalValidationRulesOp,
 } from "lib/validation";
 import { useState } from "react";
 
-export const FormCompanyInput: React.FC<{
+export const FormRoleInput: React.FC<{
   Form: typeof Form;
   showLabel?: boolean;
   control?: { label: string; name: string | (string | number)[] };
@@ -16,7 +16,7 @@ export const FormCompanyInput: React.FC<{
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedSearchTerm: string = useDebounce<string>(searchTerm);
 
-  const { data, isFetching } = useGetCompanies({
+  const { data, isFetching } = useGetRoles({
     search: debouncedSearchTerm,
   });
 
@@ -26,12 +26,12 @@ export const FormCompanyInput: React.FC<{
 
   return (
     <Form.Item
-      name={control?.name ?? "companyId"}
-      label={showLabel ? control?.label ?? "Company" : null}
+      name={control?.name ?? "roleId"}
+      label={showLabel ? control?.label ?? "Role" : null}
       rules={optional ? generalValidationRulesOp : generalValidationRules}
     >
       <Select
-        placeholder="Select Company"
+        placeholder="Select Role"
         loading={isFetching}
         showSearch
         allowClear

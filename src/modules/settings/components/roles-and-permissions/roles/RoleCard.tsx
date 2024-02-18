@@ -71,7 +71,7 @@ const RoleCard: React.FC<
 };
 export const RoleCards = () => {
   const { pagination, onChange } = usePagination();
-  const { data, isLoading } = useGetRoles();
+  const { data, isLoading } = useGetRoles({ pagination });
   return (
     <Skeleton loading={isLoading} paragraph={{ rows: 12 }}>
       <div className="space-y-8">

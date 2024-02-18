@@ -22,7 +22,7 @@ type TResponseData = Omit<
   TTrainingSessionBooking,
   "company" | "trainingSession"
 > & {
-  company: Pick<TCompany, "id" | "name">;
+  company: Pick<TCompany, "id" | "name" | "logoUrl">;
   trainingSession: Pick<TTrainingSession, "id" | "name">;
 };
 const getData = async (

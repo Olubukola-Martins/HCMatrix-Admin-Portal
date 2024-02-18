@@ -3,6 +3,7 @@ import { TApiResponse } from "lib/api/types";
 import httpClient from "lib/http";
 import { TCompany } from "lib/api/company";
 import { TTrainingSession } from "../get-training-session";
+import { TBookingStatus } from "types";
 
 export const QUERY_KEY_FOR_SINGLE_TRAINING_SESSION_BOOKING =
   "single-training-session-booking";
@@ -27,12 +28,11 @@ export const useGetSingleTrainingSessionBooking = (props: TGetDataProps) => {
 
   return queryData;
 };
-
 export type TTrainingSessionBooking = {
   id: number;
   companyId: number;
   trainingSessionId: number;
-  status: "accepted" | "rejected" | "pending" | "completed";
+  status: TBookingStatus;
   reason?: string | null;
   startDate: string;
   endDate: string;

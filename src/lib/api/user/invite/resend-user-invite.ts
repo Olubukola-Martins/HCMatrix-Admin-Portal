@@ -1,6 +1,7 @@
 import { TApiResponse } from "lib/api/types";
 import httpClient from "lib/http";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
+import { QUERY_KEY_FOR_USER_INVITES } from ".";
 
 export type TResendUserInviteInput = {
   id: number;
@@ -15,7 +16,13 @@ const createData = async (props: {
   return res;
 };
 export const useResendUserInvite = () => {
-  return useMutation((props: TResendUserInviteInput) =>
-    createData({ data: props })
+  const queryClient = useQueryClient();
+  return useMutation(
+    (props: TResendUserInviteInput) => createData({ data: props }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QUERY_KEY_FOR_USER_INVITES]);
+      },
+    }
   );
 };

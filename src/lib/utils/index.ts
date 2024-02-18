@@ -1,4 +1,4 @@
-import { TCurrency } from "types";
+import { TBookingStatus, TCurrency } from "types";
 
 type TError = {
   message: string;
@@ -65,4 +65,67 @@ export const generateAvatarFromInitials = (name: string) => {
   return `https://ui-avatars.com/api/?name=${name
     .split(" ")
     .join("+")}&background=7772EB&color=fff&bold=true`;
+};
+
+export const constructUserFullName = (detail?: {
+  firstName: string;
+  lastName: string;
+}) => (detail ? `${detail.firstName} ${detail.lastName}` : `No Name`);
+
+const ECOLOR: { [key: TBookingStatus | string]: string } = {
+  pending: "#FFA600",
+  approved: "#01966B",
+  rejected: "#FF221E",
+  closed: "#1ace17",
+  low: "#06e9ec",
+  high: "#FF221E",
+  medium: "#08b0f8",
+  active: "#08b0f8",
+  new: "#f7e930",
+  "in-review": "#FFA600",
+};
+
+export const getAppropriateColorForStatus = (status: string) => {
+  return ECOLOR?.[status] ?? generateHexColor(status);
+};
+
+type TUpdateStatusDetail = {
+  message: string;
+  title: string;
+  confirmText: string;
+};
+export const generateUpdateStatusDetails = (
+  status: TBookingStatus
+): TUpdateStatusDetail => {
+  let detail: TUpdateStatusDetail = {
+    message: "Are you sure you want to update this booking status?",
+    title: "Update Status",
+    confirmText: "Update",
+  };
+  switch (status) {
+    case "accepted":
+      detail = {
+        message: "Are you sure you want to accept this booking?",
+        title: "Accept Booking",
+        confirmText: "Accept",
+      };
+      break;
+    case "rejected":
+      detail = {
+        message: "Are you sure you want to reject this booking?",
+        title: "Reject Booking",
+        confirmText: "Reject",
+      };
+      break;
+    case "completed":
+      detail = {
+        message: "Are you sure you want to mark this booking as completed?",
+        title: "Complete Booking",
+        confirmText: "Complete",
+      };
+      break;
+    default:
+      break;
+  }
+  return detail;
 };
