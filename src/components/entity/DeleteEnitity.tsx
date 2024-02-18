@@ -7,7 +7,16 @@ const DeleteEnitity: React.FC<{
   trigger?: React.ReactNode;
   message: string;
   title: string;
-}> = ({ trigger = <Button type="primary">Delete</Button>, title, message }) => {
+  handleDelete: {
+    fn: () => void;
+    isLoading?: boolean;
+  };
+}> = ({
+  trigger = <Button type="primary">Delete</Button>,
+  title,
+  message,
+  handleDelete,
+}) => {
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -26,7 +35,13 @@ const DeleteEnitity: React.FC<{
             <Button type="default" size="large" danger onClick={handleClose}>
               Cancel
             </Button>
-            <Button type="primary" size="large" danger>
+            <Button
+              type="primary"
+              size="large"
+              danger
+              onClick={handleDelete.fn}
+              loading={handleDelete?.isLoading}
+            >
               Delete
             </Button>
           </div>

@@ -3,6 +3,7 @@ import {
   DEFAULT_MAX_FILE_UPLOAD_SIZE_IN_MB,
   DEFAULT_MAX_FILE_UPLOAD_COUNT,
 } from "constants";
+import { Dayjs } from "dayjs";
 
 import moment, { Moment } from "moment";
 import { TFileType } from "types";
@@ -72,10 +73,10 @@ export const isDateGreaterThanCurrentDay = (date: Moment) => {
   if (!date) return;
   return date.isAfter(currentDate, "day"); // Check if selected date is greater than the current day
 };
-export const isDateGreaterThanOrEqualToCurrentDay = (date: Moment) => {
+export const isDateGreaterThanOrEqualToCurrentDay = (date: Dayjs) => {
   const currentDate = moment();
   if (!date) return;
-  return date.isSameOrAfter(currentDate, "day"); // Check if selected date is greater than the current day
+  return moment(date.toISOString()).isSameOrAfter(currentDate, "day"); // Check if selected date is greater than the current day
 };
 export const isDateLesserThanOrEqualToCurrentDay = (date: Moment) => {
   const currentDate = moment();
@@ -211,7 +212,10 @@ export const numberHasToBeInRange = (_min: number, _max: number): Rule => ({
 });
 export const numberHasToBeGreaterThanValueRule = (_value: number): Rule => ({
   validator: async (_, value) => {
-    if (typeof +value !== "number") {
+    if (typeof value === "undefined") {
+      throw new Error("Field is required!");
+    }
+    if (typeof value !== "number") {
       throw new Error("Please enter a valid number!");
     }
     if (+value <= _value) {

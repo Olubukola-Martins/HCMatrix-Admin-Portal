@@ -1,7 +1,7 @@
 import httpClient from "lib/http";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { TApiResponse } from "../../types";
-import { TDiscount } from ".";
+import { QUERY_KEY_FOR_DISCOUNTS, TDiscount } from ".";
 
 export type TUpdateDiscountEndDateInput = {
   id: number;
@@ -18,12 +18,18 @@ const createData = async (props: {
     ...props.data.data,
   };
 
-  const response = await httpClient.post(url, data);
+  const response = await httpClient.patch(url, data);
   const res = response.data as TApiResponse<TDiscount>;
   return res;
 };
 export const useUpdateDiscountEndDate = () => {
-  return useMutation((props: TUpdateDiscountEndDateInput) =>
-    createData({ data: props })
+  const queryClient = useQueryClient();
+  return useMutation(
+    (props: TUpdateDiscountEndDateInput) => createData({ data: props }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QUERY_KEY_FOR_DISCOUNTS]);
+      },
+    }
   );
 };

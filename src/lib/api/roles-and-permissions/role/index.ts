@@ -10,7 +10,7 @@ type IGetDataProps = Partial<{
   search: string;
 }>;
 
-export const QUERY_KEY_FOR_COUNTRIES = "countries";
+export const QUERY_KEY_FOR_ROLES = "roles";
 
 const getData = async (
   props: {
@@ -45,7 +45,7 @@ const getData = async (
 export const useGetRoles = (props: IGetDataProps = {}) => {
   const { pagination, search } = props;
   const queryData = useQuery(
-    [QUERY_KEY_FOR_COUNTRIES, pagination, search],
+    [QUERY_KEY_FOR_ROLES, pagination, search],
     () =>
       getData({
         data: {

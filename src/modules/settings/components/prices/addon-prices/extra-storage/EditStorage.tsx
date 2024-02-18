@@ -74,7 +74,7 @@ const EditStorage: React.FC<{
                 {
                   onSuccess: () => {
                     handleClose();
-                    form.resetFields;
+                    form.resetFields();
                   },
                 }
               );

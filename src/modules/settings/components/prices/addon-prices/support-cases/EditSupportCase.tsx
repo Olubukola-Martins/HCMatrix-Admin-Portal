@@ -57,7 +57,7 @@ const EditSupportCase: React.FC<{
                 {
                   onSuccess: () => {
                     handleClose();
-                    form.resetFields;
+                    form.resetFields();
                   },
                 }
               );

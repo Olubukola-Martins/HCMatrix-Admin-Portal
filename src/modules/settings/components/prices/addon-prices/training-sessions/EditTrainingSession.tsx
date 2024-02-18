@@ -58,7 +58,7 @@ const EditTrainingSession: React.FC<{
                 {
                   onSuccess: () => {
                     handleClose();
-                    form.resetFields;
+                    form.resetFields();
                   },
                 }
               );

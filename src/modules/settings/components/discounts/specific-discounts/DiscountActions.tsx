@@ -3,14 +3,15 @@ import React from "react";
 import { AiOutlineMore } from "react-icons/ai";
 import UpdateDiscountEndDate from "./UpdateDiscountEndDate";
 import DeleteSpecificDiscount from "./DeleteSpecificDiscount";
+import { TDiscount } from "lib/api/subscription/discount";
 
 type TAction = "change-end-date" | "delete-discount";
 const DiscountActions: React.FC<{
-  discountId: number;
-  trigger: React.ReactNode;
+  discount: Pick<TDiscount, "id" | "company" | "endDate">;
+  trigger?: React.ReactNode;
   actions?: TAction[];
 }> = ({
-  discountId,
+  discount,
   trigger = <Button icon={<AiOutlineMore />} type="text" />,
   actions = ["change-end-date", "delete-discount"],
 }) => {
@@ -21,13 +22,23 @@ const DiscountActions: React.FC<{
           items: [
             {
               key: "Change End Date",
-              label: <UpdateDiscountEndDate discountId={discountId} />,
+              label: (
+                <UpdateDiscountEndDate
+                  discount={discount}
+                  trigger="Change End Date"
+                />
+              ),
               disabled: !actions.includes("change-end-date"),
             },
 
             {
               key: "Delete Discount",
-              label: <DeleteSpecificDiscount discountId={discountId} />,
+              label: (
+                <DeleteSpecificDiscount
+                  discount={discount}
+                  trigger="Delete Discount"
+                />
+              ),
               disabled: !actions.includes("delete-discount"),
             },
           ].filter(

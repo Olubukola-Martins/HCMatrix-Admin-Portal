@@ -1,17 +1,23 @@
 import { TCurrency } from "types";
 
 type TError = {
-  error: string;
+  message: string;
 };
 
-export const errorMessageFormatter = (error: any): TError => {
-  if (error.response) {
-    return error.response.data;
-  } else if (error.request) {
-    return error.request;
-  } else {
-    return { error: error.message };
-  }
+export const errorFormatter = (error: unknown): TError => {
+  const DEFAULT_ERR_MESSAGE = "Ooops! Something went wrong!";
+  return {
+    message:
+      (error as Record<string, Record<string, Record<string, string>>>)
+        ?.response.data.message ??
+      (
+        error as Record<
+          string,
+          Record<string, Record<string, Record<string, string>>>
+        >
+      )?.response.data.error.message ??
+      DEFAULT_ERR_MESSAGE,
+  };
 };
 
 export const generateHexColor = (input: string | number): string => {

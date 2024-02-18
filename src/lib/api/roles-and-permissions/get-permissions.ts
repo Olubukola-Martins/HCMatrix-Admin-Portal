@@ -5,11 +5,11 @@ import httpClient from "lib/http";
 
 export const QUERY_KEY_FOR_PERMISSIONS = "permissions";
 
-const getData = async (): Promise<TApiResponse<TPermission[]>> => {
+const getData = async (): Promise<TApiResponse<PermissionListData[]>> => {
   const url = `/permission`;
 
   const response = await httpClient.get(url);
-  const res = response.data as TApiResponse<TPermission[]>;
+  const res = response.data as TApiResponse<PermissionListData[]>;
   return res;
 };
 
@@ -19,15 +19,15 @@ export const useGetPermissions = () => {
   return queryData;
 };
 
-export type TPermission = {
+interface PermissionListData {
   id: number;
   name: string;
   createdAt: string;
   updatedAt: string;
-  permissions: Permission[];
-};
+  permissions: TPermission[];
+}
 
-interface Permission {
+export type TPermission = {
   id: number;
   name: string;
   label: string; //TODO: Create a Permission Label type, after consulting with backend
@@ -35,4 +35,4 @@ interface Permission {
   description?: string | null;
   createdAt: string;
   updatedAt: string;
-}
+};

@@ -6,7 +6,7 @@ import { TPermission } from "../get-permissions";
 
 export const QUERY_KEY_FOR_SINGLE_ROLE = "single-role";
 
-type TGetDataProps = { id: number };
+type TGetDataProps = { id?: number };
 const getData = async (props: TGetDataProps): Promise<TApiResponse<TRole>> => {
   const url = `/permission/role/${props.id}`;
 
@@ -19,7 +19,9 @@ export const useGetSingleRole = (props: TGetDataProps) => {
   const queryData = useQuery(
     [QUERY_KEY_FOR_SINGLE_ROLE, props.id],
     () => getData({ ...props }),
-    {}
+    {
+      enabled: !!props.id,
+    }
   );
 
   return queryData;
@@ -31,5 +33,14 @@ export type TRole = {
   label: string;
   createdAt: string;
   updatedAt: string;
-  permissions: TPermission[];
+  permissions: Permission[];
 };
+
+interface Permission {
+  id: number;
+  permissionId: number;
+  roleId: number;
+  createdAt: string;
+  updatedAt: string;
+  permission: TPermission;
+}

@@ -1,7 +1,8 @@
 import httpClient from "lib/http";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { TApiResponse } from "../../types";
 import { TCreateRoleInput } from "./create-role";
+import { QUERY_KEY_FOR_ROLES } from ".";
 
 export type TUpdateRoleInput = {
   id: number;
@@ -21,5 +22,10 @@ const createData = async (props: {
   return res;
 };
 export const useUpdateRole = () => {
-  return useMutation((props: TUpdateRoleInput) => createData({ data: props }));
+  const queryClient = useQueryClient();
+  return useMutation((props: TUpdateRoleInput) => createData({ data: props }), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_KEY_FOR_ROLES]);
+    },
+  });
 };
