@@ -7,7 +7,8 @@ import { useUpdateLicensedPrices } from "lib/api/subscription/prices/update-lice
 
 const PricesContainer = () => {
   const { token } = theme.useToken();
-  const { mutate, isLoading } = useUpdateLicensedPrices();
+  const { mutate: updatePrices, isLoading: isUpdatingPrices } =
+    useUpdateLicensedPrices();
   const panelStyle: React.CSSProperties = {
     marginBottom: 15,
     background: "var(--background)",
@@ -38,9 +39,9 @@ const PricesContainer = () => {
               children: (
                 <ModulePriceForm
                   onSubmit={{
-                    isLoading,
+                    isLoading: isUpdatingPrices,
                     fn: ({ prices, currency }) => {
-                      mutate({
+                      updatePrices({
                         prices: prices.map((price) => ({
                           monthlyPricePerLicensedEmployee:
                             price.monthlyPricePerLicensedEmployee,
