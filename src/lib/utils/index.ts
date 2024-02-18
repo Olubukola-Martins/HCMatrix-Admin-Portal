@@ -30,7 +30,7 @@ export const generateHexColor = (input: string | number): string => {
 };
 
 const CURRENCY_MAP: Record<TCurrency, string> = {
-  ngn: "N",
+  ngn: "₦",
   usd: "$",
 };
 export const currencyFormatter = (props: {
@@ -38,5 +38,11 @@ export const currencyFormatter = (props: {
   value: string | number;
 }) => {
   const { currency, value } = props;
-  return `${CURRENCY_MAP[currency]}${value}`;
+  return `${CURRENCY_MAP[currency]} ${value}`;
+};
+
+export const generateAvatarFromInitials = (name: string) => {
+  return `https://ui-avatars.com/api/?name=${name
+    .split(" ")
+    .join("+")}&background=7772EB&color=fff&bold=true`;
 };

@@ -1,34 +1,13 @@
-import { Collapse, CollapseProps, theme } from "antd";
+import { Collapse, theme } from "antd";
 import { PageLayout } from "components/layouts";
 import ModulePriceForm from "./module-prices/ModulePriceForm";
 import AddOnForm from "./addon-prices/AddOnForm";
 import VatForm from "./vat/VatForm";
+import { useUpdateLicensedPrices } from "lib/api/subscription/prices/update-licensed-prices";
 
-const getItems: (panelStyle: React.CSSProperties) => CollapseProps["items"] = (
-  panelStyle
-) => [
-  {
-    key: "1",
-    label: <span className="text-lg font-bold">Set Module Prices</span>,
-    children: <ModulePriceForm />,
-    style: panelStyle,
-  },
-  {
-    key: "2",
-    label: <span className="text-lg font-bold">Add-ons</span>,
-    children: <AddOnForm />,
-    style: panelStyle,
-  },
-  {
-    label: <span className="text-lg font-bold">VAT</span>,
-    key: "3",
-    children: <VatForm />,
-    style: panelStyle,
-  },
-];
 const PricesContainer = () => {
   const { token } = theme.useToken();
-
+  const { mutate, isLoading } = useUpdateLicensedPrices();
   const panelStyle: React.CSSProperties = {
     marginBottom: 15,
     background: "var(--background)",
@@ -50,7 +29,46 @@ const PricesContainer = () => {
           defaultActiveKey={["1"]}
           expandIconPosition="right"
           className="bg-transparent"
-          items={getItems(panelStyle)}
+          items={[
+            {
+              key: "1",
+              label: (
+                <span className="text-lg font-bold">Set Module Prices</span>
+              ),
+              children: (
+                <ModulePriceForm
+                  onSubmit={{
+                    isLoading,
+                    fn: ({ prices, currency }) => {
+                      mutate({
+                        prices: prices.map((price) => ({
+                          monthlyPricePerLicensedEmployee:
+                            price.monthlyPricePerLicensedEmployee,
+                          subscriptionId: price.subscriptionId,
+                          yearlyPricePerLicensedEmployee:
+                            price.yearlyPricePerLicensedEmployee,
+                          type: currency,
+                        })),
+                      });
+                    },
+                  }}
+                />
+              ),
+              style: panelStyle,
+            },
+            {
+              key: "2",
+              label: <span className="text-lg font-bold">Add-ons</span>,
+              children: <AddOnForm />,
+              style: panelStyle,
+            },
+            {
+              label: <span className="text-lg font-bold">VAT</span>,
+              key: "3",
+              children: <VatForm />,
+              style: panelStyle,
+            },
+          ]}
         />
       </div>
     </PageLayout>

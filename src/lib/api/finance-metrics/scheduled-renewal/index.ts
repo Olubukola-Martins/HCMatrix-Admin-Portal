@@ -45,7 +45,7 @@ const getData = async (
   return res;
 };
 
-export const useGetTransactionHistory = (props: IGetDataProps) => {
+export const useGetScheduledRenewals = (props: IGetDataProps) => {
   const {
     pagination,
     duration,

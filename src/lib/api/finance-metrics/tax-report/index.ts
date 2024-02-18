@@ -43,7 +43,7 @@ const getData = async (
   return res;
 };
 
-export const useGetTaxReport = (props: IGetDataProps) => {
+export const useGetTaxReports = (props: IGetDataProps) => {
   const { pagination, duration, billingCycle, countryIds, industryIds } = props;
   const queryData = useQuery(
     [

@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { IPaginationProps, TApiResponseWithPagination } from "lib/api/types";
 import httpClient from "lib/http";
 import { DEFAULT_PAGE_LIMIT, DEFAULT_PAGE_OFFSET } from "constants";
-import { TBillingCycle, TDuration, TModule } from "types";
+import { TBillingCycle, TCurrency, TDuration, TModule } from "types";
 
 type IGetDataProps = {
   pagination?: IPaginationProps;
@@ -82,7 +82,7 @@ export type TTransactionHistory = {
   isFreeTrial: boolean;
   autoRenew: boolean;
   billingCycle: string;
-  priceType: string;
+  priceType: TCurrency;
   startDate: string;
   endDate: string;
   licensedEmployeeCount: number;

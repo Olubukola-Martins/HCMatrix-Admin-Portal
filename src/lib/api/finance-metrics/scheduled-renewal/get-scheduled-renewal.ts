@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { TAddress, TApiResponse } from "lib/api/types";
 import httpClient from "lib/http";
 import { TIndustry } from "lib/api/industry";
+import { TCurrency } from "types";
 
 export const QUERY_KEY_FOR_SINGLE_SCHEDULED_RENEWAL =
   "single-scheduled-renewal";
@@ -35,7 +36,7 @@ export type TScheduledRenewal = {
   isFreeTrial: boolean;
   autoRenew: boolean;
   billingCycle: string;
-  priceType: string;
+  priceType: TCurrency;
   startDate: string;
   endDate: string;
   licensedEmployeeCount: number;

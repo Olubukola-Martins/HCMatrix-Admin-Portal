@@ -5,6 +5,7 @@ import {
   TDiscountType,
   TModule,
   TStorageUnit,
+  TSubscriptionType,
 } from "types";
 import { ENV } from "./enviroment";
 import dayjs from "dayjs";
@@ -58,6 +59,7 @@ export const dummyModuleChartData = [
     value: 5,
   },
 ];
+export const subscriptionTypeOptions: TSubscriptionType[] = ["module", "plan"];
 export const storageUnitOptions: TStorageUnit[] = ["KB", "MB", "GB"];
 export const currencyOptions: TCurrency[] = ["ngn", "usd"];
 export const billingCycleOptions: TBillingCycle[] = ["monthly", "yearly"];

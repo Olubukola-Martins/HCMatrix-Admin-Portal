@@ -211,7 +211,7 @@ export const numberHasToBeInRange = (_min: number, _max: number): Rule => ({
 });
 export const numberHasToBeGreaterThanValueRule = (_value: number): Rule => ({
   validator: async (_, value) => {
-    if (typeof value !== "number") {
+    if (typeof +value !== "number") {
       throw new Error("Please enter a valid number!");
     }
     if (+value <= _value) {
