@@ -1,7 +1,8 @@
 import httpClient from "lib/http";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { TApiResponse } from "../../types";
 import { TCurrency } from "types";
+import { QUERY_KEY_FOR_SUBSCRIPTIONS } from "..";
 
 export type TUpdateUnlicensedPricesInput = {
   prices: Price[];
@@ -9,8 +10,8 @@ export type TUpdateUnlicensedPricesInput = {
 
 interface Price {
   type: TCurrency;
-  monthlyPricePerLicensedEmployee: number;
-  yearlyPricePerLicensedEmployee: number;
+  monthlyPricePerUnlicensedEmployee: number;
+  yearlyPricePerUnlicensedEmployee: number;
 }
 const createData = async (props: {
   data: TUpdateUnlicensedPricesInput;
@@ -26,7 +27,13 @@ const createData = async (props: {
   return res;
 };
 export const useUpdateUnLicensedPrices = () => {
-  return useMutation((props: TUpdateUnlicensedPricesInput) =>
-    createData({ data: props })
+  const queryClient = useQueryClient();
+  return useMutation(
+    (props: TUpdateUnlicensedPricesInput) => createData({ data: props }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(QUERY_KEY_FOR_SUBSCRIPTIONS);
+      },
+    }
   );
 };

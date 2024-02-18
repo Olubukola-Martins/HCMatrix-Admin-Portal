@@ -4,6 +4,7 @@ import { TopBar } from "./TopBar";
 import SideBar from "./SideBar";
 const { Content } = Layout;
 const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // TODO: Check system theme and use as default theme on first entry
   // TODO: Get Auth Data n populate avatar
   const [showSideBar, setShowSideBar] = useState(true);
   return (

@@ -13,7 +13,7 @@ const getData = async (): Promise<TApiResponse<TSupportCase[]>> => {
   return res;
 };
 
-export const useGetExtraStorages = () => {
+export const useGetSupportCases = () => {
   const queryData = useQuery(
     [QUERY_KEY_FOR_SUPPORT_CASES],
     () => getData(),

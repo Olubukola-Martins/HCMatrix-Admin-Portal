@@ -1,8 +1,9 @@
-import { Form, Input } from "antd";
+import { Form, Input, Skeleton } from "antd";
 import { useEffect } from "react";
 import { IDivProps, TBillingCycle, TCurrency } from "types";
 import EditTrainingSession from "./EditTrainingSession";
 import AddTrainingSession from "./AddTrainingSession";
+import { useGetTrainingSessions } from "lib/api/subscription/add-ons/training-session";
 
 type TPrice = {
   name: string;
@@ -20,81 +21,65 @@ const TrainingSessionsContainer: React.FC<
   }
 > = ({ selection, className }) => {
   const [form] = Form.useForm<{ prices: TPrice[] }>();
-
+  const { data, isLoading } = useGetTrainingSessions();
   useEffect(() => {
-    const prices: TPrice[] = [
-      {
-        priceInNgn: 200,
-        priceInUsd: 30000,
-        name: "Train 1",
-        id: 1,
-        numberOfHrs: 3,
-      },
+    const prices: TPrice[] =
+      data?.data?.map((item) => ({
+        priceInNgn: +item.priceInNgn,
+        priceInUsd: +item.priceInUsd,
+        name: item.name,
+        id: item.id,
+        numberOfHrs: item.numberOfHours,
+      })) ?? [];
 
-      {
-        numberOfHrs: 3,
-        priceInNgn: 4500,
-        priceInUsd: 7400,
-        name: "Train 2",
-        id: 2,
-      },
-      {
-        numberOfHrs: 4,
-        priceInNgn: 4500,
-        priceInUsd: 900,
-        name: "Train 3",
-        id: 3,
-      },
-    ];
     form.setFieldsValue({
-      prices: prices.map((item) => ({
-        ...item,
-        numberOfHrs: `${item.numberOfHrs} hrs`,
-      })),
+      prices: prices,
     });
-  }, [form, selection]);
+  }, [form, selection, data]);
   return (
-    <Form form={form} className={className}>
-      <span className="text-lg font-medium">{`Training Sessions`}</span>
-      <Form.List name={"prices"}>
-        {(fields) => (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-4 gap-x-28">
-            {fields.map((field) => (
-              <div className="">
-                <div className="mb-0.5 flex justify-end items-center">
-                  <EditTrainingSession
-                    caseId={form.getFieldValue("prices")[field.name]?.id}
-                  />
+    <Skeleton active loading={isLoading} paragraph={{ rows: 4 }}>
+      <Form form={form} className={className}>
+        <span className="text-lg font-medium">{`Training Sessions`}</span>
+        <Form.List name={"prices"}>
+          {(fields) => (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-4 gap-x-28">
+              {fields.map((field) => (
+                <div className="">
+                  <div className="mb-0.5 flex justify-end items-center">
+                    <EditTrainingSession
+                      caseId={form.getFieldValue("prices")[field.name]?.id}
+                    />
+                  </div>
+                  <div className="flex gap-x-4">
+                    <Form.Item name={[field.name, "name"]}>
+                      <Input disabled />
+                    </Form.Item>
+                    <Form.Item name={[field.name, "numberOfHrs"]}>
+                      <Input disabled />
+                    </Form.Item>
+                    <Form.Item
+                      name={[field.name, "priceInNgn"]}
+                      hidden={selection.currency !== "ngn"}
+                    >
+                      <Input disabled />
+                    </Form.Item>
+                    <Form.Item
+                      name={[field.name, "priceInUsd"]}
+                      hidden={selection.currency !== "usd"}
+                    >
+                      <Input disabled />
+                    </Form.Item>
+                  </div>
                 </div>
-                <div className="flex gap-x-4">
-                  <Form.Item name={[field.name, "name"]}>
-                    <Input disabled />
-                  </Form.Item>
-                  <Form.Item name={[field.name, "numberOfHrs"]}>
-                    <Input disabled />
-                  </Form.Item>
-                  <Form.Item
-                    name={[field.name, "priceInNgn"]}
-                    hidden={selection.currency !== "ngn"}
-                  >
-                    <Input disabled />
-                  </Form.Item>
-                  <Form.Item
-                    name={[field.name, "priceInUsd"]}
-                    hidden={selection.currency !== "usd"}
-                  >
-                    <Input disabled />
-                  </Form.Item>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </Form.List>
-      <div className="flex justify-end">
-        <AddTrainingSession />
-      </div>
-    </Form>
+              ))}
+            </div>
+          )}
+        </Form.List>
+        <div className="flex justify-end">
+          <AddTrainingSession />
+        </div>
+      </Form>
+    </Skeleton>
   );
 };
 

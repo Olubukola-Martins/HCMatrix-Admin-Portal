@@ -29,6 +29,20 @@ export const generateHexColor = (input: string | number): string => {
   return "#" + "00000".substring(0, 6 - color.length) + color;
 };
 
+export function formatNumberWithCommas(
+  value: number | string | undefined,
+  minimumFractionDigits?: number
+) {
+  if (typeof value === "undefined") return "0";
+  if (typeof value === "string")
+    return Number(value).toLocaleString("en-US", {
+      minimumFractionDigits: minimumFractionDigits ?? 2,
+    });
+
+  return value.toLocaleString("en-US", {
+    minimumFractionDigits: minimumFractionDigits ?? 2,
+  });
+}
 const CURRENCY_MAP: Record<TCurrency, string> = {
   ngn: "₦",
   usd: "$",
@@ -38,7 +52,7 @@ export const currencyFormatter = (props: {
   value: string | number;
 }) => {
   const { currency, value } = props;
-  return `${CURRENCY_MAP[currency]} ${value}`;
+  return `${CURRENCY_MAP[currency]}${formatNumberWithCommas(value)}`;
 };
 
 export const generateAvatarFromInitials = (name: string) => {

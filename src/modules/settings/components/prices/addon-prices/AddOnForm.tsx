@@ -7,6 +7,7 @@ import UnlicensedUserForm from "./unlicensed-users/UnlicensedUserForm";
 import SupportCasesContainer from "./support-cases/SupportCasesContainer";
 import TrainingSessionsContainer from "./training-sessions/TrainingSessionsContainer";
 import ExtraStoragesContainer from "./extra-storage/ExtraStoragesContainer";
+import { useUpdateUnLicensedPrices } from "lib/api/subscription/prices/update-unlicensed-prices";
 
 const AddOnForm = () => {
   const [selection, setSelection] = useState<{
@@ -16,7 +17,10 @@ const AddOnForm = () => {
     billingCycle: "monthly",
     currency: "usd",
   });
-
+  const {
+    mutate: updateUnlicensedPrices,
+    isLoading: isUpdatingUnlicensedPrices,
+  } = useUpdateUnLicensedPrices();
   return (
     <div>
       <div className="flex justify-end gap-x-4">
@@ -45,6 +49,14 @@ const AddOnForm = () => {
         <UnlicensedUserForm
           selection={selection}
           className="border-b border-card pb-4"
+          handleSubmit={{
+            isLoading: isUpdatingUnlicensedPrices,
+            fn: ({ prices }) => {
+              updateUnlicensedPrices({
+                prices,
+              });
+            },
+          }}
         />
         <SupportCasesContainer
           selection={selection}
