@@ -1,8 +1,9 @@
 import httpClient from "lib/http";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { TApiResponse } from "../../../types";
 import { TCreateTrainingSessionInput } from "./create-training-session";
 import { TTrainingSession } from "./get-training-session";
+import { QUERY_KEY_FOR_TRAINING_SESSIONS } from ".";
 
 export type TUpdateTrainingSessionInput = {
   id: number;
@@ -22,7 +23,13 @@ const createData = async (props: {
   return res;
 };
 export const useUpdateTrainingSession = () => {
-  return useMutation((props: TUpdateTrainingSessionInput) =>
-    createData({ data: props })
+  const queryClient = useQueryClient();
+  return useMutation(
+    (props: TUpdateTrainingSessionInput) => createData({ data: props }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QUERY_KEY_FOR_TRAINING_SESSIONS]);
+      },
+    }
   );
 };

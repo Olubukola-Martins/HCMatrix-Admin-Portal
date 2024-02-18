@@ -1,8 +1,9 @@
 import httpClient from "lib/http";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { TApiResponse } from "../../../types";
 import { TExtraStorage } from "./get-extra-storage";
 import { TCreateExtraStorageInput } from "./create-extra-storage";
+import { QUERY_KEY_FOR_EXTRA_STORAGES } from ".";
 
 export type TUpdateExtraStorageInput = {
   id: number;
@@ -22,7 +23,14 @@ const createData = async (props: {
   return res;
 };
 export const useUpdateExtraStorage = () => {
-  return useMutation((props: TUpdateExtraStorageInput) =>
-    createData({ data: props })
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (props: TUpdateExtraStorageInput) => createData({ data: props }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QUERY_KEY_FOR_EXTRA_STORAGES]);
+      },
+    }
   );
 };

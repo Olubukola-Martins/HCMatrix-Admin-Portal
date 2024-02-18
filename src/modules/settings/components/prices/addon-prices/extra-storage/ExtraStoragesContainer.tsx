@@ -37,7 +37,7 @@ const ExtraStoragesContainer: React.FC<
   return (
     <Skeleton active loading={isLoading} paragraph={{ rows: 3 }}>
       <Form form={form} className={className}>
-        <span className="text-lg font-medium">{`Support Cases`}</span>
+        <span className="text-lg font-medium">{`Extra Storages`}</span>
         <Form.List name={"prices"}>
           {(fields) => (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-4 gap-x-28">

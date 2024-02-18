@@ -29,7 +29,7 @@ const TrainingSessionsContainer: React.FC<
         priceInUsd: +item.priceInUsd,
         name: item.name,
         id: item.id,
-        numberOfHrs: item.numberOfHours,
+        numberOfHrs: `${item.numberOfHours} hrs`,
       })) ?? [];
 
     form.setFieldsValue({

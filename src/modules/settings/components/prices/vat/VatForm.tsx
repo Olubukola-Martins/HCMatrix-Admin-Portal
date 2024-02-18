@@ -4,7 +4,12 @@ import { useGetVat } from "lib/api/subscription/vat/get-vat";
 import { useEffect, useState } from "react";
 import { TBillingCycle, TCurrency } from "types";
 
-const VatForm = () => {
+const VatForm: React.FC<{
+  onSubmit: {
+    fn: (props: { value: number }) => void;
+    isLoading?: boolean;
+  };
+}> = ({ onSubmit }) => {
   const [form] = Form.useForm<{ value: number }>();
   const [selection, setSelection] = useState<{
     billingCycle: TBillingCycle;
@@ -21,7 +26,7 @@ const VatForm = () => {
   }, [form, data]);
   return (
     <Skeleton active loading={isLoading} paragraph={{ rows: 4 }}>
-      <Form form={form} labelCol={{ span: 24 }}>
+      <Form form={form} labelCol={{ span: 24 }} onFinish={onSubmit.fn}>
         <div className="flex justify-end gap-x-4 mb-6">
           <Select
             options={billingCycleOptions.map((item) => ({
@@ -54,7 +59,7 @@ const VatForm = () => {
           <Input className="max-w-32" placeholder="Value" />
         </Form.Item>
         <div className="flex justify-end">
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={onSubmit.isLoading}>
             Save
           </Button>
         </div>

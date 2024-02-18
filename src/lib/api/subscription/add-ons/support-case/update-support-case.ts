@@ -1,8 +1,9 @@
 import httpClient from "lib/http";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { TApiResponse } from "../../../types";
 import { TCreateSupportCaseInput } from "./create-support-case";
 import { TSupportCase } from "./get-support-case";
+import { QUERY_KEY_FOR_SUPPORT_CASES } from ".";
 
 export type TUpdateSupportCaseInput = {
   id: number;
@@ -22,7 +23,13 @@ const createData = async (props: {
   return res;
 };
 export const useUpdateSupportCase = () => {
-  return useMutation((props: TUpdateSupportCaseInput) =>
-    createData({ data: props })
+  const queryClient = useQueryClient();
+  return useMutation(
+    (props: TUpdateSupportCaseInput) => createData({ data: props }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QUERY_KEY_FOR_SUPPORT_CASES]);
+      },
+    }
   );
 };
