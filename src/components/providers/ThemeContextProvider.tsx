@@ -23,6 +23,7 @@ const ThemeContextProvider = ({ children }: IProps) => {
   const [primary, setPrimary] = useState<EThemePrimaryColor>(
     EThemePrimaryColor.DEFAULT
   );
+
   useEffect(() => {
     if (
       localStorage.getItem(LOCAL_STORAGE_KEY_FOR_THEME) === null &&
@@ -30,14 +31,20 @@ const ThemeContextProvider = ({ children }: IProps) => {
     ) {
       // color
 
-      localStorage.setItem(
-        LOCAL_STORAGE_KEY_FOR_THEME,
-        EThemePrimaryColor.DEFAULT
-      );
-      setPrimary(EThemePrimaryColor.DEFAULT);
+      handleThemeSwitch(EThemePrimaryColor.DEFAULT);
+      // color --end
+
       // mode
-      localStorage.setItem(LOCAL_STORAGE_KEY_FOR_MODE, "light");
-      setMode("light");
+      // check sytem prefernece
+      const mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+      if (mq.matches) {
+        handleModeSwitch("dark");
+      } else {
+        handleModeSwitch("light");
+      }
+      // mode --end
+
       return;
     }
 
