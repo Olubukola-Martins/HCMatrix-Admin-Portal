@@ -32,7 +32,7 @@ export type TFilterFormProps = Partial<{
   countryIds: number[];
   industryIds: number[];
   modules: TModule[];
-  duration: [string, string]; //startdate, enddate
+  duration: [string, string]; //startdate, enddate //TODO: Refactor this to use dayjs and actually have the default values to match what is on tables consuming this component
 }>;
 
 const FilterEnitity: React.FC<TProps> = ({
