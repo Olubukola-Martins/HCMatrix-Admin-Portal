@@ -391,12 +391,10 @@ export function isValidEvalExpression(
       ?.filter((value, index, self) => self.indexOf(value) === index)
       ?.map((item) => `const ${item} = 0;`)
       .join("")} ${expression};`;
-    console.log(parsedExpression, "parsed");
     // eslint-disable-next-line no-eval
     eval(parsedExpression);
     return true;
   } catch (error) {
-    console.log(error, "ERR");
     // If eval throws an error, the expression is invalid
     return false;
   }

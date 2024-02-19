@@ -1,8 +1,10 @@
+import { TApiResponse, TApiResponseWithPagination } from "lib/api/types";
 import { TBookingStatus, TCurrency } from "types";
 
 type TError = {
   message: string;
 };
+type TSuccess = TError;
 
 export const errorFormatter = (error: unknown): TError => {
   const DEFAULT_ERR_MESSAGE = "Ooops! Something went wrong!";
@@ -17,6 +19,15 @@ export const errorFormatter = (error: unknown): TError => {
         >
       )?.response.data.error.message ??
       DEFAULT_ERR_MESSAGE,
+  };
+};
+export const successFormatter = (success: unknown): TSuccess => {
+  const DEFAULT_SUCCESS_MESSAGE = "Operation Successful!";
+  return {
+    message:
+      (success as TApiResponse<null>)?.message ??
+      (success as TApiResponseWithPagination<null>)?.message ??
+      DEFAULT_SUCCESS_MESSAGE,
   };
 };
 

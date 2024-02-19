@@ -4,8 +4,10 @@ import { TApiResponse } from "../types";
 import { TLoginResponseData } from "./login";
 
 export type TResetPasswordInput = {
-  password: string;
-  confirmPassword: string;
+  data: {
+    password: string;
+    confirmPassword: string;
+  };
   queryParams: {
     uid: string;
     token: string;
@@ -16,8 +18,8 @@ const createData = async (props: {
 }): Promise<TApiResponse<TLoginResponseData | null>> => {
   const url = `/auth/reset-password`;
 
-  const data: TResetPasswordInput = {
-    ...props.data,
+  const data: TResetPasswordInput["data"] = {
+    ...props.data.data,
   };
 
   const response = await httpClient.post(url, data, {

@@ -23,7 +23,6 @@ const InviteUsers: React.FC<{ open: boolean; handleClose: () => void }> = ({
           requiredMark={false}
           form={form}
           onFinish={(data) => {
-            console.log(data, "....");
             mutate(
               {
                 emails: data.emails.split(",").map((e) => e.trim()),

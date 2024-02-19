@@ -1,4 +1,8 @@
+import ForgotPasswordContainer from "modules/authentication/components/forgot-password/ForgotPasswordContainer";
 import LoginContainer from "modules/authentication/components/login/LoginContainer";
+import ChangePasswordContainer from "modules/authentication/components/me/change-password/ChangePasswordContainer";
+import ResetPasswordContainer from "modules/authentication/components/reset-password/ResetPasswordContainer";
+import UserVerificationContainer from "modules/authentication/components/verification/UserVerificationContainer";
 import {
   FinanceMetricsContainer,
   ScheduledRenewalContainer,
@@ -24,6 +28,24 @@ export const appAuthPages: TRoutePageData[] = [
     title: "Login",
     category: ["inaccessible-if-user-is-authenticated"],
   },
+  {
+    element: <UserVerificationContainer />,
+    path: appRoutePaths.verifyUser,
+    title: "User Verification",
+    category: ["inaccessible-if-user-is-authenticated"],
+  },
+  {
+    element: <ResetPasswordContainer />,
+    path: appRoutePaths.resetPassword,
+    title: "Reset Password",
+    category: ["inaccessible-if-user-is-authenticated"],
+  },
+  {
+    element: <ForgotPasswordContainer />,
+    path: appRoutePaths.forgotPassword,
+    title: "Forgot Password",
+    category: ["inaccessible-if-user-is-authenticated"],
+  },
 ];
 export const appRoutePages: TRoutePageData[] = [
   {
@@ -36,6 +58,11 @@ export const appRoutePages: TRoutePageData[] = [
     path: appRoutePaths.notFound,
     title: "Not Found",
     category: ["doesnt-require-authentication"],
+  },
+  {
+    element: <ChangePasswordContainer />,
+    path: appRoutePaths.changePassword,
+    title: "Change Password",
   },
   // training sessions
   {

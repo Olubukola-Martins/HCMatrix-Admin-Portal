@@ -3,6 +3,8 @@ export const appRoutePaths = {
   login: "/login",
   forgotPassword: "/forgot-password",
   resetPassword: "/reset-password",
+  changePassword: "/change-password",
+  verifyUser: "/verify",
   userMetrics: "/user-metrics",
   financeMetrics: "/finance-metrics",
   financeMetricsTransactionHistory: "/finance-metrics/transaction-history",

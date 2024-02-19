@@ -12,11 +12,7 @@ const useHandleSubmitLoginForm = ({ Form }: { Form: typeof _Form }) => {
         ...data,
       },
       {
-        onError: (err) => {
-          console.log(err, "test");
-        },
         onSuccess: (res) => {
-          console.log(res.data?.accessToken, "token");
           handleLogin(res.data?.accessToken ?? "");
         },
       }

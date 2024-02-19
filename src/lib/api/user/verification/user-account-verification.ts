@@ -4,8 +4,10 @@ import { TApiResponse } from "../../types";
 import { TLoginResponseData } from "lib/api/auth/login";
 
 export type TVerifyAccountInput = {
-  password: string;
-  confirmPassword: string;
+  data: {
+    password: string;
+    confirmPassword: string;
+  };
   queryParams: {
     uid: string;
     token: string;
@@ -16,8 +18,8 @@ const createData = async (props: {
 }): Promise<TApiResponse<TLoginResponseData | null>> => {
   const url = `/user/verify`;
 
-  const data: TVerifyAccountInput = {
-    ...props.data,
+  const data: TVerifyAccountInput["data"] = {
+    ...props.data["data"],
   };
 
   const response = await httpClient.post(url, data, {
