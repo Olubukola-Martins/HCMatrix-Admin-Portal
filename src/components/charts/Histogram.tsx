@@ -28,7 +28,7 @@ const options = {
 export const Histogram: React.FC<TChartProps> = ({
   labels,
   data = [],
-  axis = "x",
+  // axis = "x",
   bgColors = "#1B59F8CC",
   dataEntityLabel = "items",
   useDataSet = false,

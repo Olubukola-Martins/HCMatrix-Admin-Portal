@@ -381,24 +381,6 @@ export const urlValidationRule: Rule = {
     return true;
   },
 };
-export function isValidEvalExpression(
-  expression: string,
-  variables?: string[]
-) {
-  try {
-    // Use eval to check if the expression is valid
-    const parsedExpression = `${variables
-      ?.filter((value, index, self) => self.indexOf(value) === index)
-      ?.map((item) => `const ${item} = 0;`)
-      .join("")} ${expression};`;
-    // eslint-disable-next-line no-eval
-    eval(parsedExpression);
-    return true;
-  } catch (error) {
-    // If eval throws an error, the expression is invalid
-    return false;
-  }
-}
 
 const isValidVariableName = (name: string) => {
   const reservedKeywords = [

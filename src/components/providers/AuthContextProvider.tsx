@@ -21,7 +21,9 @@ const AuthContextProvider = ({ children }: IProps) => {
     authToken?: string;
   }>({
     isAuthenticated:
-      !!localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN_KEY) ?? false,
+      localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN_KEY) !== null
+        ? true
+        : false,
     authToken: localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN_KEY) ?? undefined,
   });
   // TODO: Refactor code as storing access token in local storage is not a good practice, and be easily obtained from browser local storage, hence comprimising security
