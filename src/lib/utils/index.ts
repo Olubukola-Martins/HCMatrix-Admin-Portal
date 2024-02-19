@@ -72,10 +72,10 @@ export const currencyFormatter = (props: {
   return `${CURRENCY_MAP[currency]}${formatNumberWithCommas(value)}`;
 };
 
-export const generateAvatarFromInitials = (name: string) => {
+export const generateAvatarFromInitials = (name: string, bg?: string) => {
   return `https://ui-avatars.com/api/?name=${name
     .split(" ")
-    .join("+")}&background=7772EB&color=fff&bold=true`;
+    .join("+")}&background=${bg ?? "7772EB"}&color=fff&bold=true`;
 };
 
 export const constructUserFullName = (detail?: {

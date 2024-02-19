@@ -49,7 +49,7 @@ export const appAuthPages: TRoutePageData[] = [
 ];
 export const appRoutePages: TRoutePageData[] = [
   {
-    element: <div>Home</div>,
+    element: <FinanceMetricsContainer />, //temporary until this is fleshed as per design
     path: appRoutePaths.home,
     title: "Home",
   },

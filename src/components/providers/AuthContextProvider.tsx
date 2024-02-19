@@ -19,7 +19,12 @@ const AuthContextProvider = ({ children }: IProps) => {
   const [authState, setAuthState] = useState<{
     isAuthenticated: boolean;
     authToken?: string;
-  }>({ isAuthenticated: false });
+  }>({
+    isAuthenticated:
+      !!localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN_KEY) ?? false,
+    authToken: localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN_KEY) ?? undefined,
+  });
+  // TODO: Refactor code as storing access token in local storage is not a good practice, and be easily obtained from browser local storage, hence comprimising security
   useEffect(() => {
     const localAuthToken = localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN_KEY);
     if (localAuthToken !== null) {
@@ -45,6 +50,7 @@ const AuthContextProvider = ({ children }: IProps) => {
       authToken,
     }));
     localStorage.setItem(LOCAL_STORAGE_AUTH_TOKEN_KEY, authToken);
+    window.location.reload(); //this is done to ensure that the httpClient can pick up token from local storage
   };
   const handleLogout = () => {
     setAuthState(() => ({

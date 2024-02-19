@@ -4,7 +4,8 @@ import {
   TVerifyAccountInput,
   useVerifyAccountAndSetPassword,
 } from "lib/api/user/verification/user-account-verification";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { appRoutePaths } from "routes";
 
 const useHandleUserVerificationForm = ({ Form }: { Form: typeof _Form }) => {
   const { mutate, isLoading } = useVerifyAccountAndSetPassword();
@@ -13,6 +14,7 @@ const useHandleUserVerificationForm = ({ Form }: { Form: typeof _Form }) => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token") ?? "";
   const uid = searchParams.get("uid") ?? "";
+  const navigate = useNavigate();
   const handleSubmit = (data: TVerifyAccountInput["data"]) => {
     mutate(
       {
@@ -23,8 +25,8 @@ const useHandleUserVerificationForm = ({ Form }: { Form: typeof _Form }) => {
         },
       },
       {
-       
         onSuccess: (res) => {
+          navigate(appRoutePaths.home);
           handleLogin(res.data?.accessToken ?? "");
         },
       }

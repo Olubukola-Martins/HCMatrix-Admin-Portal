@@ -1,12 +1,18 @@
 import { Avatar, Dropdown } from "antd";
 import ThemeSwitcher from "components/theme/ThemeSwitcher";
 import useHandleAuthentication from "hooks/auth/useHandleAuthentication";
+import { useGetAuthUserProfile } from "lib/api/auth/me/profile";
 import { useNavigate } from "react-router-dom";
 import { appRoutePaths } from "routes";
+import { SyncOutlined } from "@ant-design/icons";
+import { generateAvatarFromInitials } from "lib/utils";
 
 const UserProfileDropdown = () => {
   const { handleLogout } = useHandleAuthentication();
+  const { isLoading, data } = useGetAuthUserProfile();
   const navigate = useNavigate();
+  const fullName = data?.data.user.fullName;
+
   return (
     <Dropdown
       trigger={["click"]}
@@ -23,7 +29,18 @@ const UserProfileDropdown = () => {
         ],
       }}
     >
-      <Avatar className="cursor-pointer h-4 w-4 lg:w-6 lg:h-6" />
+      {
+        <Avatar
+          className="cursor-pointer h-4 w-4 lg:w-8 lg:h-8"
+          icon={isLoading ? <SyncOutlined spin /> : null}
+          alt="user image"
+          src={
+            fullName
+              ? generateAvatarFromInitials(fullName, "ff6647")
+              : undefined
+          }
+        />
+      }
     </Dropdown>
   );
 };
