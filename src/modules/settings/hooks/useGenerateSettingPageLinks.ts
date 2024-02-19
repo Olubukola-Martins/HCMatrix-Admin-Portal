@@ -10,9 +10,10 @@ type TSettingPageLink = {
 
 export const useGenerateSettingPageLinks = (): {
   links: TSettingPageLink[];
+  isLoading?: boolean;
 } => {
   let links: TSettingPageLink[] = [];
-  const { userPermissions } = useGetUserPermissions();
+  const { userPermissions, isLoading } = useGetUserPermissions();
   links = [
     {
       label: "Roles & Permissions",
@@ -50,5 +51,5 @@ export const useGenerateSettingPageLinks = (): {
   links = links.filter(
     (item) => item?.hidden === false || item.hidden === undefined
   );
-  return { links };
+  return { links, isLoading };
 };

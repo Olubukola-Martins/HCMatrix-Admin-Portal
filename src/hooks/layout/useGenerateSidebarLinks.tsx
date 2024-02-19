@@ -15,8 +15,11 @@ type TSidebarLink = {
   link: string;
   hidden?: boolean;
 };
-const useGenerateSidebarLinks = (): { links: TSidebarLink[] } => {
-  const { userPermissions } = useGetUserPermissions();
+const useGenerateSidebarLinks = (): {
+  links: TSidebarLink[];
+  isLoading?: boolean;
+} => {
+  const { userPermissions, isLoading } = useGetUserPermissions();
   let links: TSidebarLink[] = [];
 
   links = [
@@ -66,7 +69,7 @@ const useGenerateSidebarLinks = (): { links: TSidebarLink[] } => {
   links = links.filter(
     (item) => item?.hidden === false || item.hidden === undefined
   );
-  return { links };
+  return { links, isLoading };
 };
 
 export default useGenerateSidebarLinks;

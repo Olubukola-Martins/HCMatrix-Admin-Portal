@@ -46,5 +46,6 @@ const AppRoutes = () => {
   );
 };
 
+// TODO: Remove the export below and refactor approriately
 export { appRoutePaths };
 export default AppRoutes;

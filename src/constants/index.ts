@@ -79,24 +79,7 @@ export const discountPageLinks = [
     link: appRoutePaths.settingsDiscountsSpecific,
   },
 ];
-export const settingPageLinks = [
-  {
-    label: "Roles & Permissions",
-    link: appRoutePaths.settingsRolesAndPermissions,
-  },
-  {
-    label: "Users",
-    link: appRoutePaths.settingsUsers,
-  },
-  {
-    label: "Prices",
-    link: appRoutePaths.settingsPrices,
-  },
-  {
-    label: "Discounts",
-    link: appRoutePaths.settingsDiscounts,
-  },
-];
+
 export const DEFAULT_DATE_FORMAT = "YYYY-MM-DD";
 
 export const DEFAULT_START_DATE = dayjs()

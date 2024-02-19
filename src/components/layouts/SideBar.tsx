@@ -1,25 +1,27 @@
 import React from "react";
-import { Layout } from "antd";
+import { Layout, Skeleton } from "antd";
 import { NavLink, useMatches } from "react-router-dom";
 import useGenerateSidebarLinks from "hooks/layout/useGenerateSidebarLinks";
 
 const { Sider } = Layout;
 const SideBar: React.FC<{ showSideBar: boolean }> = ({ showSideBar }) => {
-  const { links } = useGenerateSidebarLinks();
+  const { links, isLoading } = useGenerateSidebarLinks();
   return (
     <>
       {showSideBar && (
         <Sider width={120} className="fixed top-0">
-          <div className="flex flex-col gap-8 h-full  px-4 pt-8 pb-4 shadow-sm">
-            {links.map((item) => (
-              <SideBarItem
-                key={item.label}
-                label={item.label}
-                icon={item.icon}
-                link={item.link}
-              />
-            ))}
-          </div>
+          <Skeleton active loading={isLoading} paragraph={{ rows: 14 }}>
+            <div className="flex flex-col gap-8 h-full  px-4 pt-8 pb-4 shadow-sm">
+              {links.map((item) => (
+                <SideBarItem
+                  key={item.label}
+                  label={item.label}
+                  icon={item.icon}
+                  link={item.link}
+                />
+              ))}
+            </div>
+          </Skeleton>
         </Sider>
       )}
     </>
