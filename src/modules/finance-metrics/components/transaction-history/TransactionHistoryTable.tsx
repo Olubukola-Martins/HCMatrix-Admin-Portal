@@ -19,15 +19,17 @@ const TransactionHistoryTable: React.FC<{
   const { onChange, pagination } = usePagination();
   const { data, isLoading } = useGetTransactionHistory({
     duration: {
-      startDate:
-        dayjs(duration?.[0]).format(DEFAULT_DATE_FORMAT) ?? DEFAULT_START_DATE,
-      endDate:
-        dayjs(duration?.[1]).format(DEFAULT_DATE_FORMAT) ?? DEFAULT_END_DATE,
+      startDate: duration?.[0]
+        ? dayjs(duration?.[0]).format(DEFAULT_DATE_FORMAT)
+        : DEFAULT_START_DATE,
+      endDate: duration?.[1]
+        ? dayjs(duration?.[1]).format(DEFAULT_DATE_FORMAT)
+        : DEFAULT_END_DATE,
     },
     billingCycle,
     countryIds,
     industryIds,
-    modules,
+    modules: modules ? modules : undefined,
     pagination,
   });
   useEffect(() => {

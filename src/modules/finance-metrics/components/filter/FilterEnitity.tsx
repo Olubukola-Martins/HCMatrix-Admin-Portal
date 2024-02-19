@@ -53,6 +53,7 @@ const FilterEnitity: React.FC<TProps> = ({
     setOpen(true);
   };
   const [form] = Form.useForm<TFilterFormProps>();
+
   const { data: countries, isFetching: isFetchingCountries } = useGetCountries({
     pagination: { limit: 300 },
   });
