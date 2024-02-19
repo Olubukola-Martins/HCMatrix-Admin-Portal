@@ -1,3 +1,4 @@
+import { canUserAccessComponent } from "lib/utils";
 import ForgotPasswordContainer from "modules/authentication/components/forgot-password/ForgotPasswordContainer";
 import LoginContainer from "modules/authentication/components/login/LoginContainer";
 import ChangePasswordContainer from "modules/authentication/components/me/change-password/ChangePasswordContainer";
@@ -9,6 +10,7 @@ import {
   TaxReportContainer,
   TransactionHistoryContainer,
 } from "modules/finance-metrics";
+import PageNotFoundContainer from "modules/not-found/components";
 import SettingsContainer from "modules/settings/components/SettingsContainer";
 import DiscountsContainer from "modules/settings/components/discounts/DiscountsContainer";
 import SpecificDiscountsContainer from "modules/settings/components/discounts/specific-discounts/SpecificDiscountsContainer";
@@ -19,7 +21,7 @@ import UsersContainer from "modules/settings/components/users/UsersContainer";
 import TrainingSessionContainer from "modules/training-sessions/components/TrainingSessionContainer";
 import TrainingSessionBookingContainer from "modules/training-sessions/components/bookings/TrainingSessionBookingContainer";
 import { appRoutePaths } from "routes/paths";
-import { TRoutePageData } from "routes/types";
+import { TAppPageDataFnProps, TRoutePageData } from "routes/types";
 
 export const appAuthPages: TRoutePageData[] = [
   {
@@ -47,90 +49,158 @@ export const appAuthPages: TRoutePageData[] = [
     category: ["inaccessible-if-user-is-authenticated"],
   },
 ];
-export const appRoutePages: TRoutePageData[] = [
-  {
-    element: <FinanceMetricsContainer />, //temporary until this is fleshed as per design
-    path: appRoutePaths.home,
-    title: "Home",
-  },
-  {
-    element: <div>Page Not Found!</div>,
-    path: appRoutePaths.notFound,
-    title: "Not Found",
-    category: ["doesnt-require-authentication"],
-  },
-  {
-    element: <ChangePasswordContainer />,
-    path: appRoutePaths.changePassword,
-    title: "Change Password",
-  },
-  // training sessions
-  {
-    element: <TrainingSessionContainer />,
-    path: appRoutePaths.trainingSessions,
-    title: "Training Sessions",
-  },
-  {
-    element: <TrainingSessionBookingContainer />,
-    path: appRoutePaths.trainingSessionsBookings,
-    title: "Training Session Bookings",
-  },
-  // training sessions
+export const appRoutePages = (props: TAppPageDataFnProps): TRoutePageData[] => {
+  const { userPermissions } = props;
+  let routes: TRoutePageData[] = [];
+  routes = [
+    {
+      element: <FinanceMetricsContainer />, //temporary until this is fleshed as per design
+      path: appRoutePaths.home,
+      title: "Home",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["view-finance-metrics"],
+      }),
+    },
+    {
+      element: <PageNotFoundContainer />,
+      path: appRoutePaths.notFound,
+      title: "Not Found",
+      category: ["doesnt-require-authentication"],
+    },
+    {
+      element: <ChangePasswordContainer />,
+      path: appRoutePaths.changePassword,
+      title: "Change Password",
+    },
+    // training sessions
+    {
+      element: <TrainingSessionContainer />,
+      path: appRoutePaths.trainingSessions,
+      title: "Training Sessions",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["view-training-sessions"],
+      }),
+    },
+    {
+      element: <TrainingSessionBookingContainer />,
+      path: appRoutePaths.trainingSessionsBookings,
+      title: "Training Session Bookings",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["view-training-sessions"],
+      }),
+    },
+    // training sessions
 
-  // settings
-  {
-    element: <PricesContainer />,
-    path: appRoutePaths.settingsPrices,
-    title: "Prices",
-  },
-  {
-    element: <SpecificDiscountsContainer />,
-    path: appRoutePaths.settingsDiscountsSpecific,
-    title: "Discounts",
-  },
-  {
-    element: <DiscountsContainer />,
-    path: appRoutePaths.settingsDiscounts,
-    title: "Discounts",
-  },
-  {
-    element: <UsersContainer />,
-    path: appRoutePaths.settingsUsers,
-    title: "Users",
-  },
-  {
-    element: <PermissionsContainer />,
-    path: appRoutePaths.rolePermissions().format,
-    title: "Permissions",
-  },
-  {
-    element: <RolesAndPermissionContainer />,
-    path: appRoutePaths.settingsRolesAndPermissions,
-    title: "Settings",
-  },
-  {
-    element: <SettingsContainer />,
-    path: appRoutePaths.settings,
-    title: "Settings",
-  },
-  {
-    element: <FinanceMetricsContainer />,
-    path: appRoutePaths.financeMetrics,
-    title: "Finance Metrics",
-  },
-  {
-    element: <ScheduledRenewalContainer />,
-    path: appRoutePaths.financeMetricsScheduledRenewal,
-    title: "Scheduled Renewal",
-  },
-  {
-    element: <TransactionHistoryContainer />,
-    path: appRoutePaths.financeMetricsTransactionHistory,
-    title: "Transaction History",
-  },
-  {
-    element: <TaxReportContainer />,
-    path: appRoutePaths.financeMetricsTaxReport,
-    title: "Tax Reports",
-  },
-];
+    // settings
+    {
+      element: <PricesContainer />,
+      path: appRoutePaths.settingsPrices,
+      title: "Prices",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["manage-subscription-prices"],
+      }),
+    },
+    {
+      element: <SpecificDiscountsContainer />,
+      path: appRoutePaths.settingsDiscountsSpecific,
+      title: "Discounts",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["manage-discounts"],
+      }),
+    },
+    {
+      element: <DiscountsContainer />,
+      path: appRoutePaths.settingsDiscounts,
+      title: "Discounts",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["manage-discounts"],
+      }),
+    },
+    {
+      element: <UsersContainer />,
+      path: appRoutePaths.settingsUsers,
+      title: "Users",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["manage-users"],
+      }),
+    },
+    {
+      element: <PermissionsContainer />,
+      path: appRoutePaths.rolePermissions().format,
+      title: "Permissions",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["manage-roles-and-permissions"],
+      }),
+    },
+    {
+      element: <RolesAndPermissionContainer />,
+      path: appRoutePaths.settingsRolesAndPermissions,
+      title: "Roles & Permmissions",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["manage-roles-and-permissions"],
+      }),
+    },
+    {
+      element: <SettingsContainer />,
+      path: appRoutePaths.settings,
+      title: "Settings",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: [
+          "manage-discounts",
+          "manage-subscription-prices",
+          "manage-roles-and-permissions",
+          "manage-users",
+        ],
+      }),
+    },
+    {
+      element: <FinanceMetricsContainer />,
+      path: appRoutePaths.financeMetrics,
+      title: "Finance Metrics",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["view-finance-metrics"],
+      }),
+    },
+    {
+      element: <ScheduledRenewalContainer />,
+      path: appRoutePaths.financeMetricsScheduledRenewal,
+      title: "Scheduled Renewal",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["view-finance-metrics"], //TODO: Ask wether should be free or if there is a permission for this
+      }),
+    },
+    {
+      element: <TransactionHistoryContainer />,
+      path: appRoutePaths.financeMetricsTransactionHistory,
+      title: "Transaction History",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["view-finance-metrics"], //TODO: Ask wether should be free or if there is a permission for this
+      }),
+    },
+    {
+      element: <TaxReportContainer />,
+      path: appRoutePaths.financeMetricsTaxReport,
+      title: "Tax Reports",
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["view-finance-metrics"], //TODO: Ask wether should be free or if there is a permission for this
+      }),
+    },
+  ];
+  return routes.filter(
+    (item) => item?.hidden === false || item.hidden === undefined
+  );
+};

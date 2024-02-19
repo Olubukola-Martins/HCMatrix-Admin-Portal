@@ -4,8 +4,10 @@ import { appAuthPages, appRoutePages } from "./pages";
 import { MiddlewareOrganizer } from "./middlewares";
 import { appRoutePaths } from "./paths";
 import { AuthRouteLayout, PrimaryRouteLayout } from "./layout";
+import { useGetUserPermissions } from "hooks/permission";
 
 const AppRoutes = () => {
+  const { userPermissions } = useGetUserPermissions();
   const router = createBrowserRouter([
     {
       element: <AuthRouteLayout />,
@@ -24,7 +26,7 @@ const AppRoutes = () => {
       path: "/",
 
       element: <PrimaryRouteLayout />,
-      children: appRoutePages.map((page) => ({
+      children: appRoutePages({ userPermissions }).map((page) => ({
         path: page.path,
         element: (
           <MiddlewareOrganizer categories={page.category}>

@@ -10,6 +10,7 @@ import ModeSwitcher from "components/theme/ModeSwitcher";
 import ToggleSidebar from "./ToggleSidebar";
 import { NavLink } from "react-router-dom";
 import { appRoutePaths } from "routes";
+import { PermissionRestrictor } from "components/permission-restriction/PermissionRestrictor";
 
 const { Header } = Layout;
 export const TopBar: React.FC<{
@@ -33,9 +34,18 @@ export const TopBar: React.FC<{
           icon={<SearchIcon className="h-4 w-4 md:h-6 md:w-6" />}
         />
         <ModeSwitcher />
-        <NavLink to={appRoutePaths.settings}>
-          <SettingIcon className="h-4 w-4 md:h-6 md:w-6" />
-        </NavLink>
+        <PermissionRestrictor
+          requiredPermissions={[
+            "manage-discounts",
+            "manage-subscription-prices",
+            "manage-roles-and-permissions",
+            "manage-users",
+          ]}
+        >
+          <NavLink to={appRoutePaths.settings}>
+            <SettingIcon className="h-4 w-4 md:h-6 md:w-6" />
+          </NavLink>
+        </PermissionRestrictor>
         <Button
           type="text"
           size="large"

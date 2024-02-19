@@ -6,6 +6,7 @@ type TError = {
 };
 type TSuccess = TError;
 
+export { canUserAccessComponent } from "./permissions";
 export const errorFormatter = (error: unknown): TError => {
   const DEFAULT_ERR_MESSAGE = "Ooops! Something went wrong!";
   return {

@@ -1,3 +1,5 @@
+import { TPermission } from "lib/api/roles-and-permissions/get-permissions";
+
 export type TUserAuthPayload = {
   id: number;
   userId: number;
@@ -26,17 +28,7 @@ interface Permission2 {
   roleId: number;
   createdAt: string;
   updatedAt: string;
-  permission: Permission;
-}
-
-interface Permission {
-  id: number;
-  name: string;
-  label: string;
-  categoryId: number;
-  description?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  permission: TPermission;
 }
 
 export type TUser = {

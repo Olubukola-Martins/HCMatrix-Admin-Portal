@@ -14,8 +14,10 @@ import WarningIcon from "./WarningIcon";
 import SuccessIcon from "./SuccessIcon";
 import ColoredImportCircleIcon from "./ColoredImportCircleIcon";
 import AuthBackground from "./AuthBackground";
+import PageNotFoundIcon from "./PageNotFoundIcon";
 
 export {
+  PageNotFoundIcon,
   AuthBackground,
   ColoredImportCircleIcon,
   SuccessIcon,

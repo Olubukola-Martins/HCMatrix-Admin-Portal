@@ -26,11 +26,17 @@ interface PermissionListData {
   updatedAt: string;
   permissions: TPermission[];
 }
-
+export type TPermissionLabel =
+  | "manage-roles-and-permissions"
+  | "manage-users"
+  | "manage-subscription-prices"
+  | "manage-discounts"
+  | "view-finance-metrics"
+  | "view-training-sessions";
 export type TPermission = {
   id: number;
   name: string;
-  label: string; //TODO: Create a Permission Label type, after consulting with backend
+  label: TPermissionLabel; //TODO: Update Permission Label type, after consulting with backend
   categoryId: number;
   description?: string | null;
   createdAt: string;
