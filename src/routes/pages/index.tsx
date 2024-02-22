@@ -10,7 +10,7 @@ export const appRoutePages = (props: TAppPageDataFnProps): TRoutePageData[] => {
   let routes: TRoutePageData[] = [];
   routes = [
     ...authPages(),
-    ...homePages(props),
+    ...homePages(),
     ...settingsPages(props),
     ...trainingSessionPages(props),
     ...financeMetricsPages(props),

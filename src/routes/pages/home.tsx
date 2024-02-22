@@ -1,20 +1,14 @@
-import { canUserAccessComponent } from "lib/utils";
-import { FinanceMetricsContainer } from "modules/finance-metrics";
+import { Navigate } from "react-router-dom";
 import { appRoutePaths } from "routes";
-import { TAppPageDataFnProps, TRoutePageData } from "routes/types";
+import { TRoutePageData } from "routes/types";
 
-export const homePages = (props: TAppPageDataFnProps): TRoutePageData[] => {
-  const { userPermissions } = props;
+export const homePages = (): TRoutePageData[] => {
   let routes: TRoutePageData[] = [];
   routes = [
     {
-      element: <FinanceMetricsContainer />, //temporary until this is fleshed as per design
+      element: <Navigate to={appRoutePaths.financeMetrics} />, //temporary until this is fleshed as per design
       path: appRoutePaths.home,
       title: "Home",
-      hidden: !canUserAccessComponent({
-        userPermissions,
-        requiredPermissions: ["view-finance-metrics"],
-      }),
     },
   ].map((item) => ({
     ...item,
