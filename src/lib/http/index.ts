@@ -1,13 +1,11 @@
 import axios from "axios";
-import { ENV, LOCAL_STORAGE_AUTH_TOKEN_KEY } from "constants";
+import { ENV } from "constants";
 
-const AUTH_TOKEN = localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN_KEY) ?? "";
-
+// Note: It should be noted that react auth kit inserts the authorization header automatically. That is the token, hence why no bearer token i set here
 const httpClient = axios.create({
   baseURL: ENV.API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${AUTH_TOKEN}`,
   },
 });
 export default httpClient;

@@ -1,10 +1,12 @@
 import { notification } from "antd";
+import useHandleAuthentication from "hooks/auth/useHandleAuthentication";
 import { errorFormatter, successFormatter } from "lib/utils";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const ReactQueryProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const { isAuthenticated } = useHandleAuthentication();
   const [api, contextHolder] = notification.useNotification();
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -27,6 +29,7 @@ const ReactQueryProvider: React.FC<{ children: React.ReactNode }> = ({
         },
       },
       queries: {
+        enabled: isAuthenticated, //Ensures that no requests are made if user is not authenticated
         refetchInterval: false,
         refetchIntervalInBackground: false,
         refetchOnWindowFocus: false,
