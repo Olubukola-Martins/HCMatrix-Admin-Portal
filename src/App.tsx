@@ -1,19 +1,11 @@
-import {
-  AppProviders,
-  ThemeContextProvider,
-  AuthContextProvider,
-} from "components/providers";
+import { AppProviders } from "components/providers";
 import AppRoutes from "routes";
 
 function App() {
   return (
-    <AuthContextProvider>
-      <ThemeContextProvider>
-        <AppProviders>
-          <AppRoutes />
-        </AppProviders>
-      </ThemeContextProvider>
-    </AuthContextProvider>
+    <AppProviders>
+      <AppRoutes />
+    </AppProviders>
   );
 }
 

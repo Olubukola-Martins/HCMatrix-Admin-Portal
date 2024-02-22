@@ -67,6 +67,13 @@
     resize-observer-polyfill "^1.5.1"
     throttle-debounce "^5.0.0"
 
+"@auth-kit/react-router@^3.1.2":
+  version "3.1.2"
+  resolved "https://registry.npmjs.org/@auth-kit/react-router/-/react-router-3.1.2.tgz#9790272250446d3eb71087e5b610a83fcb5a3d70"
+  integrity sha512-R8CXY1Bd3X8jCS2CtSfl+m6OZ5rYdWtava1Tvn1gS7vDBFDPEcRvG+AHNWi/F8kQdVVm2e9LTokYOWWgngeeFA==
+  dependencies:
+    react-auth-kit "^3.1.2"
+
 "@babel/code-frame@^7.23.5":
   version "7.23.5"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.23.5.tgz#9009b69a8c602293476ad598ff53e4562e15c244"
@@ -1788,6 +1795,11 @@ jiti@^1.19.1:
   resolved "https://registry.npmjs.org/jiti/-/jiti-1.21.0.tgz#7c97f8fe045724e136a397f7340475244156105d"
   integrity sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==
 
+js-cookie@^3.0.1:
+  version "3.0.5"
+  resolved "https://registry.npmjs.org/js-cookie/-/js-cookie-3.0.5.tgz#0b7e2fd0c01552c58ba86e0841f94dc2557dcdbc"
+  integrity sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==
+
 js-file-download@^0.4.12:
   version "0.4.12"
   resolved "https://registry.npmjs.org/js-file-download/-/js-file-download-0.4.12.tgz#10c70ef362559a5b23cdbdc3bd6f399c3d91d821"
@@ -2589,6 +2601,14 @@ rc-virtual-list@^3.11.1, rc-virtual-list@^3.5.1, rc-virtual-list@^3.5.2:
     rc-resize-observer "^1.0.0"
     rc-util "^5.36.0"
 
+react-auth-kit@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.npmjs.org/react-auth-kit/-/react-auth-kit-3.1.2.tgz#b265e80c2bdb7d939c4d49b329c81f8f36623b5b"
+  integrity sha512-1mi6bX7e2kXvHe8nPEacdravcgUoyYj++3uP9w9/K00UILJXt4AmkHX0t4GytUeumosGetj68xGnXkziccnL/A==
+  dependencies:
+    js-cookie "^3.0.1"
+    rxjs "^7.8.1"
+
 react-big-calendar@^1.10.1:
   version "1.10.1"
   resolved "https://registry.npmjs.org/react-big-calendar/-/react-big-calendar-1.10.1.tgz#c4cf1300ea2698bc8a199758b2d53ec1de023a7f"
@@ -2777,6 +2797,13 @@ run-parallel@^1.1.9:
   integrity sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==
   dependencies:
     queue-microtask "^1.2.2"
+
+rxjs@^7.8.1:
+  version "7.8.1"
+  resolved "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz#6f6f3d99ea8044291efd92e7c7fcf562c4057543"
+  integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==
+  dependencies:
+    tslib "^2.1.0"
 
 scheduler@^0.23.0:
   version "0.23.0"
@@ -2994,6 +3021,11 @@ tsconfck@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npmjs.org/tsconfck/-/tsconfck-3.0.1.tgz#803ca0ed8f2f2075639e4061238f04b99ba85e85"
   integrity sha512-7ppiBlF3UEddCLeI1JRx5m2Ryq+xk4JrZuq4EuYXykipebaq1dV0Fhgr1hb7CkmHt32QSgOZlcqVLEtHBG4/mg==
+
+tslib@^2.1.0:
+  version "2.6.2"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-2.6.2.tgz#703ac29425e7b37cd6fd456e92404d46d1f3e4ae"
+  integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"

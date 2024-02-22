@@ -22,7 +22,7 @@ const ReactQueryProvider: React.FC<{ children: React.ReactNode }> = ({
             type: "success",
             message: "Success",
             description: successFormatter(res).message,
-            duration: 2,
+            duration: 4,
           });
         },
       },

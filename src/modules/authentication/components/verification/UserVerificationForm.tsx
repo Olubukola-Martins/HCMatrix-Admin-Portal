@@ -1,5 +1,5 @@
 import { Button, Form, Input } from "antd";
-import { textInputValidationRules } from "lib/validation";
+import { passwordValidationRules } from "lib/validation";
 import useHandleUserVerificationForm from "modules/authentication/hooks/useHandleUserVerificationForm";
 
 const UserVerificationForm = () => {
@@ -18,14 +18,14 @@ const UserVerificationForm = () => {
         <Form.Item
           name="password"
           label="Password"
-          rules={textInputValidationRules}
+          rules={passwordValidationRules}
         >
           <Input placeholder="Password" />
         </Form.Item>
         <Form.Item
           name="confirmPassword"
           label="Confirm Password"
-          rules={textInputValidationRules}
+          rules={passwordValidationRules}
         >
           <Input placeholder="Confirm Password" />
         </Form.Item>

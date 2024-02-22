@@ -1,5 +1,8 @@
 import { Button, Form, Input } from "antd";
-import { textInputValidationRules } from "lib/validation";
+import {
+  passwordValidationRules,
+  textInputValidationRules,
+} from "lib/validation";
 import useHandleSubmitChangePasswordForm from "modules/authentication/hooks/useHandleSubmitChangePasswordForm";
 
 const ChangePasswordForm = () => {
@@ -26,14 +29,14 @@ const ChangePasswordForm = () => {
         <Form.Item
           name="password"
           label="Password"
-          rules={textInputValidationRules}
+          rules={passwordValidationRules}
         >
           <Input placeholder="Password" />
         </Form.Item>
         <Form.Item
           name="confirmPassword"
           label="Confirm Password"
-          rules={textInputValidationRules}
+          rules={passwordValidationRules}
         >
           <Input placeholder="Confirm Password" />
         </Form.Item>

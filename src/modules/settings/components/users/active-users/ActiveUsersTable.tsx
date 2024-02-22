@@ -46,7 +46,11 @@ const ActiveUsersTable: React.FC = () => {
           ),
         },
       ]}
-      dataSource={data?.data.result}
+      // TODO: Ensure all table components have a key
+      dataSource={data?.data.result.map((item) => ({
+        ...item,
+        key: item.id,
+      }))}
     />
   );
 };

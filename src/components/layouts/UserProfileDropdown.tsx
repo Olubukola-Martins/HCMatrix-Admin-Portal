@@ -25,7 +25,14 @@ const UserProfileDropdown = () => {
           },
           { key: 1, label: <ThemeSwitcher /> },
           { type: "divider" },
-          { key: 2, label: "Logout", onClick: () => handleLogout() },
+          {
+            key: 2,
+            label: "Logout",
+            onClick: () => {
+              handleLogout();
+              navigate(appRoutePaths.login);
+            },
+          },
         ],
       }}
     >

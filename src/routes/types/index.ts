@@ -1,8 +1,9 @@
 import { TPermissionLabel } from "lib/api/roles-and-permissions/get-permissions";
 
 export type TRoutePageCategory =
-  | "doesnt-require-authentication"
-  | "inaccessible-if-user-is-authenticated";
+  | "requires-authentication"
+  | "authentication-initializer"
+  | "not-found";
 
 export type TRoutePageData = {
   path: string;

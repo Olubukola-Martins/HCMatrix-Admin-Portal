@@ -1,5 +1,5 @@
 import { Button, Form, Input } from "antd";
-import { emailValidationRules, textInputValidationRules } from "lib/validation";
+import { emailValidationRules, passwordValidationRules } from "lib/validation";
 import useHandleSubmitResetPasswordForm from "modules/authentication/hooks/useHandleSubmitResetPasswordForm";
 
 const ResetPasswordForm = () => {
@@ -21,14 +21,14 @@ const ResetPasswordForm = () => {
         <Form.Item
           name="password"
           label="Password"
-          rules={textInputValidationRules}
+          rules={passwordValidationRules}
         >
           <Input placeholder="Password" />
         </Form.Item>
         <Form.Item
           name="confirmPassword"
           label="Confirm Password"
-          rules={textInputValidationRules}
+          rules={passwordValidationRules}
         >
           <Input placeholder="Confirm Password" />
         </Form.Item>

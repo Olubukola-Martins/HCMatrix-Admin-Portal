@@ -1,15 +1,45 @@
-import { AuthContext } from "components/providers/AuthContextProvider";
-import { useContext } from "react";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import useSignOut from "react-auth-kit/hooks/useSignOut";
 
-const useHandleAuthentication = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error(
-      "useHandleAuthentication must be used within a AuthContextProvider"
-    );
-  }
-  const { handleLogin, handleLogout, isAuthenticated, authToken } = context;
-  return { handleLogin, handleLogout, isAuthenticated, authToken };
+type TReturnValues = {
+  isAuthenticated: boolean;
+  authToken?: string;
+  handleLogin: (authToken: string) => void;
+  handleLogout: () => void;
+};
+type TAuthUserData = { userAccessToken: string };
+const useHandleAuthentication = (): TReturnValues => {
+  const signIn = useSignIn<TAuthUserData>();
+  const isAuthenticated = useIsAuthenticated();
+  const signOut = useSignOut();
+  const auth = useAuthUser<TAuthUserData>();
+
+  return {
+    handleLogin: (authToken) => {
+      if (!authToken) {
+        throw Error("No Token was provided!");
+      }
+      const hasBeenAuthenticated = signIn({
+        auth: {
+          token: authToken,
+          type: "Bearer",
+        },
+        userState: {
+          userAccessToken: authToken,
+        },
+      });
+      if (!hasBeenAuthenticated) {
+        throw new Error("Failed to authenticate!");
+      }
+    },
+    handleLogout: () => {
+      signOut();
+    },
+    isAuthenticated: isAuthenticated(),
+    authToken: auth?.userAccessToken,
+  };
 };
 
 export default useHandleAuthentication;

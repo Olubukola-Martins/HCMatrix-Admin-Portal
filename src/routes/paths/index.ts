@@ -26,6 +26,6 @@ export const appRoutePaths = {
   settingsDiscountsSpecific: "/settings/discounts/specific",
   reports: "/reports",
   notifications: "/notifications",
-  notFound: "*",
+  notFound: "/*",
   // training sessions
 };
