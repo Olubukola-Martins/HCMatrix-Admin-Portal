@@ -17,7 +17,7 @@ import { ErrorComponent } from "components/error/ErrorComponent";
 
 // TODO: Refactor and come up with a much more predictable approach to middleware as category implementation will lead to a bug bcos the category is linear while middleware is within , consider using a recusrive approach or chaining like in express
 const AppRoutes = () => {
-  const { userPermissions } = useGetUserPermissions();
+  const { userPermissions, isLoading } = useGetUserPermissions();
 
   const pageRoutes = createBrowserRouter(
     createRoutesFromElements(
@@ -88,10 +88,12 @@ const AppRoutes = () => {
 
   return (
     <>
-      <RouterProvider
-        router={pageRoutes}
-        fallbackElement={<Skeleton active paragraph={{ rows: 17 }} />}
-      />
+      <Skeleton active paragraph={{ rows: 17 }} loading={isLoading}>
+        <RouterProvider
+          router={pageRoutes}
+          fallbackElement={<Skeleton active paragraph={{ rows: 17 }} />}
+        />
+      </Skeleton>
     </>
   );
 };
