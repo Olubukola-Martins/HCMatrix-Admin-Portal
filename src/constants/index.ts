@@ -10,7 +10,7 @@ import {
 import { ENV } from "./enviroment";
 import dayjs from "dayjs";
 export { ENV };
-export const LOCAL_STORAGE_AUTH_TOKEN_KEY = "auth_token";
+export const LOCAL_STORAGE_AUTH_TOKEN_KEY = "_auth";
 export const DEFAULT_MAX_FILE_UPLOAD_SIZE_IN_MB = 2;
 export const DEFAULT_MAX_FILE_UPLOAD_COUNT = 1;
 export const dummyChartData = Array(15)

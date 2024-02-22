@@ -1,3 +1,4 @@
+import { LOCAL_STORAGE_AUTH_TOKEN_KEY } from "constants";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
@@ -33,6 +34,8 @@ const useHandleAuthentication = (): TReturnValues => {
       if (!hasBeenAuthenticated) {
         throw new Error("Failed to authenticate!");
       }
+      localStorage.setItem(LOCAL_STORAGE_AUTH_TOKEN_KEY, authToken);
+      // window.location.reload(); //done purely so the http client can pick up on the new token in local storage
     },
     handleLogout: () => {
       signOut();
