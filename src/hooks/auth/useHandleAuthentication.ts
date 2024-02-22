@@ -35,7 +35,7 @@ const useHandleAuthentication = (): TReturnValues => {
         throw new Error("Failed to authenticate!");
       }
       localStorage.setItem(LOCAL_STORAGE_AUTH_TOKEN_KEY, authToken);
-      // window.location.reload(); //done purely so the http client can pick up on the new token in local storage
+      window.location.reload(); //done purely so the http client can pick up on the new token in local storage
     },
     handleLogout: () => {
       signOut();
