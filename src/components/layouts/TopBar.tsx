@@ -1,9 +1,9 @@
-import { Button, Layout } from "antd";
+import { Layout } from "antd";
 import {
   AppLogo,
-  SearchIcon,
+  // SearchIcon,
   SettingIcon,
-  NotificationIcon,
+  // NotificationIcon,
 } from "components/icons";
 import UserProfileDropdown from "./UserProfileDropdown";
 import ModeSwitcher from "components/theme/ModeSwitcher";
@@ -27,12 +27,12 @@ export const TopBar: React.FC<{
         <AppLogo className="h-6 lg:h-8" />
       </div>
       <div className="flex lg:gap-x-4 items-center">
-        <Button
+        {/* <Button
           type="text"
           size="large"
           className="lg:px-2 lg:py-2 px-1 py-1"
           icon={<SearchIcon className="h-4 w-4 md:h-6 md:w-6" />}
-        />
+        /> */}
         <ModeSwitcher />
         <PermissionRestrictor
           requiredPermissions={[
@@ -46,14 +46,14 @@ export const TopBar: React.FC<{
             <SettingIcon className="h-4 w-4 md:h-6 md:w-6" />
           </NavLink>
         </PermissionRestrictor>
-        <Button
+        {/* <Button
           type="text"
           size="large"
           className="lg:px-2 lg:py-2 px-1 py-1"
           icon={
             <NotificationIcon isNotified className="h-4 w-4 md:h-6 md:w-6" />
           }
-        />
+        /> */}
         <UserProfileDropdown />
       </div>
     </Header>
