@@ -215,7 +215,7 @@ export const numberHasToBeGreaterThanValueRule = (_value: number): Rule => ({
     if (typeof value === "undefined") {
       throw new Error("Field is required!");
     }
-    if (typeof value !== "number") {
+    if (typeof +value !== "number") {
       throw new Error("Please enter a valid number!");
     }
     if (+value <= _value) {
