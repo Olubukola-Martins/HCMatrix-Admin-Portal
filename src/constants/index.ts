@@ -85,7 +85,9 @@ export const DEFAULT_DATE_FORMAT = "YYYY-MM-DD";
 export const DEFAULT_START_DATE = dayjs()
   .subtract(18, "month")
   .format(DEFAULT_DATE_FORMAT);
-export const DEFAULT_END_DATE = dayjs().format(DEFAULT_DATE_FORMAT);
+export const DEFAULT_END_DATE = dayjs()
+  .add(2, "month")
+  .format(DEFAULT_DATE_FORMAT);
 
 export const DEFAULT_PAGE_LIMIT = 15;
 export const DEFAULT_PAGE_OFFSET = 0;
