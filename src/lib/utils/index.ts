@@ -3,23 +3,27 @@ import { TBookingStatus, TCurrency } from "types";
 
 type TError = {
   message: string;
+  errors?: string[];
 };
 type TSuccess = TError;
 
+type TTypicalErrorResponse = Record<
+  string,
+  Record<string, { message: string; error?: string[] }>
+>;
+type TGenericErrorResponse = Record<
+  string,
+  Record<string, Record<string, Record<string, string>>>
+>;
 export { canUserAccessComponent } from "./permissions";
 export const errorFormatter = (error: unknown): TError => {
   const DEFAULT_ERR_MESSAGE = "Ooops! Something went wrong!";
   return {
     message:
-      (error as Record<string, Record<string, Record<string, string>>>)
-        ?.response.data.message ??
-      (
-        error as Record<
-          string,
-          Record<string, Record<string, Record<string, string>>>
-        >
-      )?.response.data.error.message ??
+      (error as TTypicalErrorResponse)?.response?.data?.message ??
+      (error as TGenericErrorResponse)?.response?.data?.error?.message ??
       DEFAULT_ERR_MESSAGE,
+    errors: (error as TTypicalErrorResponse)?.response?.data?.error,
   };
 };
 export const successFormatter = (success: unknown): TSuccess => {

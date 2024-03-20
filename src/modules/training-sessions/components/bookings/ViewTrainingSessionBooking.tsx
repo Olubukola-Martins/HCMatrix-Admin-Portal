@@ -56,7 +56,12 @@ const ViewTrainingSessionBooking: React.FC<{
         footer={null}
       >
         <Skeleton active loading={isFetchingBooking} paragraph={{ rows: 7 }}>
-          <Form labelCol={{ span: 24 }} requiredMark={false} form={form}>
+          <Form
+            labelCol={{ span: 24 }}
+            requiredMark={false}
+            form={form}
+            disabled
+          >
             <div className="grid grid-cols-2 gap-x-4">
               <Form.Item label="Company Name" name={`companyName`}>
                 <Input placeholder="Name" />
@@ -81,40 +86,40 @@ const ViewTrainingSessionBooking: React.FC<{
             <Form.Item label="Reason" name={`reason`}>
               <Input.TextArea placeholder="Reason" />
             </Form.Item>
-            <div className="mt-4 flex justify-between items-center">
-              <Button type="text" onClick={handleClose}>
-                Cancel
-              </Button>
-              {_booking?.data.status === "pending" ? (
-                <div className="flex gap-x-4 items-center">
-                  <UpdateSessionBookingStatus
-                    key="accept"
-                    data={{
-                      status: "accepted",
-                    }}
-                    booking={{
-                      id: bookingId,
-                    }}
-                    trigger={<Button type="primary">Accept</Button>}
-                  />
-                  <UpdateSessionBookingStatus
-                    key="reject"
-                    data={{
-                      status: "rejected",
-                    }}
-                    booking={{
-                      id: bookingId,
-                    }}
-                    trigger={
-                      <Button type="default" danger>
-                        Reject
-                      </Button>
-                    }
-                  />
-                </div>
-              ) : null}
-            </div>
           </Form>
+          <div className="mt-4 flex justify-between items-center">
+            <Button type="text" onClick={handleClose}>
+              Cancel
+            </Button>
+            {_booking?.data.status === "pending" ? (
+              <div className="flex gap-x-4 items-center">
+                <UpdateSessionBookingStatus
+                  key="accept"
+                  data={{
+                    status: "accepted",
+                  }}
+                  booking={{
+                    id: bookingId,
+                  }}
+                  trigger={<Button type="primary">Accept</Button>}
+                />
+                <UpdateSessionBookingStatus
+                  key="reject"
+                  data={{
+                    status: "rejected",
+                  }}
+                  booking={{
+                    id: bookingId,
+                  }}
+                  trigger={
+                    <Button type="default" danger>
+                      Reject
+                    </Button>
+                  }
+                />
+              </div>
+            ) : null}
+          </div>
         </Skeleton>
       </Modal>
       <div className="cursor-pointer" onClick={handleOpen}>

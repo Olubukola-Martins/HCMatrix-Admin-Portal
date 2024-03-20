@@ -1,4 +1,4 @@
-import { notification } from "antd";
+import { Space, notification } from "antd";
 import useHandleAuthentication from "hooks/auth/useHandleAuthentication";
 import { errorFormatter, successFormatter } from "lib/utils";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -14,8 +14,14 @@ const ReactQueryProvider: React.FC<{ children: React.ReactNode }> = ({
         onError: (err) => {
           api.open({
             type: "error",
-            message: "Error",
-            description: errorFormatter(err).message,
+            message: errorFormatter(err).message,
+            description: (
+              <Space direction="vertical">
+                {errorFormatter(err).errors?.map((err) => (
+                  <span className="capitalize">{err}</span>
+                ))}
+              </Space>
+            ),
             duration: 0,
           });
         },
