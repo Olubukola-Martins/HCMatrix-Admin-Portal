@@ -10,7 +10,7 @@ export type TUpdateTrainingSessionBookingInput = {
 const createData = async (props: {
   data: TUpdateTrainingSessionBookingInput;
 }): Promise<TApiResponse<TTrainingSessionBooking | null>> => {
-  const url = `/subscription/add-ons/training-session/${props.data.id}`;
+  const url = `/subscription/add-ons/training-session/booking/${props.data.id}`;
 
   const data: TUpdateTrainingSessionBookingInput["data"] = {
     ...props.data.data,
