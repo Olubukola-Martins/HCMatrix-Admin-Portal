@@ -3,19 +3,17 @@ import { ERRORS_THAT_WARRANT_LOGOUT } from "constants";
 import useHandleAuthentication from "hooks/auth/useHandleAuthentication";
 import { errorFormatter, successFormatter } from "lib/utils";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { useNavigate } from "react-router-dom";
-import { appRoutePaths } from "routes";
+import { appRoutePaths } from "routes/paths";
 
 const ReactQueryProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { isAuthenticated, handleLogout } = useHandleAuthentication();
   const [api, contextHolder] = notification.useNotification();
-  const navigate = useNavigate();
   const autoLogoutDueToLackOfAuthentication = (errMessage: string) => {
     if (ERRORS_THAT_WARRANT_LOGOUT.includes(errMessage)) {
       handleLogout();
-      navigate(appRoutePaths.login, { replace: true });
+      window.location.href = appRoutePaths.login;
     }
   };
   const queryClient = new QueryClient({
