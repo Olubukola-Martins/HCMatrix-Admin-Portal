@@ -12,6 +12,7 @@ import {
   generalValidationRules,
   numberHasToBeGreaterThanValueRule,
 } from "lib/validation";
+import { constructLabelNameforDiscountType } from "modules/settings/utils";
 import React, { useState } from "react";
 
 const AddSpecificDiscount: React.FC<{ trigger?: React.ReactNode }> = ({
@@ -30,6 +31,9 @@ const AddSpecificDiscount: React.FC<{ trigger?: React.ReactNode }> = ({
     }
   >();
   const { mutate, isLoading } = useCreateDiscount();
+  const discountTypeLabelValueName = constructLabelNameforDiscountType(
+    form.getFieldValue("type")
+  );
   return (
     <>
       <Modal
@@ -42,6 +46,9 @@ const AddSpecificDiscount: React.FC<{ trigger?: React.ReactNode }> = ({
           labelCol={{ span: 24 }}
           requiredMark={false}
           form={form}
+          initialValues={{
+            type: "percentage"
+          }}
           onFinish={(data) => {
             const formattedData = {
               ...data,
@@ -81,11 +88,14 @@ const AddSpecificDiscount: React.FC<{ trigger?: React.ReactNode }> = ({
             />
           </Form.Item>
           <Form.Item
-            label="Discount Rate(%)"
+            label={discountTypeLabelValueName}
             name={`value`}
             rules={[numberHasToBeGreaterThanValueRule(0)]}
           >
-            <InputNumber placeholder="Discount Rate(%)" className="w-full" />
+            <InputNumber
+              placeholder={discountTypeLabelValueName}
+              className="w-full"
+            />
           </Form.Item>
           <Form.Item
             label="Duration"
