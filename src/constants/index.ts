@@ -91,3 +91,5 @@ export const DEFAULT_END_DATE = dayjs()
 
 export const DEFAULT_PAGE_LIMIT = 15;
 export const DEFAULT_PAGE_OFFSET = 0;
+
+export const ERRORS_THAT_WARRANT_LOGOUT = ["Please provide a valid token."];
