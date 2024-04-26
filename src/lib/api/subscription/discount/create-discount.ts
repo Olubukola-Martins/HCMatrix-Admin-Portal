@@ -2,10 +2,11 @@ import httpClient from "lib/http";
 import { useMutation, useQueryClient } from "react-query";
 import { TApiResponse } from "../../types";
 import { QUERY_KEY_FOR_DISCOUNTS, TDiscount } from ".";
+import { TDiscountType } from "types";
 
 export type TCreateDiscountInput = {
   companyId: number;
-  type: string;
+  type: TDiscountType;
   value: number;
   startDate: string;
   endDate: string;

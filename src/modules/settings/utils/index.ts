@@ -3,10 +3,10 @@ import { TDiscountType } from "types";
 export const constructLabelNameforDiscountType = (
   discountType?: TDiscountType
 ): string => {
-  let label = "";
+  let label = "Discount Value";
   switch (discountType) {
     case "flat":
-      label = "amount";
+      label = "Discount Amount";
 
       break;
     case "percentage":

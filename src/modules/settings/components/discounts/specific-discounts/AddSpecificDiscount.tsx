@@ -4,8 +4,8 @@ import { ModalTitle } from "components/modal";
 import { DEFAULT_DATE_FORMAT, discountTypeOptions } from "constants";
 import { Dayjs } from "dayjs";
 import {
-  TCreateDiscountInput,
   useCreateDiscount,
+  TCreateDiscountInput,
 } from "lib/api/subscription/discount/create-discount";
 import {
   dateHasToBeGreaterThanOrEqualToCurrentDayRuleForRange,
@@ -15,6 +15,9 @@ import {
 import { constructLabelNameforDiscountType } from "modules/settings/utils";
 import React, { useState } from "react";
 
+type FormFields = Omit<TCreateDiscountInput, "startDate" | "endDate"> & {
+  duration?: [Dayjs, Dayjs];
+};
 const AddSpecificDiscount: React.FC<{ trigger?: React.ReactNode }> = ({
   trigger = <Button type="primary">Add New</Button>,
 }) => {
@@ -25,15 +28,9 @@ const AddSpecificDiscount: React.FC<{ trigger?: React.ReactNode }> = ({
   const handleOpen = () => {
     setOpen(true);
   };
-  const [form] = Form.useForm<
-    Omit<TCreateDiscountInput, "startDate" | "endDate"> & {
-      duration?: [Dayjs, Dayjs];
-    }
-  >();
+  const [form] = Form.useForm<FormFields>();
   const { mutate, isLoading } = useCreateDiscount();
-  const discountTypeLabelValueName = constructLabelNameforDiscountType(
-    form.getFieldValue("type")
-  );
+  const discountTypeLabelValueName = constructLabelNameforDiscountType();
   return (
     <>
       <Modal
@@ -46,9 +43,6 @@ const AddSpecificDiscount: React.FC<{ trigger?: React.ReactNode }> = ({
           labelCol={{ span: 24 }}
           requiredMark={false}
           form={form}
-          initialValues={{
-            type: "percentage"
-          }}
           onFinish={(data) => {
             const formattedData = {
               ...data,

@@ -46,7 +46,7 @@ const SpecificDiscountsTable = () => {
           render: (_, item) => <DiscountActions discount={item} />,
         },
       ]}
-      dataSource={data?.data.result}
+      dataSource={data?.data.result.map((item) => ({ key: item.id, ...item }))}
     />
   );
 };
