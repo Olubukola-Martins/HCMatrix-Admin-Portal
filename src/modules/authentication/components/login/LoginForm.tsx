@@ -1,11 +1,16 @@
 import { Button, Form, Input } from "antd";
 import { emailValidationRules, passwordValidationRules } from "lib/validation";
 import useHandleSubmitLoginForm from "modules/authentication/hooks/useHandleSubmitLoginForm";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { appRoutePaths } from "routes";
 
-const LoginForm = () => {
+const LoginForm: React.FC<{ email?: string }> = ({ email }) => {
   const { form, handleSubmit, isLoading } = useHandleSubmitLoginForm({ Form });
+  useEffect(() => {
+    form.setFieldsValue({ email });
+  }, [form, email]);
+
   return (
     <>
       <Form

@@ -1,11 +1,12 @@
 import { Button, Form, Input } from "antd";
-import { emailValidationRules, passwordValidationRules } from "lib/validation";
+import { passwordValidationRules } from "lib/validation";
 import useHandleSubmitResetPasswordForm from "modules/authentication/hooks/useHandleSubmitResetPasswordForm";
 
-const ResetPasswordForm = () => {
+const ResetPasswordForm: React.FC<{ email?: string }> = ({ email }) => {
   const { form, handleSubmit, isLoading } = useHandleSubmitResetPasswordForm({
     Form,
   });
+
   return (
     <>
       <Form
@@ -15,8 +16,8 @@ const ResetPasswordForm = () => {
         size="large"
         onFinish={handleSubmit}
       >
-        <Form.Item name="email" label="Email" rules={emailValidationRules}>
-          <Input placeholder="Email" />
+        <Form.Item label="Email">
+          <Input placeholder="Email" value={email} disabled />
         </Form.Item>
         <Form.Item
           name="password"

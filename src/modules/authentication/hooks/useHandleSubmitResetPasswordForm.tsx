@@ -11,14 +11,17 @@ const useHandleSubmitResetPasswordForm = ({ Form }: { Form: typeof _Form }) => {
   const { mutate, isLoading } = useResetPassword();
   const [form] = Form.useForm<TResetPasswordInput["data"]>();
   const { handleLogin } = useHandleAuthentication();
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const token = searchParams.get("token") ?? "";
   const uid = searchParams.get("uid") ?? "";
   const handleSubmit = (data: TResetPasswordInput["data"]) => {
     mutate(
       {
-        data,
+        data: {
+          confirmPassword: data.confirmPassword,
+          password: data.password,
+        },
         queryParams: {
           token,
           uid,
