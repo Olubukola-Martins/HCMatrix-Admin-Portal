@@ -84,4 +84,4 @@ yarn build # using yarn
 
 ## Documentation
 
-The application documentation is available on the [Hospitality PMS documentation](https://carnation-bladder-b2b.notion.site/Hospitality-PMS-8a2226acd72a43bb97eee7f13ffc7b40). It should be noted that the source code is also documentated via docstring comments and typescript type definitions.
+The application entry site is available on the [Hcmatrix V3 Entry Site](https://hcmatrix.com/). It should be noted that the source code is also documentated via docstring comments and typescript type definitions.
