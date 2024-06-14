@@ -84,4 +84,4 @@ yarn build # using yarn
 
 ## Documentation
 
-The application site is available on the [Hcmatrix V3 Site](https://app.hcmatrix.com/). It should be noted that the source code is also documentated via docstring comments and typescript type definitions.
+The application site is available on the [Hcmatrix V3 App](https://app.hcmatrix.com/). It should be noted that the source code is also documentated via docstring comments and typescript type definitions.
