@@ -1,22 +1,37 @@
 import React from "react";
 import { Icon } from "@iconify/react";
-interface UserMetricsCardProps {
+import { Dropdown } from "antd";
+import type { MenuProps } from "antd";
+
+export interface IUserMetricsCardProps {
   header: string;
   acctNumber: string;
   rating: string;
   ratingText: string;
   icon: string;
-  iconColor:string
+  iconColor: string;
+  arrow?: boolean;
+  menuItem?: MenuProps["items"];
 }
 
-export const UserMetricsCard: React.FC<UserMetricsCardProps> = ({
+export const UserMetricsCard: React.FC<IUserMetricsCardProps> = ({
   header,
   icon,
   acctNumber,
   rating,
   ratingText,
-  iconColor
+  iconColor,
+  menuItem,
 }) => {
+  const isPositive = rating.startsWith("+");
+  const isNegative = rating.startsWith("-");
+
+  const ratingColor = isPositive ? "#01966B" : isNegative ? "#FF221E" : "black";
+  const ratingIcon = isPositive
+    ? "octicon:arrow-up-24"
+    : isNegative
+    ? "octicon:arrow-down-24"
+    : "";
   return (
     <div className="rounded-lg shadow text-accent w-72 p-4">
       <div className="flex justify-between py-3 mb-4 mx-auto">
@@ -29,22 +44,38 @@ export const UserMetricsCard: React.FC<UserMetricsCardProps> = ({
               style={{ color: iconColor }}
             />
           </div>
-          <div className="text-lg ">{header}</div>
+          <h2 className="text-lg ">{header}</h2>
         </div>
         <div className="my-auto">
-          <Icon
-            icon="mi:options-vertical"
-            width="25"
-            height="25"
-            style={{ color: "#d3cfcf" }}
-          />
+          <Dropdown trigger={["click"]} menu={{ items: menuItem }}>
+            <Icon
+              icon="mi:options-vertical"
+              width="25"
+              height="25"
+              style={{ color: "black" }}
+            />
+          </Dropdown>
         </div>
       </div>
       <div className="flex justify-between items-center mt-5">
         <h2 className="font-bold text-2xl">{acctNumber}</h2>
+
         <div>
-          <p className="text-right text-xl">{rating}</p>
-          <p>{ratingText}</p>
+          <p
+            className="text-xl flex gap-2 justify-end items-center"
+            style={{ color: ratingColor }}
+          >
+            {rating}{" "}
+            {ratingIcon && (
+              <Icon
+                icon={ratingIcon}
+                width="24"
+                height="24"
+                style={{ color: ratingColor }}
+              />
+            )}
+          </p>
+          <p>{ratingText} </p>
         </div>
       </div>
     </div>
