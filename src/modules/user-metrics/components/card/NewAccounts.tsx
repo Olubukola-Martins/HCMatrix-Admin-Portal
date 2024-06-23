@@ -1,54 +1,30 @@
-import React from "react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@iconify/react/dist/iconify.js";
 import { Dropdown } from "antd";
-import type { MenuProps } from "antd";
+import React from "react";
+import { getRatingDetails } from "../constants/RatingFunction";
+import { IUserMetricsCardProps } from "./ActiveAccounts";
 
-export interface IUserMetricsCardProps {
-  header: string;
-  acctNumber: string;
-  rating: string;
-  ratingText: string;
-  icon: string;
-  iconColor: string;
-  arrow?: boolean;
-  menuItem?: MenuProps["items"];
-}
-
-export const UserMetricsCard: React.FC<IUserMetricsCardProps> = ({
-  header,
-  icon,
+export const NewAccounts: React.FC<IUserMetricsCardProps> = ({
   acctNumber,
   rating,
   ratingText,
-  iconColor,
   menuItem,
 }) => {
-  const isPositive = rating.startsWith("+");
-  const isNegative = rating.startsWith("-");
-
-  const ratingColor = isPositive ? "#01966B" : isNegative ? "#FF221E" : "black";
-  const ratingIcon = isPositive
-    ? "octicon:arrow-up-24"
-    : isNegative
-    ? "octicon:arrow-down-24"
-    : "";
+  const { ratingColor, ratingIcon } = getRatingDetails(rating);
   return (
-    <div className="border rounded-lg w-72 p-3">
-      <div className="rounded-lg shadow p-5">
+    <div className="border rounded-lg w-72 p-3 ">
+      <div className="border rounded-lg shadow p-5">
         <div className="flex justify-between py-3 mb-4 mx-auto">
           <div className="flex items-center gap-3">
-            <div
-              className="border rounded-full p-2"
-              style={{ borderColor: iconColor }}
-            >
+            <div className="border rounded-full p-2 border-[#1270B0]">
               <Icon
-                icon={icon}
+                icon="majesticons:suitcase-line"
                 width="25"
                 height="25"
-                style={{ color: iconColor }}
+                style={{ color: "#1270B0" }}
               />
             </div>
-            <h2 className="text-lg ">{header}</h2>
+            <h2 className="text-lg ">New Accounts</h2>
           </div>
           <div className="my-auto">
             <Dropdown trigger={["click"]} menu={{ items: menuItem }}>
