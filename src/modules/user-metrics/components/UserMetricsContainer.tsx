@@ -12,6 +12,7 @@ export const UserMetricsContainer = () => {
           <div className="flex gap-5">
             <Select
               defaultValue="all"
+              className="md:min-w-52 "
               options={[
                 {
                   label: "All",
@@ -21,6 +22,7 @@ export const UserMetricsContainer = () => {
             />
             <Select
               defaultValue="webApp"
+              className="md:min-w-52 "
               options={[
                 {
                   label: "Web App",
@@ -30,8 +32,7 @@ export const UserMetricsContainer = () => {
             />
           </div>
         ),
-      }}
-    >
+      }}>
       <div></div>
     </PageLayout>
   );
