@@ -27,7 +27,10 @@ const useGenerateSidebarLinks = (): {
       label: "User Metrics",
       icon: <UserMetricsIcon />,
       link: appRoutePaths.userMetrics,
-      hidden: true,
+      hidden: !canUserAccessComponent({
+        userPermissions,
+        requiredPermissions: ["view-training-sessions"],
+      }),
     },
     {
       label: "IT/Audit Metrics",
