@@ -1,6 +1,11 @@
 import { Select } from "antd";
 import { PageLayout } from "components/layouts";
-import { UserMetricsLineChart } from "./charts/UserMetricsChart";
+import UsageHeatMap from "./charts/UsageHeatMap";
+import { usageMockData } from "../data/mockData";
+import ActiveUsersChart from "./charts/ActiveUsers";
+import SubsriptionsChart from "./charts/Subsriptions";
+import FrequentlyUsedModulesChart from "./charts/FrequentlyUsedModules";
+import FrequentlyUsedFeaturesChart from "./charts/FrequentlyUsedFeatures";
 
 export const UserMetricsContainer = () => {
   return (
@@ -34,9 +39,12 @@ export const UserMetricsContainer = () => {
           </div>
         ),
       }}>
-      <div className="grid grid-cols-4 grid-rows-4 gap-4 p-4">
-<UserMetricsLineChart chart={<div>Hey there</div>} header="sample chart" filterSelect={<div>Filter</div>} />
-
+      <div className="inline-grid grid-cols-4 grid-rows-4 gap-16 p-4">
+        <ActiveUsersChart additionalStyles="col-span-2 row-span-1" />
+        <SubsriptionsChart additionalStyles="col-span-2 row-span-1" />
+        <FrequentlyUsedModulesChart additionalStyles="col-span-2 row-span-1" />
+        <FrequentlyUsedFeaturesChart additionalStyles="col-span-2 row-span-1" />
+        <UsageHeatMap dataValues={usageMockData} additionalStyles=" col-span-3 row-span-1" />
       </div>
     </PageLayout>
   );

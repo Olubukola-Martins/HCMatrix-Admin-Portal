@@ -9,10 +9,14 @@ export interface IBarChartProps {
   rating?: string;
   ratingText?: string;
   chart: React.ReactNode;
+  isLineChart?: boolean;
+  additionalStyles?: string
 }
-export const UserMetricsLineChart: React.FC<IBarChartProps> = ({ header, subscribedSelect, featureSelect, monthSelect, filterSelect, rating, ratingText, chart }) => {
+export const UserMetricsChart: React.FC<IBarChartProps> = ({ header, subscribedSelect, featureSelect, monthSelect, filterSelect, rating, ratingText,additionalStyles, chart,isLineChart = true }) => {
   return (
-    <div className="rounded-lg shadow-accent shadow text-accent p-4">
+    <div className={`${additionalStyles} " shadow-accent rounded-xl shadow-md text-accent p-6 h-fit max-h-fit"`}>
+      <div className="m-6">
+
       <h2 className="text-2xl font-medium p-2">{header}</h2>
       <div className="flex justify-between items-center">
         <p className="text-2xl p-2">0</p>
@@ -21,14 +25,17 @@ export const UserMetricsLineChart: React.FC<IBarChartProps> = ({ header, subscri
           {filterSelect}
           {monthSelect}
           {featureSelect}
-          <div>
-            <p className="text-right text-2xl">{rating}</p>
-            <p className="text-right">{ratingText}</p>
-          </div>
+          {isLineChart && (
+            <div>
+              <p className="text-right text-2xl">{rating}</p>
+              <p className="text-right">{ratingText}</p>
+            </div>
+          )}
           <Icon icon="mi:options-vertical" width="25" height="25" className="cursor-pointer text-accent" />
         </div>
       </div>
-      {chart}
+       {chart}
+      </div>
     </div>
   );
 };
