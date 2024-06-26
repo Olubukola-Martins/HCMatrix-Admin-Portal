@@ -1,0 +1,16 @@
+.scrollbarThin::-webkit-scrollbar {
+  height: 4px;
+}
+
+.scrollbarThin::-webkit-scrollbar-track {
+  background: gray; 
+}
+
+.scrollbarThin::-webkit-scrollbar-thumb {
+  background-color: #242323; 
+  border-radius: 10px;
+}
+
+.scrollbarThin::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

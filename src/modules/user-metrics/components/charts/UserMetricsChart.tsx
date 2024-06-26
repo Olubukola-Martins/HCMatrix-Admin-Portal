@@ -6,36 +6,39 @@ export interface IBarChartProps {
   subscribedSelect?: React.ReactNode;
   monthSelect?: React.ReactNode;
   featureSelect?: React.ReactNode;
-  rating?: string;
+  rating?: number;
   ratingText?: string;
+  ratingIncreasing?: boolean;
   chart: React.ReactNode;
   isLineChart?: boolean;
-  additionalStyles?: string
+  additionalStyles?: string;
 }
-export const UserMetricsChart: React.FC<IBarChartProps> = ({ header, subscribedSelect, featureSelect, monthSelect, filterSelect, rating, ratingText,additionalStyles, chart,isLineChart = true }) => {
+export const UserMetricsChart: React.FC<IBarChartProps> = ({ header, subscribedSelect, featureSelect, monthSelect, filterSelect, rating, ratingText, additionalStyles, chart, isLineChart = true }) => {
   return (
-    <div className={`${additionalStyles} " shadow-accent rounded-xl shadow-md text-accent p-6 h-fit max-h-fit"`}>
-      <div className="m-6">
-
-      <h2 className="text-2xl font-medium p-2">{header}</h2>
-      <div className="flex justify-between items-center">
-        <p className="text-2xl p-2">0</p>
-        <div className="flex gap-6 p-2 items-center">
-          {subscribedSelect}
-          {filterSelect}
-          {monthSelect}
-          {featureSelect}
-          {isLineChart && (
-            <div>
-              <p className="text-right text-2xl">{rating}</p>
-              <p className="text-right">{ratingText}</p>
+    <div className={`${additionalStyles} " shadow-accent rounded-xl shadow-md text-accent p-3 max-h-[340] flex flex-col justify-between"`}>
+      <div className="mb-auto flex flex-col justify-between">
+        <h2 className=" text-lg md:text-xl xl:text-2xl font-medium p-2">{header}</h2>
+        <div className="flex justify-between items-center">
+          <p className="text-xl xl:text-2xl p-2">0</p>
+          <div className="flex gap-5 xl:gap-6 p-2 items-center">
+            <div className="flex gap-3 xl:gap-6 flex-col xl:flex-row">
+              {subscribedSelect}
+              {filterSelect}
+              {monthSelect}
+              {featureSelect}
             </div>
-          )}
-          <Icon icon="mi:options-vertical" width="25" height="25" className="cursor-pointer text-accent" />
+            {isLineChart && (
+              <div>
+                <p className={`text-right text-lg md:text-xl xl:text-2xl `}>{rating}</p>
+                <p className="text-right max-sm:text-xs">{ratingText}</p>
+              </div>
+            )}
+            <Icon icon="mi:options-vertical" width="25" height="25" className="cursor-pointer text-accent" />
+          </div>
         </div>
       </div>
-       {chart}
-      </div>
+
+      {chart}
     </div>
   );
 };

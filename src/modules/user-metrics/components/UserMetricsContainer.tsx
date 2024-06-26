@@ -6,6 +6,12 @@ import ActiveUsersChart from "./charts/ActiveUsers";
 import SubsriptionsChart from "./charts/Subsriptions";
 import FrequentlyUsedModulesChart from "./charts/FrequentlyUsedModules";
 import FrequentlyUsedFeaturesChart from "./charts/FrequentlyUsedFeatures";
+import { AverageDaysActive } from "./card/AverageDaysActive";
+import { EventsCard } from "./card/EventsCard";
+import { ActiveAccounts } from "./card/ActiveAccounts";
+import { NewAccounts } from "./card/NewAccounts";
+import { DeactivatedAccounts } from "./card/DeactivatedAccounts";
+import { SlippingAway } from "./card/SlippingAway";
 
 export const UserMetricsContainer = () => {
   return (
@@ -39,12 +45,27 @@ export const UserMetricsContainer = () => {
           </div>
         ),
       }}>
-      <div className="inline-grid grid-cols-4 grid-rows-4 gap-16 p-4">
-        <ActiveUsersChart additionalStyles="col-span-2 row-span-1" />
-        <SubsriptionsChart additionalStyles="col-span-2 row-span-1" />
-        <FrequentlyUsedModulesChart additionalStyles="col-span-2 row-span-1" />
-        <FrequentlyUsedFeaturesChart additionalStyles="col-span-2 row-span-1" />
-        <UsageHeatMap dataValues={usageMockData} additionalStyles=" col-span-3 row-span-1" />
+      <div className="flex flex-col gap-8 ">
+        <div className="inline-grid grid-cols-2 gap-12">
+          <ActiveUsersChart additionalStyles="lg:col-span-1 col-span-2" />
+          <SubsriptionsChart additionalStyles="lg:col-span-1 col-span-2" />
+        </div>
+
+        <div className="inline-grid grid-cols-2 gap-12 ">
+          <FrequentlyUsedModulesChart additionalStyles="lg:col-span-1 col-span-2" />
+          <FrequentlyUsedFeaturesChart additionalStyles="lg:col-span-1 col-span-2" />
+        </div>
+
+        {/* <div className="inline-grid grid-cols-4 gap-12">
+          <ActiveAccounts ratingText="Vs preceeding month" rating="0.4" acctNumber="0" /> <NewAccounts ratingText="Vs preceeding month" rating="0.4" acctNumber="0" /> <DeactivatedAccounts ratingText="Vs preceeding month" rating="0.4" acctNumber="0" /> <SlippingAway ratingText="Vs preceeding month" rating="0.4" acctNumber="0" />
+        </div> */}
+
+        <div className="inline-grid grid-cols-4 gap-12 ">
+          <UsageHeatMap dataValues={usageMockData} additionalStyles=" col-span-4 xl:col-span-3 " />
+          <div className="flex gap-4 align-middle md:flex-col xl:gap-8 xl:col-span-1 justify-evenly col-span-4 ">
+            <AverageDaysActive days="5.8" ratingText="Vs preceeding month" /> <EventsCard ratingText="Vs preceeding month" rating="0.4" acctNumber="0" />
+          </div>
+        </div>
       </div>
     </PageLayout>
   );

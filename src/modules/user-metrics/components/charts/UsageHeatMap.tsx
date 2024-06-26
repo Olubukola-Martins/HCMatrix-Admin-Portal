@@ -2,6 +2,7 @@ import { Select } from "antd";
 import { DefaultOptionType } from "antd/lib/select";
 import { DayData, DisplayedUsageData, HourData, IHeatMapProps, MonthData, UsageDataTimeFrame, WeekData } from "modules/user-metrics/types";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import styles from "../../styles/usermetrics.module.css";
 
 const UsageHeatMap = ({ dataValues, additionalStyles }: IHeatMapProps) => {
   // CONSTANTS && HELPERS
@@ -88,7 +89,6 @@ const UsageHeatMap = ({ dataValues, additionalStyles }: IHeatMapProps) => {
     }
   }, [duration, timeFrame, dataValues]);
 
-
   const generateYAxisArray = useMemo(() => {
     if (timeFrame === "daily") {
       const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -138,25 +138,28 @@ const UsageHeatMap = ({ dataValues, additionalStyles }: IHeatMapProps) => {
       const daysArray = generateYAxisArray;
       return (
         <>
-          <div className="flex flex-row gap-5">
-            <div className="flex flex-col justify-between mb-8">
+          <div className="flex flex-row gap-5 w-full max-w-full">
+            <div className="flex flex-col justify-between  mb-9 ">
               {daysArray?.map((item) => (
                 <p>{item}</p>
               ))}
             </div>
-            <div className="max-w-[80%] overflow-x-scroll">
-              <div className="inline-grid grid-cols-24 gap-x-2.5 gap-y-5 min-w-fit w-full h-fit" style={{ WebkitTransform: "scaleY(-1)", transform: "scaleY(-1)" }}>
-                {displayedData?.map((hourItem, index) => {
-                  const { date, hour, totalUsageCount } = hourItem as HourData;
-                  const intensity = getIntensity(highestValue as number, totalUsageCount);
-                  const color = getColorFromIntensity(intensity);
-                  return <div key={`${index}-${date}-${hour}`} className=" h-4 min-w-6 rounded cursor-pointer bg-gray-400" title={`${totalUsageCount} users on ${date}, ${hour}`} style={{ backgroundColor: `${totalUsageCount === 0 ? "#ffffff10" : String(color)}` }} />;
-                })}
-              </div>
-              <div className="w-full grid grid-cols-12 mt-5">
-                {timeArray.map((time) => (
-                  <p className="text-accent text-left">{time}</p>
-                ))}
+
+            <div className={` max-lg:overflow-x-auto w-full max-w-full  ${styles.scrollbarThin} `}>
+              <div style={{ minWidth: 750, maxWidth: "100%" }}>
+                <div className="grid grid-cols-24 gap-x-2.5 gap-y-5  whitespace-nowrap h-fit" style={{ WebkitTransform: "scaleY(-1)", transform: "scaleY(-1)" }}>
+                  {displayedData?.map((hourItem, index) => {
+                    const { date, hour, totalUsageCount } = hourItem as HourData;
+                    const intensity = getIntensity(highestValue as number, totalUsageCount);
+                    const color = getColorFromIntensity(intensity);
+                    return <div key={`${index}-${date}-${hour}`} className=" h-4 min-w-6 col-span-1 rounded cursor-pointer bg-gray-400" title={`${totalUsageCount} users on ${date}, ${hour}`} style={{ backgroundColor: `${totalUsageCount === 0 ? "#ffffff10" : String(color)}` }} />;
+                  })}
+                </div>
+                <div className="w-full grid grid-cols-12 mt-5">
+                  {timeArray.map((time) => (
+                    <p className="text-accent text-left">{time}</p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -170,25 +173,27 @@ const UsageHeatMap = ({ dataValues, additionalStyles }: IHeatMapProps) => {
       const weeksArray = generateYAxisArray;
       return (
         <>
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-row gap-5  max-w-full">
             <div className="flex flex-col justify-between mb-8">
               {weeksArray?.map((item) => (
-                <p>{item}</p>
+                <p className="whitespace-nowrap">{item}</p>
               ))}
             </div>
-            <div className="max-w-[80%] overflow-x-scroll">
-              <div className="inline-grid grid-cols-7 gap-x-2.5 gap-y-5 min-w-fit w-full h-fit " style={{ WebkitTransform: "scaleY(-1)", transform: "scaleY(-1)" }}>
+            <div className={`overflow-x-auto ${styles.scrollbarThin}`}>
+              <div style={{ minWidth: 200 }}>
+              <div className="grid grid-cols-7 gap-x-2.5 gap-y-5 w-full min-w-72    h-fit " style={{ WebkitTransform: "scaleY(-1)", transform: "scaleY(-1)" }}>
                 {displayedData?.map((dayItem, index) => {
                   const { week, date, totalUsageCount } = dayItem as DayData;
                   const intensity = getIntensity(highestValue as number, totalUsageCount);
                   const color = getColorFromIntensity(intensity);
-                  return <div key={`${index}-${week}-${date}`} className="h-4 min-w-6 rounded cursor-pointer bg-gray-400" title={`${totalUsageCount} users on ${date}`} style={{ backgroundColor: `${totalUsageCount === 0 ? "#ffffff10" : String(color)}` }} />;
+                  return <div key={`${index}-${week}-${date}`} className="h-4 min-w-6 col-span-1 rounded cursor-pointer bg-gray-400" title={`${totalUsageCount} users on ${date}`} style={{ backgroundColor: `${totalUsageCount === 0 ? "#ffffff10" : String(color)}` }} />;
                 })}
               </div>
-              <div className="w-full flex flex-row justify-between mt-5 text-sm">
+              <div className=" flex flex-row gap-4 mt-5 text-sm">
                 {timeArray.map((time) => (
                   <p className="text-accent text-left ">{time}</p>
                 ))}
+              </div>
               </div>
             </div>
           </div>
@@ -205,13 +210,13 @@ const UsageHeatMap = ({ dataValues, additionalStyles }: IHeatMapProps) => {
       const monthsArray = generateYAxisArray;
       return (
         <>
-          <div className="flex flex-row gap-5 ">
+          <div className="flex flex-row gap-5 max-w-full ">
             <div className="flex flex-col justify-between mb-8  ">
               {monthsArray?.map((item) => (
                 <p>{item}</p>
               ))}
             </div>
-            <div className="max-w-[80%] overflow-x-scroll">
+            <div className={`overflow-x-auto ${styles.scrollbarThin}`}>
               <div className={`grid grid-rows-${duration} gap-y-6 min-w-fit w-full h-fit `}>
                 {groupedData?.map((monthData, monthIndex) => (
                   <div key={monthIndex} className="flex flex-row gap-4">
@@ -225,7 +230,7 @@ const UsageHeatMap = ({ dataValues, additionalStyles }: IHeatMapProps) => {
                 ))}
               </div>
 
-              <div className="w-full flex flex-row justify-between mt-5 text-sm">
+              <div className="w-full flex flex-row gap-3 min-w-fit mt-5 text-sm">
                 {timeArray.map((time) => (
                   <p className="text-accent text-left ">{time}</p>
                 ))}
@@ -238,12 +243,12 @@ const UsageHeatMap = ({ dataValues, additionalStyles }: IHeatMapProps) => {
   }, [displayedData, duration, generateYAxisArray, timeFrame]);
 
   return (
-    <div className={`${additionalStyles} flex flex-col gap-5 w-full h-fit shadow-accent rounded-lg shadow-md text-accent p-6`}>
+    <div className={`${additionalStyles} flex flex-col gap-5 w-full overflow-hidden h-fit shadow-accent rounded-lg shadow-md text-accent px-3 py-6`}>
       {/* header area  */}
-      <div className="flex justify-between">
-        <h3 className="text-2xl">Usage By Time Of Day</h3>
+      <div className="flex justify-between gap-3 flex-col md:flex-row">
+        <h3 className="text-lg xl:text-2xl">Usage By Time Of Day</h3>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-col md:flex-row">
           <Select
             options={timeFrameOptions}
             className="w-40 min-w-fit"

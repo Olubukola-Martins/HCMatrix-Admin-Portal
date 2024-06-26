@@ -22,6 +22,9 @@ export default {
         24: "repeat(24, minmax(0, 1fr))",
       },
     },
+    variants: {
+      scrollbar: ["rounded"],
+    },
   },
   plugins: [],
 };
