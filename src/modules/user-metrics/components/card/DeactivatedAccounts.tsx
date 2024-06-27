@@ -1,9 +1,8 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Dropdown } from "antd";
 import React from "react";
-import { getRatingDetails } from "../constants/RatingFunction";
+import { getRatingDetails } from "../../utils/RatingFunction";
 import { IUserMetricsCardProps } from "./ActiveAccounts";
-
 
 export const DeactivatedAccounts: React.FC<IUserMetricsCardProps> = ({
   acctNumber,
@@ -13,51 +12,49 @@ export const DeactivatedAccounts: React.FC<IUserMetricsCardProps> = ({
 }) => {
   const { ratingColor, ratingIcon } = getRatingDetails(rating);
   return (
-    <div className="border rounded-lg w-72 p-3 ">
-      <div className="border rounded-lg shadow p-5">
-        <div className="flex justify-between py-3 mb-4 mx-auto">
-          <div className="flex items-center gap-3">
-            <div className="border rounded-full p-2 border-[#FF221E]">
-              <Icon
-                icon="majesticons:suitcase-line"
-                width="25"
-                height="25"
-                style={{ color: "#FF221E" }}
-              />
-            </div>
-            <h2 className="text-lg ">Deactivated Accounts</h2>
+    <div className="border w-[15rem] h-40 p-3 rounded-lg shadow-inner">
+      <div className="flex justify-between py-2 mb-5 mx-auto">
+        <div className="flex items-center gap-2">
+          <div className="border rounded-full p-2 border-[#FF221E]">
+            <Icon
+              icon="majesticons:suitcase-line"
+              width="20"
+              height="20"
+              style={{ color: "#FF221E" }}
+            />
           </div>
-          <div className="my-auto">
-            <Dropdown trigger={["click"]} menu={{ items: menuItem }}>
-              <Icon
-                icon="mi:options-vertical"
-                width="25"
-                height="25"
-                style={{ color: "black" }}
-              />
-            </Dropdown>
-          </div>
+          <h2 className="text-lg">Deactivated Accounts</h2>
         </div>
-        <div className="flex justify-between items-center mt-5">
-          <h2 className="font-bold text-2xl">{acctNumber}</h2>
+        <div className="my-auto cursor-pointer">
+          <Dropdown trigger={["click"]} menu={{ items: menuItem }}>
+            <Icon
+              icon="mi:options-vertical"
+              width="20"
+              height="20"
+              style={{ color: "black" }}
+            />
+          </Dropdown>
+        </div>
+      </div>
+      <div className="flex justify-between items-center mt-5">
+        <h2 className="font-bold text-xl">{acctNumber}</h2>
 
-          <div>
-            <p
-              className="text-xl flex gap-2 justify-end items-center"
-              style={{ color: ratingColor }}
-            >
-              {rating}{" "}
-              {ratingIcon && (
-                <Icon
-                  icon={ratingIcon}
-                  width="24"
-                  height="24"
-                  style={{ color: ratingColor }}
-                />
-              )}
-            </p>
-            <p>{ratingText} </p>
-          </div>
+        <div>
+          <p
+            className="text-lg flex gap-1 justify-end items-center"
+            style={{ color: ratingColor }}
+          >
+            {rating}{" "}
+            {ratingIcon && (
+              <Icon
+                icon={ratingIcon}
+                width="15"
+                height="15"
+                style={{ color: ratingColor }}
+              />
+            )}
+          </p>
+          <p>{ratingText} </p>
         </div>
       </div>
     </div>
