@@ -26,7 +26,7 @@ export type IUserMetricsCardProps = Pick<UserMetricDBAccountInfoCardProps, "clas
 export const UserMetricDBAccountInfoCard: React.FC<
   UserMetricDBAccountInfoCardProps
 > = ({
-  className = "border w-[15rem] h-40 p-3 rounded-lg",
+  className = "border w-[15rem] h-32 p-3 rounded-lg",
   icon,
   actionItems,
   amount,

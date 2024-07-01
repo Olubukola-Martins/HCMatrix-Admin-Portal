@@ -34,12 +34,7 @@ export const UserMetricsContainer = () => {
       }}
     >
       <div>
-        <AverageDaysActive
-          userDays="4"
-          userRating={-0.4}
-          accountDays="5"
-          accountRating={+1.4}
-        />
+        
       </div>
     </PageLayout>
   );
