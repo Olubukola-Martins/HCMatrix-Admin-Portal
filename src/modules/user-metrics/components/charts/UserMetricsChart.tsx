@@ -30,10 +30,10 @@ export const UserMetricsChart: React.FC<IBarChartProps> = ({ header, subscribedS
             {isLineChart && (
               <div>
                 <div className="flex gap-1 md:gap-3 justify-items-center align-middle max-w-fit">
-                  <p className={`text-right text-lg md:text-xl xl:text-2xl ${ratingIncreasing ? "text-green-500" : "text-red-500"} `}>
+                  <p className={`text-right text-lg md:text-xl xl:text-2xl ${ratingIncreasing ? "text-[var(--green)]" : "text-red-500"} `}>
                     {ratingIncreasing ? "+" : "-"} {rating}{" "}
                   </p>
-                  <Icon icon={`mingcute:arrow-${ratingIncreasing ? "up" : "down"}-fill`} className={`${ratingIncreasing ? "text-green-500" : "text-red-500"} text-2xl text-center`} />
+                  <Icon icon={`mingcute:arrow-${ratingIncreasing ? "up" : "down"}-fill`} className={`${ratingIncreasing ? "text-[var(--green)]" : "text-red-500"} text-2xl text-center`} />
                 </div>
                 <p className="text-right max-sm:text-xs">{ratingText}</p>
               </div>
