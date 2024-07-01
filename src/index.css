@@ -15,6 +15,7 @@
   --sideBar: #f6f7fb;
   --sideBarIcon: #ffffff;
   --scrollBg: rgba(0, 0, 0, 0.3);
+  --green:#3EBE5E;
 }
 
 [data-theme="dark"] {

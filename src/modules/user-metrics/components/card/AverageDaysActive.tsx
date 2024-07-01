@@ -1,87 +1,90 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React from "react";
-import { getRatingDetails } from "../constants/RatingFunction";
+import { getUserMetricDBComparisonIndicatorValues } from "../../utils/RatingFunction";
 
 export interface IActiveCardProps {
-  days: string;
-  ratingText: string;
+  userDays: string;
+  accountDays: string;
+  userRating: number;
+  accountRating: number;
 }
 
 export const AverageDaysActive: React.FC<IActiveCardProps> = ({
-  days,
-  ratingText,
+  accountDays,
+  accountRating,
+  userDays,
+  userRating,
 }) => {
-  const { ratingColor, ratingIcon } = getRatingDetails(ratingText);
+  const userMetrics = getUserMetricDBComparisonIndicatorValues(userRating);
+  const accountMetrics =
+    getUserMetricDBComparisonIndicatorValues(accountRating);
+
   return (
-    <div className="border rounded-lg w-72 p-3">
-      <div className="border rounded-lg p-4">
-        <h2 className="text-center text-base py-2">Average Days Active</h2>
-        <div className="flex gap-5 items-center my-3">
-          <div
-            className="border rounded-full p-1"
-            style={{ borderColor: "#7987A5" }}
-          >
-            <Icon
-              icon="gg:profile"
-              width="25"
-              height="25"
-              style={{ color: "#7987A5" }}
-            />
-          </div>
+    <div
+      className="border rounded-lg w-[15rem] h-40 p-2"
+      style={{ boxShadow: "inset 0px 0px 10px 0px rgba(0,0,0,0.2)" }}
+    >
+      <div className="p-2">
+        <h2 className="text-center text-base py-1">Average Days Active</h2>
+
+        <div className="flex gap-2 items-center justify-between my-2">
+          <Icon
+            icon="gg:profile"
+            width="30"
+            height="30"
+            className="border border-[#7987A5] rounded-full p-1"
+            style={{ color: "#7987A5" }}
+          />
+
           <p className="">Users</p>
           <div className="flex items-center gap-1">
-            <p className="font-bold text-lg">{days} </p> {""}
-            <p>days</p>
+            <p className="font-bold text-lg">{userDays}</p> days
           </div>
 
           <div>
             <p
-              className="flex justify-end items-center"
-              style={{ color: ratingColor }}
+              className="flex items-center text-base"
+              style={{ color: userMetrics.color }}
             >
-              {ratingText}{" "}
-              {ratingIcon && (
+              {userMetrics.formattedValue}{" "}
+              {userMetrics.icon && (
                 <Icon
-                  icon={ratingIcon}
-                  width="15"
-                  height="15"
-                  style={{ color: ratingColor }}
+                  icon={userMetrics.icon}
+                  width="18"
+                  height="18"
+                  style={{ color: userMetrics.color }}
                 />
               )}
             </p>
           </div>
         </div>
 
-        <div className="flex gap-5 items-center">
-          <div
-            className="border rounded-full p-1"
-            style={{ borderColor: "#AD6359" }}
-          >
-            <Icon
-              icon="majesticons:suitcase-line"
-              width="25"
-              height="25"
-              style={{ color: "#AD6359" }}
-            />
-          </div>
+        <div className="flex gap-2 items-center justify-between my-2">
+          <Icon
+            icon="majesticons:suitcase-line"
+            width="50"
+            height="30"
+            className="border border-[#AD6359] rounded-full p-1"
+            style={{ color: "#AD6359" }}
+          />
+
           <p className="">Accounts</p>
           <div className="flex items-center gap-1">
-            <p className="font-bold text-lg">{days} </p> {""}
-            <p>days</p>
+            <p className="font-bold text-lg">{accountDays}</p> days
           </div>
 
           <div>
             <p
-              className="flex justify-end items-center"
-              style={{ color: ratingColor }}
+              className="flex items-center text-base"
+              style={{ color: accountMetrics.color }}
             >
-              {ratingText}{" "}
-              {ratingIcon && (
+              {accountMetrics.formattedValue}
+              {accountMetrics.icon && (
                 <Icon
-                  icon={ratingIcon}
-                  width="15"
-                  height="15"
-                  style={{ color: ratingColor }}
+                  icon={accountMetrics.icon}
+                  width="18"
+                  height="18"
+                  style={{ color: accountMetrics.color }}
                 />
               )}
             </p>

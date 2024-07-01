@@ -2,6 +2,7 @@
 IMPLEMENTATION_GUIDE.tsx
 .env
 .env.local
+.env.example
 
 # Logs
 logs
@@ -15,7 +16,10 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+package-lock.json
+yarn.lock
 *.local
+
 
 # Editor directories and files
 .vscode/*
